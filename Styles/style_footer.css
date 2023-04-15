@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body{
+  line-height: 1.5;
+  font-family: 'Century Gothic', sans-serif;
+}
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+footer{
+/*  height: 200px;*/
+  width: 100%;
+  padding: 20px 10px;
+  background: url("/Users/mixysami/HTML Project/Mevet/Styles/fonmenu.jpg");
+  background-size: cover;
+/*  background-size: contain;*/
+  background-position: center;
+}
+.container{
+  max-width: 1170px;
+  margin:auto;
+
+}
+.container p{
+  margin-top: 2%;
+  margin-left: 37%;
+}
+
+ul{
+  list-style: none;
+}
+.footer{
+  
+    padding: 70px 0;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+   margin-left: 38%;
+}
+.footer-col h4{
+  font-size: 18px;
+  color: #ffffff;
+  text-transform: capitalize;
+  margin-bottom: 35px;
+  font-weight: 500;
+  position: relative;
+}
+.footer-col h4::before{
+  content: '';
+  position: absolute;
+  left:25%;
+  bottom: -10px;
+  background-color: red;
+  height: 2px;
+  box-sizing: border-box;
+  width: 60px;
+}
+
+
+
+
+
+
+.footer-col .social-links a{
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255,255,255,0.2);
+  margin:0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  padding: 5%;
+  transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+  color: #24262b;
+  background-color: #ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+
