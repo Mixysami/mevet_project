@@ -11,7 +11,7 @@ header {
   
 /*  background-color: #808080;*/
   padding: 20px 10px;
-  background: url("/Users/mixysami/HTML Project/Mevet/Styles/fonmenu.jpg");
+  background: url("../img/fonmenu.jpg");
   background-size: cover;
 /*  background-size: contain;*/
   background-position: center;
