@@ -4,6 +4,12 @@
 
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
+
+
+
+
+
+
 .video-bg {
     height: 100vh;
     width: 100%;
@@ -44,6 +50,15 @@
     padding: 0 20px;
 }
 
+.rentals-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+ .rental-item {
+        width: 33.33%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
 
 .rentals-container {
         display: flex;
