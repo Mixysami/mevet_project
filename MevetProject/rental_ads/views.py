@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
 from .models import Rental, Category, RentalImage
 
 def index(request):
@@ -27,4 +28,16 @@ def rental_detail(request, category_name, rental_id):
     images = rental.images.all()
     context = {'rental': rental, 'images': images}
     return render(request, 'rental_detail.html', context)
+
+def rental_search(request):
+    query = request.GET.get('query', '')
+
+    rental_list = Rental.objects.filter(
+        Q(title__icontains=query) |
+        Q(description__icontains=query)
+    )
+
+    context = {'rental_list': rental_list}
+    return render(request, 'rental_search_results.html', context)
+
 

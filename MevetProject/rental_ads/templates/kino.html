@@ -9,15 +9,17 @@
 
 <div class="rentals-container">
     {% for rental in rental_list %}
-    <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
-        <div class="rental-item">
-            <img src="{{ rental.main_image.url }}" >
+
+    <div class="rental-item">
+        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
+            <img src="{{ rental.main_image.url }}">
             <h3>{{ rental.name }}</h3>
             <p>Description of Product 4</p>
             <p>{{ rental.address }}</p>
             <button class="add-to-favorites">Add to Favorites</button>
-        </div>
-    </a>
+        </a>
+    </div>
+
     {% endfor %}
 </div>
 {% endblock %}

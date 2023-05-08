@@ -40,22 +40,32 @@
                     {% with request.path|lower|slice:":-1" as current_path %}
                     <ul id="menyu_sayta">
                         <li>
-                            <a href="/" style="text-decoration: {% if '' == current_path %}underline; color: black;{% else %}none{% endif %};">ГЛАВНАЯ СТРАНИЦА</a>
+                            <a href="/"
+                               style="text-decoration: {% if '' == current_path %}underline; color: black;{% else %}none{% endif %};">ГЛАВНАЯ
+                                СТРАНИЦА</a>
                         </li>
 
-                        <li><a href="/pagefoto" style="text-decoration: {% if '/pagefoto' == current_path %}underline; color: black;{% else %}none{% endif %};">ФОТОСТУДИИ</a>
+                        <li><a href="/pagefoto"
+                               style="text-decoration: {% if '/pagefoto' == current_path %}underline; color: black;{% else %}none{% endif %};">ФОТОСТУДИИ</a>
                         </li>
                         <li>
-                            <a href="/svadba" style="text-decoration: {% if '/svadba' == current_path %}underline; color: black;{% else %}none{% endif %};">ОРГАНИЗАЦИЯ СВАДЕБ</a>
+                            <a href="/svadba"
+                               style="text-decoration: {% if '/svadba' == current_path %}underline; color: black;{% else %}none{% endif %};">ОРГАНИЗАЦИЯ
+                                СВАДЕБ</a>
                         </li>
                         <li>
-                            <a href="/banket" style="text-decoration: {% if '/banket' == current_path %}underline; color: black;{% else %}none{% endif %};">БАНКЕТНЫЕ ЗАЛЫ</a>
+                            <a href="/banket"
+                               style="text-decoration: {% if '/banket' == current_path %}underline; color: black;{% else %}none{% endif %};">БАНКЕТНЫЕ
+                                ЗАЛЫ</a>
                         </li>
                         <li>
-                            <a href="/kino" style="text-decoration: {% if '/kino' == current_path %}underline; color: black;{% else %}none{% endif %};">КИНОЗАЛЫ</a>
+                            <a href="/kino"
+                               style="text-decoration: {% if '/kino' == current_path %}underline; color: black;{% else %}none{% endif %};">КИНОЗАЛЫ</a>
                         </li>
                         <li>
-                            <a href="/kon" style="text-decoration: {% if '/kon' == current_path %}underline; color: black;{% else %}none{% endif %};">ПЛОЩАДКИ ДЛЯ ПРОВЕДЕНИЯ КОНЦЕРОВ</a>
+                            <a href="/kon"
+                               style="text-decoration: {% if '/kon' == current_path %}underline; color: black;{% else %}none{% endif %};">ПЛОЩАДКИ
+                                ДЛЯ ПРОВЕДЕНИЯ КОНЦЕРОВ</a>
                         </li>
                     </ul>
                     {% endwith %}
@@ -64,9 +74,11 @@
             <!-- <a href="#"class="fa-solid fa-bars" style=" font-size: 40px;"></a> -->
             <a href="#" class="logo"><img src="{% static 'rental_ads/img/logo.png' %}" height="70px"></a>
             <div id="tp">
-                <form action="">
-                    <input type="search">
-                    <i class="fa fa-search"></i>
+                <form method="get" action="{% url 'rental_search' %}">
+                    <input type="search" name="query" placeholder="Search rentals...">
+                    <button type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </form>
             </div>
 
