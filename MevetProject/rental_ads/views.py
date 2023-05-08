@@ -1,12 +1,11 @@
 from django.shortcuts import render
-from .models import Rental
-from .models import Category
+from .models import Rental, Category
 
 def index(request):
     return render(request, 'index.html')
 
 def kino(request):
-    kino_category = Category.objects.get(name = 'kino')
+    kino_category = Category.objects.get(name='kino')
     rental_list = Rental.objects.filter(category=kino_category)
     context = {"rental_list": rental_list}
     return render(request, 'kino.html', context)
