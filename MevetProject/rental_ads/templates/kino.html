@@ -6,16 +6,15 @@
 
 {% block content %}
 <h1>Кинозалы</h1>
+
 <div class="rentals-container">
     {% for rental in rental_list %}
         <div class="rental-item">
-            <img src="{{ rental.image.url }}" height="310px" width="100%">
-            <h3 class="txtbold">{{ rental.name }}</h3>
-            <p class="txtff">{{ rental.address }}</p>
-            <nav class="nav3">
-                <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-            </nav>
+            <img src="{{ rental.image.url }}" >
+            <h3>{{ rental.name }}</h3>
+            <p>Description of Product 4</p>
+            <p>{{ rental.address }}</p>
+            <button class="add-to-favorites">Add to Favorites</button>
         </div>
     {% endfor %}
 </div>
