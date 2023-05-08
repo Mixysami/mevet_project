@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ rental.title }}</h1>
+    <p>Category: {{ rental.category }}</p>
+    <p>Address: {{ rental.address }}</p>
+    <p>Price: {{ rental.price }}</p>
+    <p>Contact: {{ rental.contact }}</p>
+    <p>Description: {{ rental.description }}</p>
+
+    <h2>Images</h2>
+    <div>
+        {% for rental_image in images %}
+            <img src="{{ rental_image.image.url }}" alt="{{ rental.title }} - Image {{ forloop.counter }}" />
+        {% empty %}
+            <p>No additional images available.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
