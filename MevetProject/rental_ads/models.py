@@ -18,16 +18,29 @@ def rental_image_upload_path(instance, filename):
 
 
 def rental_main_image_upload_path(instance, filename):
-    # Get the file extension
-    ext = os.path.splitext(filename)[-1].lower()
-    # Create a unique filename using UUID
-    unique_filename = f"{uuid.uuid4()}{ext}"
-    # Sanitize the rental name
-    rental_name_sanitized = re.sub(r"[^\w\-_]", "_", instance.title)
-    # Define the folder structure
-    folder = f"rental_images/{rental_name_sanitized}_{instance.rental.id}/main/"
-    # Return the full path
-    return os.path.join(folder, unique_filename)
+    # Check if a main image exists for this rental
+    if instance.main_image:
+        # Use the path for the main image
+        ext = os.path.splitext(instance.main_image.name)[-1].lower()
+        unique_filename = f"{uuid.uuid4()}{ext}"
+        rental_name_sanitized = re.sub(r"[^\w\-_]", "_", instance.title)
+        folder = f"rental_images/{rental_name_sanitized}_{instance.id}/main/"
+        return os.path.join(folder, unique_filename)
+    else:
+        # If there is no main image, choose any one of the rental's images
+        rental_images = instance.images.all()
+        if rental_images:
+            # Choose a random image
+            random_image = rental_images.order_by('?').first()
+            ext = os.path.splitext(random_image.image.name)[-1].lower()
+            unique_filename = f"{uuid.uuid4()}{ext}"
+            rental_name_sanitized = re.sub(r"[^\w\-_]", "_", instance.title)
+            folder = f"rental_images/{rental_name_sanitized}_{instance.id}/main/"
+            return os.path.join(folder, unique_filename)
+        else:
+            # If there are no images, use a default image
+            return "rental_images/default_main_image.png"
+
 
 
 class Category(models.Model):
