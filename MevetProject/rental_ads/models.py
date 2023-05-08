@@ -36,8 +36,6 @@ def get_random_image_from_folder(folder):
     return None
 
 
-
-
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
