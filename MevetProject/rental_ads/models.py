@@ -1,3 +1,5 @@
+from pathlib import Path
+from django.conf import settings
 from django.db import models
 import os
 import uuid
@@ -18,28 +20,21 @@ def rental_image_upload_path(instance, filename):
 
 
 def rental_main_image_upload_path(instance, filename):
-    # Check if a main image exists for this rental
-    if instance.main_image:
-        # Use the path for the main image
-        ext = os.path.splitext(instance.main_image.name)[-1].lower()
-        unique_filename = f"{uuid.uuid4()}{ext}"
-        rental_name_sanitized = re.sub(r"[^\w\-_]", "_", instance.title)
-        folder = f"rental_images/{rental_name_sanitized}_{instance.id}/main/"
-        return os.path.join(folder, unique_filename)
-    else:
-        # If there is no main image, choose any one of the rental's images
-        rental_images = instance.images.all()
-        if rental_images:
-            # Choose a random image
-            random_image = rental_images.order_by('?').first()
-            ext = os.path.splitext(random_image.image.name)[-1].lower()
-            unique_filename = f"{uuid.uuid4()}{ext}"
-            rental_name_sanitized = re.sub(r"[^\w\-_]", "_", instance.title)
-            folder = f"rental_images/{rental_name_sanitized}_{instance.id}/main/"
-            return os.path.join(folder, unique_filename)
-        else:
-            # If there are no images, use a default image
-            return "rental_images/default_main_image.png"
+    ext = os.path.splitext(instance.main_image.name)[-1].lower()
+    unique_filename = f"{uuid.uuid4()}{ext}"
+    rental_name_sanitized = re.sub(r"[^\w\-_]", "_", instance.title)
+    folder = f"rental_images/{rental_name_sanitized}_{instance.id}/main/"
+    return os.path.join(folder, unique_filename)
+
+
+def get_random_image_from_folder(folder):
+    folder_path = Path(settings.MEDIA_ROOT, folder)
+    if folder_path.exists() and folder_path.is_dir():
+        images = list(folder_path.glob('*.png')) + list(folder_path.glob('*.jpg')) + list(folder_path.glob('*.jpeg'))
+        if images:
+            return os.path.relpath(images[0], settings.MEDIA_ROOT).replace('\\', '/')
+    return None
+
 
 
 
@@ -68,6 +63,33 @@ class Rental(models.Model):
     class Meta:
         verbose_name = "Rental"
         verbose_name_plural = "Rentals"
+
+    def save(self, *args, **kwargs):
+        is_new = not self.pk
+
+        if is_new:
+            # Save the rental once to generate the ID
+            super(Rental, self).save(*args, **kwargs)
+
+        if not self.main_image:
+            # Try to get a random image from the corresponding folder
+            folder = f"rental_images/{self.title}_{self.id}/"
+            random_image_path = get_random_image_from_folder(folder)
+
+            if random_image_path:
+                self.main_image = random_image_path
+            else:
+                # There is no image in the folder, use the default
+                self.main_image = "rental_images/default_main_image.png"
+        else:
+            # Save the main image with the correct path
+            main_image = self.main_image
+            self.main_image = None
+            super(Rental, self).save(*args, **kwargs)
+            self.main_image = main_image
+
+        # Save the rental again with the updated main_image
+        super(Rental, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
