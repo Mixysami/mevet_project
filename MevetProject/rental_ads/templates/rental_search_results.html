@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Search Results</h1>
+
+    <div class="rentals-container">
+        {% for rental in rental_list %}
+            <div class="rental-item">
+                <h3>{{ rental.title }}</h3>
+                <p>{{ rental.description }}</p>
+                <p>{{ rental.address }}</p>
+            </div>
+        {% empty %}
+            <p>No results found.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
