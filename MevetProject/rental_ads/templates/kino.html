@@ -5,92 +5,18 @@
 {% block title %}Svadba{% endblock %}
 
 {% block content %}
-<div class="osnov">
-    <center>
-        <br>
-        <h1>Кинозалы</h1>
-        <br>
-
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/k1.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Empire Cinema</h3>
-                <p class="txtff">г. Волгоград, ул. Краснознаменская, 9, ТРЦ «Пирамида»</p>
-                <h3 class="txtbold">6.9 оценка</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-                <!-- <i class="fa-regular fa-comment-dots txtbold">Написать продавцу</i> -->
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/k2.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Mori cinema</h3>
-                <p class="txtff">г. Волгоград, ул. им Землячки, 110б, ТРЦ «КомсоМолл», 2 этаж</p>
-                <h3 class="txtbold">7.0 оценка</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/k3.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Гиппопо</h3>
-                <p class="txtff">г. Волгоград, просп. Героев Сталинграда, 68</p>
-                <h3 class="txtbold">7.2 оценка</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
+<h1>Кинозалы</h1>
+<div class="rentals-container">
+    {% for rental in rental_list %}
+        <div class="rental-item">
+            <img src="{{ rental.image.url }}" height="310px" width="100%">
+            <h3 class="txtbold">{{ rental.name }}</h3>
+            <p class="txtff">{{ rental.address }}</p>
+            <nav class="nav3">
+                <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
+                <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
+            </nav>
         </div>
-
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/k4.jpg' %}" height="310px" width="90%">
-                <h3 class="txtbold">Киномакс</h3>
-                <p class="txtff">г. Волгоград, ул. Рабоче-Крестьянская, 10</p>
-                <h3 class="txtbold">8.4 оценка</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/k5.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Пять Звезд</h3>
-                <p class="txtff">г. Волгоград, ул. Рабоче-Крестьянская, 9б, ТРЦ «Ворошиловский»</p>
-                <h3 class="txtbold">8.4 оценка</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/k6.jpg' %}" height="310px" width="90%">
-                <h3 class="txtbold">Синема 5</h3>
-                <p class="txtff">г. Волгоград, б-р 30-летия Победы, 21, ТРК Park House</p>
-                <h3 class="txtbold">9.1 оценка</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
-
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="{% static '/rental_ads/img/k7.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Синема Парк</h3>
-                <p class="txtff">г. Волгоград, пр. им В.И Ленина, 54б, ТРК «Европа Сити Молл»</p>
-                <h3 class="txtbold">8.3 оценка</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-
-        </div>
-        <br>
+    {% endfor %}
 </div>
 {% endblock %}
