@@ -36,7 +36,8 @@
                     <span></span>
                     <span></span>
                     <span></span>
-                   {% with request.path|lower|slice:":-1" as current_path %}
+
+                    {% with request.path|lower|slice:":-1" as current_path %}
                     <ul id="menyu_sayta">
                         <li>
                             <a href="" style="text-decoration: {% if '' == current_path %}underline; color: black;{% else %}none{% endif %};">ГЛАВНАЯ СТРАНИЦА</a>
