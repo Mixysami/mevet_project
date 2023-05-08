@@ -77,9 +77,11 @@ class RentalImage(models.Model):
     rental = models.ForeignKey(Rental, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=rental_image_upload_path, blank=True, null=True)
 
+
     class Meta:
         verbose_name = "Rental Image"
         verbose_name_plural = "Rental Images"
+
 
     def __str__(self):
         return f"{self.rental.title} - Image {self.pk}"
