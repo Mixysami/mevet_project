@@ -17,6 +17,19 @@ def rental_image_upload_path(instance, filename):
     return os.path.join(folder, unique_filename)
 
 
+def rental_main_image_upload_path(instance, filename):
+    # Get the file extension
+    ext = os.path.splitext(filename)[-1].lower()
+    # Create a unique filename using UUID
+    unique_filename = f"{uuid.uuid4()}{ext}"
+    # Sanitize the rental name
+    rental_name_sanitized = re.sub(r"[^\w\-_]", "_", instance.title)
+    # Define the folder structure
+    folder = f"rental_images/{rental_name_sanitized}_{instance.rental.id}/main/"
+    # Return the full path
+    return os.path.join(folder, unique_filename)
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
@@ -37,6 +50,7 @@ class Rental(models.Model):
     contact = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    main_image = models.ImageField(upload_to=rental_main_image_upload_path, blank=True, null=True)
 
     class Meta:
         verbose_name = "Rental"
