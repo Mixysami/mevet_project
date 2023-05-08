@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import Rental, Category
+from django.shortcuts import render, get_object_or_404
+from .models import Rental, Category, RentalImage
 
 def index(request):
     return render(request, 'index.html')
@@ -21,3 +21,10 @@ def svadba(request):
 
 def banket(request):
     return render(request, 'banket.html')
+
+def rental_detail(request, category_name, rental_id):
+    rental = get_object_or_404(Rental, id=rental_id)
+    images = rental.images.all()
+    context = {'rental': rental, 'images': images}
+    return render(request, 'rental_detail.html', context)
+
