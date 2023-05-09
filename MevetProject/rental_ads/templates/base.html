@@ -103,13 +103,34 @@
     <div id="okno">
         <p>Авторизуйтесь</p><br>
 
-        <form id="login-form">
-            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
-            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+        <form id="login-form" method="post" action="/login/">
+            {% csrf_token %}
+            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username"
+                   required>
+            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password"
+                   required>
             <input type="submit" value="Login" id="login-form-submit" class="close">
+            <p><a href="#zatemnenie2">Регистрация</a></p>
         </form>
 
         <a href="#" class="close">Закрыть окно</a>
+    </div>
+</div>
+
+<div id="zatemnenie2">
+    <div id="okno2">
+        <p>Зарегистрируйтесь</p><br>
+        {% csrf_token %}
+        <form id="login-form2" method="post" action="/register/">
+            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Введите имя"
+                   required>
+            <input type="password" name="password" id="password-field" class="login-form-field"
+                   placeholder="Введите пароль" required>
+            <input type="submit" value="Register" id="login-form-submit" class="close">
+            <p><a href="#zatemnenie">Вход</a></p>
+        </form>
+
+        <a href="#" class="close2">Закрыть окно</a>
     </div>
 </div>
 

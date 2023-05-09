@@ -1,105 +1,40 @@
-<html>
-	<head>
-		<title>foto</title>
-		<meta charset="utf-8" />
 
-		<link href="https://fonts.cdnfonts.com/css/century-gothic?styles=24895" rel="stylesheet">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		
-		<style>
-			.Osn {
-				margin: 2%;
-				display: flex;
-				width: 90%;
-			}
-			.oneP {
-				padding-top: 3%;
-				width: 50%;
-			}
-			.twoP {
-				width: 50%;
-			}
-
-			.twoP h1{
-				font-size: 50px;
-			}
-
-			.twoP p{
-				font-size: 20px;
-			}
-
-			.threeP{
-				margin: 2%;
-				width: 90%;
-			}
-
-			.oneP img {
-				border: solid 2px gray;
-				width: 91.1%;
-				transition:width 0.5s ease;
-			}
-
-			.dinamic {
-				display: flex;
-			}
-			.dinamic img {
-				border: solid 2px gray;
-				/*padding-top: 0.5%;
-				padding-right: 0.5%;
-				padding-bottom: 0.5%;*/
-				width: 30%;
-				transition:width 0.5s ease;
-			}
-
-
-			.spc{
-				font-weight: bold;
-			}
-
-			.add-to-favorites {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.add-to-favorites:hover {
-  background-color: #0056b3;
-}
-
-
-
-
-			
-		</style>
-	</head>
-	<body>
-		
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
 		<div class="Osn">
 			<div class="oneP">
-				<img src="/Users/mixysami/HTML Project/Mevet/Styles/k1.jpg">
+				<img src="{{ rental.main_image.url }}">
+
+<!--				{% for rental in rental_list %}-->
+<!--				<div class="dinamic">-->
+<!--					<img src="{{ rental.main_image.url }}">-->
+<!--				</div>-->
+<!--				{% endfor %}-->
+
+				{% for image in images %}
 				<div class="dinamic">
-					<img src="/Users/mixysami/HTML Project/Mevet/Styles/k2.jpg">
+					<img src="{{ image.url }}">
 				</div>
+				{% endfor %}
 
 			</div>
 			<div class="twoP">
-				<h1>Title</h1>
+				<h1>{{ rental.title }}</h1>
+				<p class="spc">Цена:</p>
+				<p>{{ rental.price }}</p>
 				<p class="spc">Связь с организатором:</p>
-				<p>number</p>
+				<p>{{ rental.contact }}</p>
 				<p class="spc">Местоположение:</p>
-				<p>adreess</p>
+				<p>{{ rental.address }}</p>
 				<button class="add-to-favorites">Add to Favorites</button>
 			</div>
 		</div>
 		<div class="threeP">
 		<h2>Описание</h2>
-			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+			<p>{{ rental.description }}</p>
 		</div>
+{% endblock %}
 <script>
   // выбираем все изображения на странице
   const images = document.querySelectorAll('img');
@@ -139,5 +74,3 @@
   });
 </script>
 		
-	</body>
-</html>
