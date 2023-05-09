@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from .models import Rental, Category, RentalImage
 
+
 def index(request):
     return render(request, 'index.html')
 
@@ -22,9 +23,11 @@ def login_view(request):
     else:
         return render(request, 'login.html')
 
+
 def logout_view(request):
     logout(request)
     return redirect('login')
+
 
 def register_view(request):
     if request.method == 'POST':
@@ -43,11 +46,13 @@ def kino(request):
     context = {"rental_list": rental_list}
     return render(request, 'kino.html', context)
 
+
 def kon(request):
     kon_category = Category.objects.get(name='kon')
     rental_list = Rental.objects.filter(category=kon_category)
     context = {"rental_list": rental_list}
     return render(request, 'kon.html', context)
+
 
 def pagefoto(request):
     pagefoto_category = Category.objects.get(name='pagefoto')
@@ -55,11 +60,13 @@ def pagefoto(request):
     context = {"rental_list": rental_list}
     return render(request, 'pagefoto.html', context)
 
+
 def svadba(request):
     svadba_category = Category.objects.get(name='svadba')
     rental_list = Rental.objects.filter(category=svadba_category)
     context = {"rental_list": rental_list}
     return render(request, 'svadba.html', context)
+
 
 def banket(request):
     banket_category = Category.objects.get(name='banket')
@@ -67,11 +74,13 @@ def banket(request):
     context = {"rental_list": rental_list}
     return render(request, 'banket.html', context)
 
+
 def rental_detail(request, category_name, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
     images = rental.images.all()
     context = {'rental': rental, 'images': images}
     return render(request, 'rental_detail.html', context)
+
 
 def rental_search(request):
     query = request.GET.get('query', '')
@@ -83,5 +92,3 @@ def rental_search(request):
 
     context = {'rental_list': rental_list}
     return render(request, 'rental_search_results.html', context)
-
-
