@@ -1,14 +1,15 @@
 <html>
-	<head>
-		<title>foto</title>
-		<meta charset="utf-8" />
+<head>
+    <title>foto</title>
+    <meta charset="utf-8"/>
 
-		<link href="https://fonts.cdnfonts.com/css/century-gothic?styles=24895" rel="stylesheet">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.cdnfonts.com/css/century-gothic?styles=24895" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		
-		<style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
 			.Osn {
 				margin: 2%;
 				display: flex;
@@ -41,10 +42,10 @@
 				transition:width 0.5s ease;
 			}
 
-			.dinamic {
+			.dynamic {
 				display: flex;
 			}
-			.dinamic img {
+			.dynamic img {
 				border: solid 2px gray;
 				/*padding-top: 0.5%;
 				padding-right: 0.5%;
@@ -75,31 +76,42 @@
 
 
 			
-		</style>
-	</head>
-	<body>
 		
-		<div class="Osn">
-			<div class="oneP">
-				<img src="/Users/mixysami/HTML Project/Mevet/Styles/k1.jpg">
-				<div class="dinamic">
-					<img src="/Users/mixysami/HTML Project/Mevet/Styles/k2.jpg">
-				</div>
 
-			</div>
-			<div class="twoP">
-				<h1>Title</h1>
-				<p class="spc">Связь с организатором:</p>
-				<p>number</p>
-				<p class="spc">Местоположение:</p>
-				<p>adreess</p>
-				<button class="add-to-favorites">Add to Favorites</button>
-			</div>
-		</div>
-		<div class="threeP">
-		<h2>Описание</h2>
-			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-		</div>
+    </style>
+</head>
+<body>
+
+<div class="Osn">
+    <div class="oneP">
+        {% if rental.main_image %}
+        <img src="{{ rental.main_image.url }}">
+        {% endif %}
+        <div class="dynamic">
+            {% for image in rental.images.all %}
+            <img src="{{ image.image.url }}">
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="twoP">
+        <h1>{{ rental.title }}</h1>
+        <p class="spc">Связь с организатором:</p>
+        <p>{{ rental.contacts }}</p>
+        <p class="spc">Местоположение:</p>
+        <p>{{ rental.address }}</p>
+        <button class="add-to-favorites">Add to Favorites</button>
+    </div>
+</div>
+<div class="threeP">
+    <h2>Описание</h2>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+        a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+        of Lorem Ipsum.</p>
+</div>
 <script>
   // выбираем все изображения на странице
   const images = document.querySelectorAll('img');
@@ -137,7 +149,9 @@
       });
     });
   });
+
+
 </script>
-		
-	</body>
+
+</body>
 </html>
