@@ -2,114 +2,24 @@
 
 {% load static %}
 
-{% block title %}kon{% endblock %}
+{% block title %}Площадки для проведения концертов{% endblock %}
 
 {% block content %}
-<div class="osnov">
-    <center>
-        <br>
-        <h1>Площадки для проведения концертов</h1>
-        <br>
+<h1>Площадки для проведения концертов</h1>
 
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/t1.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Центральный концертный зал</h3>
-                <p class="txtff">Волгоград, наб. 62-й Армии, 4</p>
-                <h3 class="txtbold">пн-вс 10.00–19.00</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-                <!-- <i class="fa-regular fa-comment-dots txtbold">Написать продавцу</i> -->
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/t2.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Кроп Arena</h3>
-                <p class="txtff">Волгоград, Батальонная, 4</p>
-                <h3 class="txtbold">пн-вс 8.00–22.00</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/t3.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">ДК профсоюзов</h3>
-                <p class="txtff">Волгоград, просп. имени В.И.Ленина, 4</p>
-                <h3 class="txtbold">пн-вс 11.00–23.00</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
+<div class="rentals-container">
+    {% for rental in rental_list %}
 
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/t4.jpg' %}" height="310px" width="90%">
-                <h3 class="txtbold">Дом офицеров</h3>
-                <p class="txtff">Волгоград, просп. имени В.И.Ленина, 31</p>
-                <h3 class="txtbold">пн-вс 11.00–23.00</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/t5.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Волгоградская филармония</h3>
-                <p class="txtff">Волгоград, просп. имени В.И.Ленина, 53а</p>
-                <h3 class="txtbold">пн-вс 10.00–18.00</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/t6.jpg' %}" height="310px" width="90%">
-                <h3 class="txtbold">ДК «Октябрь»</h3>
-                <p class="txtff">Волжский, Сталинградская, 6</p>
-                <h3 class="txtbold">пн-пт 11.00–18.00</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
+    <div class="rental-item">
+        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
+            <img src="{{ rental.main_image.url }}">
+            <h3>{{ rental.name }}</h3>
+            <p>Description of Product 4</p>
+            <p>{{ rental.address }}</p>
+            <button class="add-to-favorites">Add to Favorites</button>
+        </a>
+    </div>
 
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/t7.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Kultura</h3>
-                <p class="txtff">Волгоград, наб. 62-й Армии, 6</p>
-                <h3 class="txtbold">пн-пт 11.00–20.00</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/t8.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Сити-холл «Южный»</h3>
-                <p class="txtff">Волгоград, Рабоче-Крестьянская, 18 </p>
-                <h3 class="txtbold">пн-пт 11.00–23.00</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/t9.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Волгоградская консерватория им. Серебрякова</h3>
-                <p class="txtff">Волгоград, Мира, 5а</p>
-                <h3 class="txtbold">пн-пт 11.00–20.00</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
-        <br>
+    {% endfor %}
 </div>
 {% endblock %}

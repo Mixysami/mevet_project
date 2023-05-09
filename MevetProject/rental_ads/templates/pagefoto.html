@@ -1,115 +1,25 @@
 {% extends "base.html" %}
-{% load static %}
-{% block title %}pagefoto{% endblock %}
 
+{% load static %}
+
+{% block title %}Фотостудии{% endblock %}
 
 {% block content %}
-<div class="osnov">
-    <center class="center_x">
-        <br>
-        <h1>Фотостудии</h1>
-        <br>
+<h1>Фотостудии</h1>
 
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/f1.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Зал новый в фотостудии Рай</h3>
-                <p class="txtff">г.Волгоград Универсетский проспект,34</p>
-                <h3 class="txtbold">от 1000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-                <!-- <i class="fa-regular fa-comment-dots txtbold">Написать продавцу</i> -->
-            </div>
+<div class="rentals-container">
+    {% for rental in rental_list %}
 
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/f2.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Зал основной в фотостудии ROOM</h3>
-                <p class="txtff">г.Волгоград ул.64 Армии,131 </p>
-                <h3 class="txtbold">от 500 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/f3.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Зал новый в фотостудии Cosmos</h3>
-                <p class="txtff">г.Волгоград ул. Циолковского 6</p>
-                <h3 class="txtbold">от 1000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
+    <div class="rental-item">
+        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
+            <img src="{{ rental.main_image.url }}">
+            <h3>{{ rental.name }}</h3>
+            <p>Description of Product 4</p>
+            <p>{{ rental.address }}</p>
+            <button class="add-to-favorites">Add to Favorites</button>
+        </a>
+    </div>
 
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/f4.jpg" height="310px" width="90%">
-                <h3 class="txtbold">Зал Снежный вальс</h3>
-                <p class="txtff">Волгоград Ул. Канунникова 1</p>
-                <h3 class="txtbold">от 1000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/f5.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Зал Тёмный в фотостудии <br>Птичка</h3>
-                <p class="txtff">г. Волгоград, пр.Ленина,д.3</p>
-                <h3 class="txtbold">от 1200 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/f6.jpg" height="310px" width="90%">
-                <h3 class="txtbold">Зал Family в фотостудии Рай</h3>
-                <p class="txtff">г. Волгоград, Университетский проспект, 34</p>
-                <h3 class="txtbold">от 1000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
-
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/f7.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Зал Arcobaleno</h3>
-                <p class="txtff">г. Волгоград, ул. Доценко, д. 43</p>
-                <h3 class="txtbold">от 900 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/f8.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Зал AVOCADO в фотостудии AVOCADO</h3>
-                <p class="txtff">г. Волгоград, ш. Авиаторов, д. 18/1 </p>
-                <h3 class="txtbold">от 1000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/f9.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Зал Hobby Horse в фотостудии Hobby Horse</h3>
-                <p class="txtff">г. Волгоград, ул. Бакинская, д. 10</p>
-                <h3 class="txtbold">от 1000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
-        <br>
+    {% endfor %}
 </div>
 {% endblock %}

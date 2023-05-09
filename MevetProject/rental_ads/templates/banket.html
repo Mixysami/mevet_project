@@ -1,114 +1,25 @@
 {% extends "base.html" %}
-{% block title %}banket{% endblock %}
+
 {% load static %}
 
+{% block title %}Банкетные залы{% endblock %}
 
 {% block content %}
-<div class="osnov">
-    <center>
-        <br>
-        <h1>Банкетные залы</h1>
-        <br>
+<h1>Банкетные залы</h1>
 
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/b1.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Volga Hall</h3>
-                <p class="txtff">Волгоград, Профсоюзная, 13</p>
-                <h3 class="txtbold">от 10 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-                <!-- <i class="fa-regular fa-comment-dots txtbold">Написать продавцу</i> -->
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/b2.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Римини</h3>
-                <p class="txtff">Волгоград, Гагарина, 9 </p>
-                <h3 class="txtbold">от 10 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/b3.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Волгоград</h3>
-                <p class="txtff">Волгоград, Мира, 12</p>
-                <h3 class="txtbold">от 5000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
+<div class="rentals-container">
+    {% for rental in rental_list %}
 
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/b4.jpg" height="310px" width="90%">
-                <h3 class="txtbold">Якитория</h3>
-                <p class="txtff">Волгоград, наб. 62-й Армии, 6</p>
-                <h3 class="txtbold">от 5000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/b5.jpg" height="310px" width="100%">
-                <h3 class="txtbold">7 королей</h3>
-                <p class="txtff">Волгоград, Электролесовская, 74</p>
-                <h3 class="txtbold">от 2000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/b6.jpg" height="310px" width="90%">
-                <h3 class="txtbold">Alex Hall</h3>
-                <p class="txtff">Волгоград, Дорожная, 36а</p>
-                <h3 class="txtbold">от 15000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
+    <div class="rental-item">
+        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
+            <img src="{{ rental.main_image.url }}">
+            <h3>{{ rental.name }}</h3>
+            <p>Description of Product 4</p>
+            <p>{{ rental.address }}</p>
+            <button class="add-to-favorites">Add to Favorites</button>
+        </a>
+    </div>
 
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/b7.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Plaza</h3>
-                <p class="txtff">Волгоград, Новоузенская, 2/1</p>
-                <h3 class="txtbold">от 20 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/b8.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Prestige</h3>
-                <p class="txtff">Волгоград, Электролесовская, 74 </p>
-                <h3 class="txtbold">от 10 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/b9.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Антей</h3>
-                <p class="txtff">Волгоград, Удмуртская, 33</p>
-                <h3 class="txtbold">от 5000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
-        <br>
+    {% endfor %}
 </div>
-{% endblock %}git
+{% endblock %}

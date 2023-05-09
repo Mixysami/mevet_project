@@ -2,114 +2,24 @@
 
 {% load static %}
 
-{% block title %}svadba{% endblock %}
+{% block title %}Организация свадеб{% endblock %}
 
 {% block content %}
-<div class="osnov">
-    <center>
-        <br>
-        <h1>Свадебные агенства</h1>
-        <br>
+<h1>Организация свадеб</h1>
 
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/s1.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Имперя праздника</h3>
-                <p class="txtff">+7 937 555-50-50</p>
-                <h3 class="txtbold">от 100 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-                <!-- <i class="fa-regular fa-comment-dots txtbold">Написать продавцу</i> -->
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/s2.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Свадебное агентство CLEVER</h3>
-                <p class="txtff">+7 961 665-89-95 </p>
-                <h3 class="txtbold">от 35 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="{% static 'rental_ads/img/s3.jpg' %}" height="310px" width="100%">
-                <h3 class="txtbold">Анастасия Крижановская</h3>
-                <p class="txtff">+7 905 397-14-76</p>
-                <h3 class="txtbold">от 70 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
+<div class="rentals-container">
+    {% for rental in rental_list %}
 
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/s4.jpg" height="310px" width="90%">
-                <h3 class="txtbold">Это по любви</h3>
-                <p class="txtff">+7 905 434-12-30</p>
-                <h3 class="txtbold">от 250 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/s5.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Свадебное агентство <br>EVENTG</h3>
-                <p class="txtff">+7 988 022-23-32</p>
-                <h3 class="txtbold">от 60 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/s6.jpg" height="310px" width="90%">
-                <h3 class="txtbold">Студия креатива «Счастье есть!»</h3>
-                <p class="txtff">+7 917 644-94-78</p>
-                <h3 class="txtbold">от 150 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
+    <div class="rental-item">
+        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
+            <img src="{{ rental.main_image.url }}">
+            <h3>{{ rental.name }}</h3>
+            <p>Description of Product 4</p>
+            <p>{{ rental.address }}</p>
+            <button class="add-to-favorites">Add to Favorites</button>
+        </a>
+    </div>
 
-        <div class="vtor">
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/s7.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Event-Агентство "Миндаль"</h3>
-                <p class="txtff">+7 927 250-31-02</p>
-                <h3 class="txtbold">от 50 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/s8.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Свадебное агентство First Class Wedding</h3>
-                <p class="txtff">+7 988 987-86-86 </p>
-                <h3 class="txtbold">от 50 000 руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-            <div class="col1-3">
-                <img src="/Users/mixysami/HTML Project/Mevet/Styles/s9.jpg" height="310px" width="100%">
-                <h3 class="txtbold">Агентство "Апельсин"</h3>
-                <p class="txtff">+7 904 405-19-81</p>
-                <h3 class="txtbold">от (-) руб</h3>
-                <nav class="nav3">
-                    <a class="fa-regular fa-comment-dots" style="font-size: 30px;"><font class="txts"></font></a>
-                    <a class="fa-regular fa-heart" style="font-size: 30px;"></a>
-                </nav>
-            </div>
-        </div>
-        <br>
+    {% endfor %}
 </div>
 {% endblock %}
