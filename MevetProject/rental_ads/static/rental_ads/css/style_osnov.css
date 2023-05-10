@@ -90,18 +90,6 @@
   margin-bottom: 5px;
 }
 
-.add-to-favorites {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.add-to-favorites:hover {
-  background-color: #0056b3;
-}
 
 /* new off*/
 
@@ -190,65 +178,69 @@ color: black;
 
 /*  */
 .Osn {
-				margin: 2%;
-				display: flex;
-				width: 90%;
-			}
-			.oneP {
-				padding-top: 3%;
-				width: 50%;
-			}
-			.twoP {
-				width: 50%;
-			}
-
-			.twoP h1{
-				font-size: 50px;
-			}
-
-			.twoP p{
-				font-size: 20px;
-			}
-
-			.threeP{
-				margin: 2%;
-				width: 90%;
-			}
-
-			.oneP img {
-				border: solid 2px gray;
-				width: 91.1%;
-				transition:width 0.5s ease;
-			}
-
-			.dinamic {
-				display: flex;
-			}
-			.dinamic img {
-				border: solid 2px gray;
-				/*padding-top: 0.5%;
-				padding-right: 0.5%;
-				padding-bottom: 0.5%;*/
-				width: 30%;
-				transition:width 0.5s ease;
-			}
-
-
-			.spc{
-				font-weight: bold;
-			}
-
-			.add-to-favorites {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    margin: 2%;
+	display: flex;
+	width: 90%;
+}
+.oneP {
+	padding-top: 1.5%;
+    width: 50%;
+}
+.twoP {
+	width: 50%;
 }
 
-.add-to-favorites:hover {
-  background-color: #0056b3;
+.twoP h1{
+	font-size: 50px;
+}
+
+.twoP p{
+	font-size: 20px;
+}
+
+.threeP{
+	margin: 2%;
+	width: 90%;
+}
+
+/*main картинка*/
+.main_img_rental_detail {
+    cursor: pointer;
+    border: solid 2px gray;
+	width: 91.1%;
+	transition:width 0.5s ease;
+}
+
+.dinamic {
+	display: flex;
+}
+/*rental картинки*/
+.rental_img_rental_detail {
+    cursor: pointer;
+    border: solid 2px gray;
+    width: 30%;
+	transition:width 0.5s ease;
+}
+
+
+.spc{
+	font-weight: 1000;
+}
+
+/*кнопка-добавить в избранное*/
+.add-to-favorites {
+    background-color: transparent;
+    color: #e74c3c;
+    border-radius: 0.6em;
+    border: 2px solid #e74c3c;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-favorites:hover, .add-to-favorites:focus {
+    color: white;
+    background-color: #e74c3c;
 }
 
 
