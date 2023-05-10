@@ -44,16 +44,28 @@ def kino(request):
     return render(request, 'kino.html', context)
 
 def kon(request):
-    return render(request, 'kon.html')
+    kon_category = Category.objects.get(name='kon')
+    rental_list = Rental.objects.filter(category=kon_category)
+    context = {"rental_list": rental_list}
+    return render(request, 'kon.html', context)
 
 def pagefoto(request):
-    return render(request, 'pagefoto.html')
+    pagefoto_category = Category.objects.get(name='pagefoto')
+    rental_list = Rental.objects.filter(category=pagefoto_category)
+    context = {"rental_list": rental_list}
+    return render(request, 'pagefoto.html', context)
 
 def svadba(request):
-    return render(request, 'svadba.html')
+    svadba_category = Category.objects.get(name='svadba')
+    rental_list = Rental.objects.filter(category=svadba_category)
+    context = {"rental_list": rental_list}
+    return render(request, 'svadba.html', context)
 
 def banket(request):
-    return render(request, 'banket.html')
+    banket_category = Category.objects.get(name='banket')
+    rental_list = Rental.objects.filter(category=banket_category)
+    context = {"rental_list": rental_list}
+    return render(request, 'banket.html', context)
 
 def rental_detail(request, category_name, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
