@@ -9,13 +9,12 @@
 
 <div class="rentals-container">
     {% for rental in rental_list %}
-
     <div class="rental-item">
         <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
             <img src="{{ rental.main_image.url }}">
-            <h3>{{ rental.name }}</h3>
-            <p> rental.description </p>
-            <p>{{ rental.address }}</p>
+            <h3>{{ rental.title }}</h3>
+            <p>{{ rental.description|slice:":20" }}{% if rental.description|length > 20 %}...{% endif %}</p>
+            <p>{{ rental.address|slice:":20" }}{% if rental.address|length > 20 %}...{% endif %}</p>
            <button class="add-to-favorites fa-regular fa-heart " style="font-size: 20px;"> Добавить в избранное</button>
         </a>
     </div>
