@@ -22,7 +22,7 @@
 <body>
 <header>
     <nav class="nav2">
-        <a href="#" class="fa-solid fa-language" id="google_translate_element"><font class="txtm"> RU</font></a>
+        <a href="/" class="fa-solid fa-language" id="google_translate_element"><font class="txtm"> RU</font></a>
 
         <a href="#zatemnenie" class="fa-solid fa-location-dot"><font class="txtm"> ВОЛГОГРАД</font></a>
         <a href="#zatemnenie" class="fa-solid fa-laptop"><font class="txtm"> СТАНЬТЕ ПРОДАВЦОМ</font></a>
@@ -72,7 +72,7 @@
                 </div>
             </nav>
             <!-- <a href="#"class="fa-solid fa-bars" style=" font-size: 40px;"></a> -->
-            <a href="#" class="logo"><img src="{% static 'rental_ads/img/logo.png' %}" height="70px"></a>
+            <a href="/" class="logo"><img src="{% static 'rental_ads/img/logo.png' %}" height="70px"></a>
             <div id="tp">
                 <form method="get" action="{% url 'rental_search' %}">
                     <input type="search" name="query" placeholder="Search rentals...">
@@ -84,13 +84,9 @@
 
         </div>
         <nav>
-
-            <a href="#zatemnenie" class="fa-regular fa-comment ff" style="font-size: 20px;"><font class="txtm">
-                ЧАТ</font></a>
-            <a href="#zatemnenie" class="fa-regular fa-user ff" style="font-size: 20px;"><font class="txtm">
-                ПРОФИЛЬ</font></a>
-            <a href="#zatemnenie" class="fa-regular fa-heart ff" style="font-size: 20px;"><font class="txtm">
-                ИЗБРАННОЕ</font></a>
+            <a href="#okno" class="fa-regular fa-comment ff" style="font-size: 20px;"><font class="txtm">Чат</font></a>
+            <a href="/" class="fa-regular fa-user ff" style="font-size: 20px;"><font class="txtm">Профиль</font></a>
+            <a href="/" class="fa-regular fa-heart ff" style="font-size: 20px;"><font class="txtm">Избранное</font></a>
         </nav>
     </div>
 
@@ -103,6 +99,7 @@
     <div id="okno">
         <p>Авторизуйтесь</p><br>
 
+        <h2>Login</h2>
         <form id="login-form" method="post" action="/login/">
             {% csrf_token %}
             <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username"
@@ -110,27 +107,9 @@
             <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password"
                    required>
             <input type="submit" value="Login" id="login-form-submit" class="close">
-            <p><a href="#zatemnenie2">Регистрация</a></p>
         </form>
-
-        <a href="#" class="close">Закрыть окно</a>
-    </div>
-</div>
-
-<div id="zatemnenie2">
-    <div id="okno2">
-        <p>Зарегистрируйтесь</p><br>
-        {% csrf_token %}
-        <form id="login-form2" method="post" action="/register/">
-            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Введите имя"
-                   required>
-            <input type="password" name="password" id="password-field" class="login-form-field"
-                   placeholder="Введите пароль" required>
-            <input type="submit" value="Register" id="login-form-submit" class="close">
-            <p><a href="#zatemnenie">Вход</a></p>
-        </form>
-
-        <a href="#" class="close2">Закрыть окно</a>
+        <a href="/register/" class="register-button">Register</a>
+        <a href="/" class="close">Закрыть окно</a>
     </div>
 </div>
 
@@ -152,7 +131,6 @@
     </div>
 </footer>
 <script src="https://kit.fontawesome.com/7dd3d9efdc.js" crossorigin="anonymous"></script>
-
 
 </body>
 </html>
