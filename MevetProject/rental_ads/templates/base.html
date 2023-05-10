@@ -96,7 +96,7 @@
 
 </br>
 <div id="zatemnenie">
-    <div id="okno">
+    <div id="okno2">
         <p>Авторизуйтесь</p><br>
 
         <h2>Login</h2>
@@ -107,10 +107,27 @@
             <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password"
                    required>
             <input type="submit" value="Login" id="login-form-submit" class="close">
+            <a href="#zatemnenie2" class="register-button">Register</a>
         </form>
-        <a href="/register/" class="register-button">Register</a>
+
         <a href="/" class="close">Закрыть окно</a>
     </div>
+</div>
+
+<div id="zatemnenie2">
+	      <div id="okno2">
+	        <p>Зарегистрируйтесь</p><br>
+        {% csrf_token %}
+		<form id="login-form2" method="post" action="/password/">
+      <input type="text" name="username" id="username-field" class="login-form-field2" placeholder="Введите имя" required>
+      <input type="password" name="password" id="password-field" class="login-form-field2" placeholder="Введите пароль" required>
+      <input type="password" name="password" id="password-field" class="login-form-field2" placeholder="Повторите пароль" required>
+      <input type="submit" value="Register" id="login-form-submit" class="close">
+      <p><a href="#zatemnenie">Вход</a></p>
+    </form>
+
+	        <a href="#" class="close2">Закрыть окно</a>
+	      </div>
 </div>
 
 <footer class="footer">
