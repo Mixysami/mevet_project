@@ -15,6 +15,8 @@
             <h3>{{ rental.title }}</h3>
             <p>{{ rental.description|slice:":20" }}{% if rental.description|length > 20 %}...{% endif %}</p>
             <p>{{ rental.address|slice:":20" }}{% if rental.address|length > 20 %}...{% endif %}</p>
+            <h4>{{ rental.price }} ₽</h4>
+            <br>
            <button class="add-to-favorites fa-regular fa-heart " style="font-size: 20px;"> Добавить в избранное</button>
         </a>
     </div>

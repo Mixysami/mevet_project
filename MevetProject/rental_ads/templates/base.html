@@ -109,6 +109,7 @@
             <input type="submit" value="Login" id="login-form-submit" class="close">
             <a href="#zatemnenie2" class="register-button">Register</a>
         </form>
+        {{ form.errors}}
 
         <a href="/" class="close">Закрыть окно</a>
     </div>
@@ -117,15 +118,18 @@
 <div id="zatemnenie2">
 	      <div id="okno2">
 	        <p>Зарегистрируйтесь</p><br>
-        {% csrf_token %}
-		<form id="login-form2" method="post" action="/password/">
-      <input type="text" name="username" id="username-field" class="login-form-field2" placeholder="Введите имя" required>
-      <input type="password" name="password" id="password-field" class="login-form-field2" placeholder="Введите пароль" required>
-      <input type="password" name="password" id="password-field" class="login-form-field2" placeholder="Повторите пароль" required>
-      <input type="submit" value="Register" id="login-form-submit" class="close">
-      <p><a href="#zatemnenie">Вход</a></p>
-    </form>
 
+		<form id="login-form2" method="post" action="/register/">
+            {% csrf_token %}
+              {{ form.as_p }}
+      <input type="text" name="username" id="username-field" class="login-form-field2" placeholder="Введите имя" required>
+      <input type="password" name="password1" id="password-field" class="login-form-field2" placeholder="Введите пароль" required>
+      <input type="password_confirmation" name="password2" id="password-field" class="login-form-field2" placeholder="Повторите пароль" required>
+             <button type="submit" id="login-form-submit">Register</button>
+<!--      <input type="submit" value="Register" id="login-form-submit" class="close">-->
+
+    </form>
+<p><a href="#zatemnenie">Вход</a></p>
 	        <a href="#" class="close2">Закрыть окно</a>
 	      </div>
 </div>
