@@ -85,8 +85,9 @@
         </div>
         <nav>
 <!--            <a href="#zatemnenie" class="fa-regular fa-comment ff" style="font-size: 20px;"><font class="txtm">Чат</font></a>-->
-            <a href="/" class="fa-regular fa-file-alt ff" style="font-size: 20px;"><font class="txtm"> Объявления</font></a>
+
             {% if user.is_authenticated %}
+                <a href="/" class="fa-regular fa-file-alt ff" style="font-size: 20px;"><font class="txtm"> Объявления</font></a>
                 <a href="{% url 'logout' %}" class="fa-regular fa-user ff" style="font-size: 20px;"><font class="txtm"> Выход</font></a>
             {% else %}
                 <a href="#zatemnenie" class="fa-regular fa-user ff" style="font-size: 20px;"><font class="txtm"> Вход</font></a>
