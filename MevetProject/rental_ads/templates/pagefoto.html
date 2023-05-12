@@ -17,7 +17,7 @@
             <img src="{{ rental.main_image.url }}">
             <h3 style=" font-weight: bolder; ">{{ rental.title }}</h3>
             <p>{{ rental.address|slice:":50" }}{% if rental.address|length > 50 %}...{% endif %}</p>
-            <h4>{{ rental.price }} ₽</h4>
+            <h4>От {{ rental.price }} ₽</h4>
 
             </a>
            <button class="add-to-favorites fa-regular fa-heart " style="font-size: 18px;"> Добавить в избранное</button>
