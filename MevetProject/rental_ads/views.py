@@ -92,3 +92,5 @@ def rental_search(request):
 
     context = {'rental_list': rental_list}
     return render(request, 'rental_search_results.html', context)
+
+
