@@ -55,17 +55,25 @@
 .rentals-container {
         display: flex;
         flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin: 0 auto;
+        max-width: 1250px;
+
 
     }
 .rental-item {
     width: 30%;
+    height: 500px;
   margin: 0.5%;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 13px;
   border-radius: 15px;
   border: solid 0.5px black;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
+
+
     }
 
 .rental-item:hover {
@@ -83,11 +91,23 @@
 }
 
 .rental-item h3 {
+
+  color: black;
+    font-size: 23px;
   margin-bottom: 10px;
 }
 
 .rental-item p {
+  color: gray;
+  font-size: 15px;
   margin-bottom: 5px;
+}
+
+.rental-item h4 {
+ align: bottom;
+  color: black;
+    font-size: 20px;
+  margin-bottom: 10px;
 }
 
 
@@ -227,8 +247,8 @@ color: black;
 	font-weight: 1000;
 }
 
-/*кнопка-добавить в избранное*/
-.add-to-favorites {
+/*кнопка-добавить в избранное в rental_details*/
+.add-to-favorites-rental {
     background-color: transparent;
     color: #e74c3c;
     border-radius: 0.6em;
@@ -238,10 +258,27 @@ color: black;
     transition: background-color 0.3s ease;
 }
 
+.add-to-favorites-rental:hover, .add-to-favorites:focus {
+    color: white;
+    background-color: #e74c3c;
+}
+/*кнопка-добавить в избранное*/
+.add-to-favorites {
+    background-color: transparent;
+    color: #e74c3c;
+    border-radius: 0.7em;
+    border: 1.5px solid #e74c3c;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 .add-to-favorites:hover, .add-to-favorites:focus {
     color: white;
     background-color: #e74c3c;
 }
+
+
 
 
 
