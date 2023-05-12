@@ -2,22 +2,26 @@
 
 {% load static %}
 
+
 {% block title %}Фотостудии{% endblock %}
 
 {% block content %}
-<h1>Фотостудии</h1>
 
-<div class="rentals-container">
+<br>
+<h1 align="center">Фотостудии</h1>
+<br>
+<div class="rentals-container" align="center">
     {% for rental in rental_list %}
-
-    <div class="rental-item">
-        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
+    <div class="rental-item" href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
+        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}" style=" text-decoration: none;">
             <img src="{{ rental.main_image.url }}">
-            <h3>{{ rental.name }}</h3>
-            <p>Description of Product 4</p>
-            <p>{{ rental.address }}</p>
-            <button class="add-to-favorites">Add to Favorites</button>
-        </a>
+            <h3 style=" font-weight: bolder; ">{{ rental.title }}</h3>
+            <p>{{ rental.address|slice:":50" }}{% if rental.address|length > 50 %}...{% endif %}</p>
+            <h4>{{ rental.price }} ₽</h4>
+
+            </a>
+           <button class="add-to-favorites fa-regular fa-heart " style="font-size: 18px;"> Добавить в избранное</button>
+
     </div>
 
     {% endfor %}
