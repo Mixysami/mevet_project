@@ -16,6 +16,8 @@ urlpatterns = [
     path('favorites/', views.favorites, name='favorites'),
     path('add_rental/', views.add_rental, name='add_rental'),
     path('rental_manage/', views.rental_manage, name='rental_manage'),
+    path('rental/<int:rental_id>/delete/', views.delete_rental, name='delete_rental'),
+    path('rental/<int:rental_id>/edit/', views.edit_rental, name='edit_rental'),
 
 
 

@@ -22,8 +22,8 @@
 
             </a>
 
-        <button class="add-to-favorites fa-regular far fa-edit " style="font-size: 18px;"> Редактировать</button>
-        <button class="add-to-favorites fa-regular far fa-trash-alt" style="font-size: 18px;"> Удалить</button>
+        <a href="{% url 'edit_rental' rental_id=rental.id %}" class="add-to-favorites fa-regular far fa-edit " style="font-size: 18px;"> Редактировать</a>
+    <a href="{% url 'delete_rental' rental_id=rental.id %}" class="add-to-favorites fa-regular far fa-trash-alt" style="font-size: 18px;"> Удалить</a>
 
     </div>
 
