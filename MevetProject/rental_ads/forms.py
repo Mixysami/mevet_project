@@ -1,12 +1,9 @@
 from django import forms
-from models import *
+from .models import Rental, Category
 
-# class UserCreationForm(UserCreationForm):
-#     class Meta(UserCreationForm.Meta):
-#         model = User
-#         fields = ('username', 'password1', 'password2")
-#         widgets = {
-#             'username': forms. TextInput (attrs={'class': 'form-input'}),
-#             'password1': forms. PasswordInput(attrs={'class': 'form-input'}),
-#             'password2': forms. PasswordInput(attrs={'class': 'form-input'}),
-#         }
+
+class RentalForm(forms.ModelForm):
+    class Meta:
+        model = Rental
+        fields = ['category', 'title', 'description', 'address', 'price', 'contact', 'main_image']
+        widgets = {'category': forms.Select(choices=Category.objects.all())}

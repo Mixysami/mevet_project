@@ -19,10 +19,12 @@
             <p>{{ rental.address|slice:":50" }}{% if rental.address|length > 50 %}...{% endif %}</p>
             <h4>{{ rental.price }} ₽</h4>
             </a>
-           <button class="add-to-favorites fa-regular fa-heart " style="font-size: 18px;"> Добавить в избранное</button>
+           <button class="add-to-favorites fa-regular fa-heart add-to-favorites-btn" style="font-size: 18px;" > Добавить в избранное</button>
 
     </div>
 
     {% endfor %}
 </div>
+
+
 {% endblock %}

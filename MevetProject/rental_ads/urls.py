@@ -11,7 +11,12 @@ urlpatterns = [
     path('pagefoto/', views.pagefoto, name='pagefoto'),
     path('svadba/', views.svadba, name='svadba'),
     path('banket/', views.banket, name='banket'),
-    path('banket/', views.banket, name='banket'),
     path('<str:category_name>/<int:rental_id>/', views.rental_detail, name='rental_detail'),
     path('search/', views.rental_search, name='rental_search'),
+    path('favorites/', views.favorites, name='favorites'),
+    path('add_rental/', views.add_rental, name='add_rental'),
+    path('rental_manage/', views.rental_manage, name='rental_manage'),
+
+
+
 ]

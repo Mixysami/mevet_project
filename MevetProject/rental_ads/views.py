@@ -4,7 +4,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from .models import Rental, Category, RentalImage
-
+from django.http import HttpResponse
+from django.http import JsonResponse
+from django.http import HttpResponseRedirect
+from .forms import RentalForm
 
 def index(request):
     return render(request, 'index.html')
@@ -75,6 +78,7 @@ def banket(request):
     return render(request, 'banket.html', context)
 
 
+
 def rental_detail(request, category_name, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
     images = rental.images.all()
@@ -92,5 +96,32 @@ def rental_search(request):
 
     context = {'rental_list': rental_list}
     return render(request, 'rental_search_results.html', context)
+
+
+
+
+def favorites(request):
+    rental_list = Rental.objects.filter(id__in=request.session.get('favorites', []))
+    context = {'rental_list': rental_list}
+    return render(request, 'favorites.html', context)
+
+
+def add_rental(request):
+    if request.method == 'POST':
+        form = RentalForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('rental_manage')
+    else:
+        form = RentalForm()
+    return render(request, 'add_rental.html', {'form': form})
+
+def rental_manage(request):
+    return render(request, 'rental_manage.html')
+
+
+
+
+
 
 
