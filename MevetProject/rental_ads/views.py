@@ -125,6 +125,26 @@ def rental_manage(request):
     rental_list = Rental.objects.filter(user=request.user)
     return render(request, 'rental_manage.html', {'rental_list': rental_list})
 
+@login_required
+def delete_rental(request, rental_id):
+    rental = get_object_or_404(Rental, pk=rental_id, user=request.user)
+    rental.delete()
+    return redirect('rental_manage')
+
+@login_required
+def edit_rental(request, rental_id):
+    rental = get_object_or_404(Rental, pk=rental_id, user=request.user)
+    if request.method == 'POST':
+        form = RentalForm(request.POST, request.FILES, instance=rental)
+        if form.is_valid():
+            rental = form.save(commit=False)
+            rental.user = request.user
+            rental.save()
+            return redirect('rental_detail', category_name=rental.category.name, rental_id=rental.id)
+    else:
+        form = RentalForm(instance=rental)
+    return render(request, 'edit_rental.html', {'form': form})
+
 
 
 
