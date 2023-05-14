@@ -10,7 +10,7 @@
 <br>
 <h1 align="center">Ваши объявления</h1>
 <br>
-<button class="add-to-favorites far fa-folder-open " style="font-size: 18px;"> Добавить объявление</button>
+<a href="/add_rental" class="add-to-favorites far fa-folder-open " style="font-size: 18px;">Добавить Объявление</a>
 <div class="rentals-container" align="center">
     {% for rental in rental_list %}
     <div class="rental-item" href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">

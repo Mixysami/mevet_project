@@ -57,6 +57,7 @@ class Rental(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     main_image = models.ImageField(upload_to=rental_main_image_upload_path, blank=True, null=True)
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Rental"
@@ -113,3 +114,5 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"{self.rental.title} - Contact {self.pk}"
+
+

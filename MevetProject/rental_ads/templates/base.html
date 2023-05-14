@@ -87,12 +87,12 @@
 <!--            <a href="#zatemnenie" class="fa-regular fa-comment ff" style="font-size: 20px;"><font class="txtm">Чат</font></a>-->
 
             {% if user.is_authenticated %}
-                <a href="/" class="fa-regular fa-file-alt ff" style="font-size: 20px;"><font class="txtm"> Объявления</font></a>
+                <a href="/rental_manage" class="fa-regular fa-file-alt ff" style="font-size: 20px;"><font class="txtm"> Объявления</font></a>
                 <a href="{% url 'logout' %}" class="fa-regular fa-user ff" style="font-size: 20px;"><font class="txtm"> Выход</font></a>
             {% else %}
                 <a href="#zatemnenie" class="fa-regular fa-user ff" style="font-size: 20px;"><font class="txtm"> Вход</font></a>
             {% endif %}
-            <a href="/" class="fa-regular fa-heart ff" style="font-size: 20px;"><font class="txtm"> Избранное</font></a>
+            <a href="/favorites" class="fa-regular fa-heart ff" style="font-size: 20px;"><font class="txtm"> Избранное</font></a>
         </nav>
     </div>
 
