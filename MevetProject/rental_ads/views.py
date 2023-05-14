@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 from .forms import RentalForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'index.html')
@@ -110,14 +111,19 @@ def add_rental(request):
     if request.method == 'POST':
         form = RentalForm(request.POST, request.FILES)
         if form.is_valid():
+            rental = form.save(commit=False)
+            rental.user = request.user  # Связываем объявление с пользователем
             form.save()
             return redirect('rental_manage')
     else:
         form = RentalForm()
     return render(request, 'add_rental.html', {'form': form})
 
+@login_required
 def rental_manage(request):
-    return render(request, 'rental_manage.html')
+    user = request.user
+    rental_list = Rental.objects.filter(user=request.user)
+    return render(request, 'rental_manage.html', {'rental_list': rental_list})
 
 
 
