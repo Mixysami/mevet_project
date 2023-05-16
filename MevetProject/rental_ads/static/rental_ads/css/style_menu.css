@@ -13,7 +13,6 @@ header {
     flex-direction: column; /* Добавляем свойство, чтобы меню располагались один под другим */
     align-items: center;
     padding: 10px;
-    background: gray;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(13px);
     transition: transform 0.3s ease-in-out;
@@ -44,6 +43,7 @@ header {
     border: none;
     border-radius: 20px;
     margin-right: 10px;
+
 }
 
 .search-button {
@@ -54,10 +54,12 @@ header {
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 .search-button:hover {
-    background-color: black;
+    background-color: white;
+    color: black;
 }
 
 .center { /*Центральная часть верхнего меню*/
