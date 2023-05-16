@@ -33,7 +33,7 @@ header {
 }
 
 .search-form {
-	margin-left: -3%;
+	margin-left: -1%;
     display: flex;
     align-items: center;
 }
@@ -118,7 +118,7 @@ header {
 
 /*Форма Логина и регистрации*/
 
-#zatemnenie {
+#blackout-login {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -126,7 +126,7 @@ header {
     left: 0;
     display: none;
 }
-#okno {
+#window-login {
     width: 300px;
     height: 320px;
     text-align: center;
@@ -144,7 +144,7 @@ header {
     font-family: 'Century Gothic', sans-serif;
 }
 
-#zatemnenie:target {display: block;}
+#blackout-login:target {display: block;}
 
 .close {
     display: inline-block;
@@ -223,7 +223,7 @@ header {
 }
 
 /*Форма Registr*/
-#zatemnenie2 {
+#blackout-register {
      width: 100%;
      height: 100%;
      position: absolute;
@@ -232,7 +232,7 @@ header {
      display: none;
 }
 
-#okno2 {
+#window-register {
      width: 300px;
      height: 370px;
      text-align: center;
@@ -250,7 +250,7 @@ header {
      font-family: 'Century Gothic', sans-serif;
 }
 
-#zatemnenie2:target {display: block;}
+#blackout-register:target {display: block;}
 
 
 

@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,64 +7,48 @@
     <link rel="stylesheet" href="{% static 'rental_ads/css/style_menu.css' %}">
     <link rel="stylesheet" href="{% static 'rental_ads/css/style_footer.css' %}">
     <link rel="stylesheet" href="{% static 'rental_ads/css/style_osnov.css' %}">
-
     <link href="https://fonts.cdnfonts.com/css/century-gothic?styles=24895" rel="stylesheet">
-
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-z+LsWLOx9dQgQ4O1tK9mXHx6qNF9l9pQGK8te68XvvGdQh8zL9aVZk7hV52S9Jy8bLaANf5Y4eu3ChmkXmpymg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <style>
     </style>
 </head>
-<body>
 
+<body>
 <header>
-  <div class="top">
-    <form class="search-form" method="get" action="{% url 'rental_search' %}">
-      <div class="left">
-        <input type="search" class="search-input" placeholder="Поиск">
-      </div>
-      <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
-    </form>
-    <div class="center">
-      <img src="{% static 'rental_ads/img/logo.png' %}" alt="Логотип">
+    <div class="top">
+        <form class="search-form" method="get" action="{% url 'rental_search' %}">
+            <div class="left">
+                <input type="search" class="search-input" placeholder="Поиск">
+            </div>
+             <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
+        </form>
+        <div class="center">
+            <img src="{% static 'rental_ads/img/logo.png' %}" alt="Логотип">
+        </div>
+        <div class="right">
+            {% if user.is_authenticated %}
+                <a href="/rental_manage" class="fa-regular fa-file-alt"></a>
+                <a href="{% url 'logout' %}" class="fa-regular fa-user"></a>
+            {% else %}
+                <a href="#blackout-login" class="fa-regular fa-user"></a>
+            {% endif %}
+                <a href="/favorites" class="fa-regular fa-heart"></a>
+        </div>
     </div>
-    <div class="right">
-        {% if user.is_authenticated %}
-      <a href="/rental_manage" class="fa-regular fa-file-alt"></a>
-      <a href="{% url 'logout' %}" class="fa-regular fa-user"></a>
-{% else %}
-        <a href="#zatemnenie" class="fa-regular fa-user"></a>
-        {% endif %}
-      <a href="/favorites" class="fa-regular fa-heart"></a>
+    <div class="bottom">
+        {% with request.path|lower|slice:":-1" as current_path %}
+            <a href="/" class="fa-regular fas far far fa-compass" style="background: {% if '' == current_path %}  white;
+      color: black;{% endif %}"><font class="bottom-text"> Главная страница</font></a>
+            <a href="/pagefoto" class="fa-regular fas fa-photo" style="background: {% if '/pagefoto' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Фотостудии</font></a>
+            <a href="/svadba" class="fa-regular fas fa-gift" style="background: {% if '/svadba' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Свадебные агенства</font></a>
+            <a href="/banket" class="fa-regular fas fa-glass-cheers" style="background: {% if '/banket' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Банкетные залы</font></a>
+            <a href="/kino" class="fa-regular fas fa-video" style="background: {% if '/kino' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Кинозалы</font></a>
+            <a href="/kon" class="fa-regular fas fa-guitar" style="background: {% if '/kon' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Концертные залы</font></a>
+        {% endwith %}
     </div>
-  </div>
-  <div class="bottom">
-  {% with request.path|lower|slice:":-1" as current_path %}
-    <a href="/" class="fa-regular fas far far fa-compass" style="background: {% if '' == current_path %}  white;
-      color: black;{% endif %}">
-      <font class="bottom-text">Главная страница</font>
-    </a>
-    <a href="/pagefoto" class="fa-regular fas fa-photo" style="background: {% if '/pagefoto' == current_path %} white; color: black; {% endif %}">
-      <font class="bottom-text">Фотостудии</font>
-    </a>
-    <a href="/svadba" class="fa-regular fas fa-gift" style="background: {% if '/svadba' == current_path %} white; color: black; {% endif %}">
-      <font class="bottom-text">Свадебные агенства</font>
-    </a>
-    <a href="/banket" class="fa-regular fas fa-glass-cheers" style="background: {% if '/banket' == current_path %} white; color: black; {% endif %}">
-      <font class="bottom-text">Банкетные залы</font>
-    </a>
-    <a href="/kino" class="fa-regular fas fa-video" style="background: {% if '/kino' == current_path %} white; color: black; {% endif %}">
-      <font class="bottom-text">Кинозалы</font>
-    </a>
-    <a href="/kon" class="fa-regular fas fa-guitar" style="background: {% if '/kon' == current_path %} white; color: black; {% endif %}">
-      <font class="bottom-text">Концертные залы</font>
-    </a>
-  {% endwith %}
-</div>
 </header>
 <br>
 <br>
@@ -76,51 +59,45 @@
 {% block content %} {% endblock content %}
 
 </br>
-<div id="zatemnenie">
-    <div id="okno">
-
+<div id="blackout-login">
+    <div id="window-login">
         <h2>Авторизуйтесь</h2>
         <form id="login-form" method="post" action="/login/">
-             {% csrf_token %}
-            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Имя пользователя"
+            {% csrf_token %}
+                <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Имя пользователя"
                    required>
-            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Пароль"
+                <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Пароль"
                    required>
-            <input type="submit" value="Войти" id="login-form-submit" class="close">
-            <a href="#zatemnenie2" class="register-button">Регистрация</a>
-
+                <input type="submit" value="Войти" id="login-form-submit" class="close">
+                <a href="#blackout-register" class="register-button">Регистрация</a>
         </form>
-         {{ form.errors}}
-<a href="#" class="close fas fa-close"><font style="font-family: 'Century Gothic', sans-serif; font-weight: 400;"> Закрыть окно</font></a>
-
+        {{ form.errors}}
+    <a href="#" class="close fas fa-close"><font style="font-family: 'Century Gothic', sans-serif; font-weight: 400;"> Закрыть окно</font></a>
     </div>
 </div>
 
-<div id="zatemnenie2">
-	      <div id="okno2">
-	        <h2>Зарегистрируйтесь</h2>
-
+<div id="blackout-register">
+    <div id="window-register">
+        <h2>Зарегистрируйтесь</h2>
 		<form id="login-form" method="post" action="/register/">
-             {% csrf_token %}
-               {{ form.as_p }}
-      <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Введите имя" required>
-      <input type="password" name="password1" id="password-field" class="login-form-field" placeholder="Введите пароль" required>
-      <input type="password" name="password2" id="password-field" class="login-form-field" placeholder="Повторите пароль" required>
-             <input type="submit" value="Регистрация" class="close" id="login-form-submit"></input>
-<!--      <input type="submit" value="Register" id="login-form-submit" class="close">-->
-
-    </form>
-<p><a href="#zatemnenie" class="register-button">Вход</a></p>
-	        <a href="#" class="close">Закрыть окно</a>
-	      </div>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Введите имя" required>
+            <input type="password" name="password1" id="password-field" class="login-form-field" placeholder="Введите пароль" required>
+            <input type="password" name="password2" id="password-field" class="login-form-field" placeholder="Повторите пароль" required>
+            <input type="submit" value="Регистрация" class="close" id="login-form-submit"></input>
+            <a href="#blackout-login" class="register-button">Вход</a>
+        </form>
+        {{ form.errors}}
+        <a href="#" class="close"><font style="font-family: 'Century Gothic', sans-serif; font-weight: 400;">Закрыть окно</font></a>
+    </div>
 </div>
 
+<center>
 <footer class="footer">
     <div class="container">
-
         <div class="footer-col">
-            <h4>&nbsp;Подпишитесь на нас</h4>
-
+            <h4>Подпишитесь на нас</h4>
             <div class="social-links">
                 <a href="https://vk.com/mixysami"><i class="fa-brands fa-vk"></i></a>
                 <a href="https://t.me/mixxxs"><i class="fa-brands fa-telegram"></i></a>
@@ -128,11 +105,10 @@
                 <a href="https://www.google.com/intl/ru/gmail/about/"><i class="fa-solid fa-envelope"></i></a>
             </div>
         </div>
-
         <p style="color: white;">©2023 MEVET | All Rights Reserved</p>
     </div>
 </footer>
+</center>
 <script src="https://kit.fontawesome.com/7dd3d9efdc.js" crossorigin="anonymous"></script>
-
 </body>
 </html>
