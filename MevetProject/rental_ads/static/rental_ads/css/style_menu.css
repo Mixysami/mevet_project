@@ -8,328 +8,142 @@ body {
 }
 
 header {
-  
-/*  background-color: #808080;*/
-  padding: 20px 10px;
-  background: url("../img/fonmenu.jpg");
-  background-size: cover;
-/*  background-size: contain;*/
-  background-position: center;
-
-  
-
-
-}
-
-
-/*нижнее меню*/
-#head{
-	display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  height: 100px;
-
-
-}
-
-.wrap-logo {
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
+  flex-direction: column; /* Добавляем свойство, чтобы меню располагались один под другим */
   align-items: center;
-  color: #212121;
-  padding: 15px;
-
- 
-}
-
-#head a {
-  color: white;
-
-
   padding: 10px;
-  text-decoration: none;
-  font-size: 18px; 
-  border-radius: 4px;
-
-text-decoration: none;
-
-transition: width 0.3s ease-out;
-
+  background: gray;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(13px);
+  transition: transform 0.3s ease-in-out;
+  z-index: 999;
 }
 
-#head a.logo {
-  font-size: 45px;
-  font-weight: bold;
-  
-  margin-left: 10%;
-transition: width 0.3s ease-out;
-  
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
 }
 
-
-.ff:after {
-	display: block;
-/*	position: absolute;*/
-	left: 0; /*изменить на right:0;, чтобы изменить направление подчёркивания */
-	width: 0;/*задаём длинну линии до наведения курсора*/
-	border-radius: 3px;
-	margin-top: 5px;
-	height: 3px; /*задаём ширину линии*/
-	background-color: red; /*задаём цвет линии*/
-
-	content: "";
-	transition: width 0.3s ease-out; /*задаём время анимации*/
-}
-
-#head a:hover{
-color: red;
-}
-
-.ff:hover:after,
-.ff:focus:after {
-	width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
-
-}
-
-
-
-/*#head a:hover {
-  background-color: #FBC02D;
-  color: #212121;
-}*/
-
-/*head a.active {
-  background-color: #FBC02D;
-}*/
-
-nav {
+.left {
   display: flex;
   align-items: center;
-/*  height: 80px;*/
-  }
-
-/*верхнее меню-------------------------------------*/
-.nav2{
-	display: flex;
-  align-items: center;
-  height: 30px;
 }
-.nav2 a {
-  color: #212121;
-  padding: 7px;
-  margin-right: 20px;
+
+/*input[type="search"] {
+  padding: 10px;
+  border: none;
+  background-color: #f2f2f2;
+
+}*/
+
+.center {
+  text-align: center;
+}
+
+.center img {
+	margin-right: 5%;
+  max-width: 25%;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.right a {
+
+	transition: all 0.2s ease-in-out;
+  margin-left: 45px;
   text-decoration: none;
-  font-size: 13px; 
+  color: white;
+  font-size: 20px;
+}
+
+.right a:hover {
+  	color: red;
+}
+
+.bottom {
+  display: flex;
+  justify-content: center; /* Стили для меню, чтобы оно располагалось справа */
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 14px;
+}
+
+.bottom a {
+	color: white;
+	font-size: 13px;
+  margin: 0 15px;
+  text-decoration: none;
+  padding: 7px;
   border-radius: 20px;
-/*  background-color: white;*/
 
-/*  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);*/
-	/*background: rgba(255, 255, 255, 0.2); // Make sure this color has an opacity of less than 1
-  backdrop-filter: blur(8px); // This be the blur*/
-
-  border: 1px solid #fff;
-color: #EBEBEB;
-  cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.nav2 a:hover {
-  background: #fff;
-  color: #333;
-}
 
-.txtm{
-	font-family: 'Century Gothic', sans-serif;
-}
+.bottom a:hover {
+	background: #fff;
+  	color: #333;
 
-
- 
-
-.prod {
-	border-radius: 30%;
-	background: rgba(255,245,215,.5);
-	text-align: center;
-}
-
-/*Поисковая строка-----------------------------------*/
-#tp form{
-    position: relative;
-    top: 30%;
-    left: 55%;
-    transform: translate(-50%,-50%);
-    transition: all 1s;
-    width: 400px;
-    height: 50px;
-    background: white;
-    box-sizing: border-box;
-    border-radius: 25px;
-    border: 4px solid white;
-    padding: 5px;
-}
-
-#tp input{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;;
-    height: 42.5px;
-    line-height: 30px;
-    outline: 0;
-    border: 0;
-    display: none;
-    font-size: 1em;
-    border-radius: 20px;
-    padding: 0 20px;
-}
-
-#tp .fa{
-    box-sizing: border-box;
-    padding: 10px;
-    width: 42.5px;
-    height: 42.5px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-radius: 50%;
-    color: #07051a;
-    text-align: center;
-    font-size: 1.2em;
-    transition: all 1s;
-}
-
-#tp form:hover{
-    width: 500px;
-    cursor: pointer;
-}
-
-#tp form:hover input{
-    display: block;
-}
-
-#tp form:hover .fa{
-    background: #07051a;
-    color: white;
-}
-
-#tp {
-  margin-top: 6%;
-  margin-left: 20%;
 }
 
 
-/*Выпадающее меню-----------------------------------------*/
-.navigatsiya_protala { 
-  position: absolute; 
-  left: 0; 
-  right: 0; 
-  top: 40vh; 
-  width:50%; 
-  min-width: 400px; 
-  height: 60px; 
-  margin: 0 auto; 
-} 
+.search-form {
+	margin-left: -3%;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input {
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      margin-right: 10px;
+    }
+
+    .search-button {
+      background-color: gray;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .search-button:hover {
+      background-color: black;
+    }
+
+    .bottom-text{
+    	font-size: 13px;
+    	font-family: 'Century Gothic', sans-serif;
+
+    }
 
 
 
-#navigation_leaked{ 
-  display: block; 
-/*  position: fixed; */
-  top: 150px; 
-  left: 60px; 
-  z-index: 1; 
-  -webkit-user-select: none; 
-  user-select: none; 
-} 
 
-#navigation_leaked input{ 
-  display: block; 
-  width: 50px; 
-  height: 60px; 
-  position: absolute; 
-  top: 70px; 
-  left: 30px; 
-  cursor: pointer; 
-  opacity: 0; 
-  z-index: 2; 
-  border: solid 2px white;
-  -webkit-touch-callout: none; 
-} 
-
-#navigation_leaked span{ 
-  display: block; 
-  width: 40px; 
-  height: 6px; 
-  margin-bottom: 5px; 
-  position: relative; 
-  background: #ECF0F1; 
-  border-radius: 5px; 
-  z-index: 1; 
-  transform-origin: 3px 0px; 
-  transition: transform 0.2s cubic-bezier(0.77,0.2,0.05,1.0),
-  background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), 
-  opacity 0.55s ease; 
-} 
-
-
-
-#navigation_leaked input:checked ~ span{ 
-  opacity: 1; 
-/*  transform: rotate(45deg) translate(-2px, -1px); */
-  background: #E74C3C; 
-} 
-
-
-#menyu_sayta{ 
-  position: absolute; 
-  width: 90vw; 
-  height: 110vh; 
-  margin: -100px 0 0 -50px; 
-  padding: 50px; 
-  padding-top: 125px; 
-  background: rgba(236, 240, 241, 0.97);; 
-  list-style-type: none; 
-  transform-origin: 0 0; 
-  transform: translate(-100%, 0); 
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-  text-align: center; 
-
-} 
-
-#menyu_sayta li{ 
-  padding: 15px 0; 
-  color: #000000; 
-  list-style-type: none; 
-  font-size: 2em; 
-  font-weight: 300; 
-} 
-
-#menyu_sayta li a { 
-  color: #E74C3C; 
-  text-decoration: none; 
-  text-transformation: uppercase 
-} 
-
-#menyu_sayta li a:hover { 
-  color: #2C3E50; 
-  text-decoration: none; 
-} 
-
-#navigation_leaked input:checked ~ ul 
-{ 
-  transform: scale(1.0, 1.0); 
-  opacity: 1; 
-}
+/*Форма Login*/
 
 #zatemnenie {
         background: rgba(102, 102, 102, 0.5);
         width: 100%;
         height: 100%;
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         display: none;
       }
-      #okno {
+#okno {
         width: 300px;
         height: 300px;
         text-align: center;
@@ -337,7 +151,7 @@ color: #EBEBEB;
         border: 1px solid black;
         border-radius: 10px;
         color: black;
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
         bottom: 0;
@@ -345,7 +159,7 @@ color: #EBEBEB;
         margin: auto;
         background: white;
       }
-      #zatemnenie:target {display: block;}
+#zatemnenie:target {display: block;}
       .close {
         display: inline-block;
         border: 1px solid black;
@@ -358,13 +172,13 @@ color: #EBEBEB;
         font-size: 14pt;
         cursor:pointer;
       }
-      .close:hover {background: red; color: white;}
+.close:hover {background: red; color: white;}
 
 
 
 
 
-      #main-holder {
+#main-holder {
   width: 50%;
   height: 70%;
   display: grid;
@@ -432,7 +246,7 @@ color: #EBEBEB;
   outline: none;
 }
 
-/*Регистрация*/
+/*Форма Registr*/
 #zatemnenie2 {
         background: rgba(102, 102, 102, 0.5);
         width: 100%;
@@ -544,6 +358,8 @@ color: #EBEBEB;
   cursor: pointer;
   outline: none;
 }
+
+
 
 
 
