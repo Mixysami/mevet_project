@@ -1,10 +1,38 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-  <h1>Edit Rental</h1>
-  <form method="post" enctype="multipart/form-data">
+  <h2 align="center">Добавить объявление</h2>
+<br>
+<div class="form-container">
+  <form method="POST" enctype="multipart/form-data" class="form-group">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Changes</button>
+      <label for="{{ form.category.id_for_label }}">Выберете категорию:</label>
+    <br>
+      {{ form.category }}
+    <br>
+      <label for="{{ form.title.id_for_label }}">Введите название:</label>
+      {{ form.title }}
+    <br>
+      <label for="{{ form.description.id_for_label }}">Введите описание</label>
+      {{ form.description }}
+    <br>
+      <label for="{{ form.address.id_for_label }}">Введите адресс:</label>
+      {{ form.address }}
+<br>
+      <label for="{{ form.price.id_for_label }}">Введите цену:</label>
+    <br>
+      {{ form.price }}
+    <br>
+      <label for="{{ form.contact.id_for_label }}">Ваши контакты:</label>
+      {{ form.contact }}
+    <br>
+      <label for="{{ form.main_image.id_for_label }}">Главное фото:</label>
+    <br>
+      {{ form.main_image }}
+    <br>
+    <br>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
   </form>
+</div>
 {% endblock %}
