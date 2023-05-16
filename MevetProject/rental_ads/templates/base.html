@@ -66,40 +66,40 @@
 </br>
 <div id="zatemnenie">
     <div id="okno">
-        <p>Авторизуйтесь</p><br>
 
-        <h2>Login</h2>
+        <h2>Авторизуйтесь</h2>
         <form id="login-form" method="post" action="/login/">
-            {% csrf_token %}
-            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username"
+             {% csrf_token %}
+            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Имя пользователя"
                    required>
-            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password"
+            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Пароль"
                    required>
-            <input type="submit" value="Login" id="login-form-submit" class="close">
-            <a href="#zatemnenie2" class="register-button">Register</a>
-        </form>
-        {{ form.errors}}
+            <input type="submit" value="Войти" id="login-form-submit" class="close">
+            <a href="#zatemnenie2" class="register-button">Регистрация</a>
 
-        <a href="/" class="close">Закрыть окно</a>
+        </form>
+         {{ form.errors}}
+<a href="#" class="close fas fa-close"><font style="font-family: 'Century Gothic', sans-serif; font-weight: 400;"> Закрыть окно</font></a>
+
     </div>
 </div>
 
 <div id="zatemnenie2">
 	      <div id="okno2">
-	        <p>Зарегистрируйтесь</p><br>
+	        <h2>Зарегистрируйтесь</h2>
 
-		<form id="login-form2" method="post" action="/register/">
-            {% csrf_token %}
-              {{ form.as_p }}
-      <input type="text" name="username" id="username-field" class="login-form-field2" placeholder="Введите имя" required>
-      <input type="password" name="password1" id="password-field" class="login-form-field2" placeholder="Введите пароль" required>
-      <input type="password_confirmation" name="password2" id="password-field" class="login-form-field2" placeholder="Повторите пароль" required>
-             <button type="submit" id="login-form-submit">Register</button>
+		<form id="login-form" method="post" action="/register/">
+             {% csrf_token %}
+               {{ form.as_p }}
+      <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Введите имя" required>
+      <input type="password" name="password1" id="password-field" class="login-form-field" placeholder="Введите пароль" required>
+      <input type="password" name="password2" id="password-field" class="login-form-field" placeholder="Повторите пароль" required>
+             <input type="submit" value="Регистрация" class="close" id="login-form-submit"></input>
 <!--      <input type="submit" value="Register" id="login-form-submit" class="close">-->
 
     </form>
-<p><a href="#zatemnenie">Вход</a></p>
-	        <a href="#" class="close2">Закрыть окно</a>
+<p><a href="#zatemnenie" class="register-button">Вход</a></p>
+	        <a href="#" class="close">Закрыть окно</a>
 	      </div>
 </div>
 
