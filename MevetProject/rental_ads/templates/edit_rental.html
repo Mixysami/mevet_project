@@ -5,34 +5,48 @@
   <h2 align="center">Добавить объявление</h2>
 <br>
 <div class="form-container">
-  <form method="POST" enctype="multipart/form-data" class="form-group">
+  <form method="POST" enctype="multipart/form-data" class="form-style-add-rental">
     {% csrf_token %}
-      <label for="{{ form.category.id_for_label }}">Выберете категорию:</label>
+
+      <div class="form-group">
+          <label for="{{ form.category.id_for_label }}">Выберете категорию:</label>
+          {{ form.category }}
+          <label for="{{ form.title.id_for_label }}" style="padding-left: 3%;">Загаловок объявления:</label>
+          &nbsp;&nbsp;
+          {{ form.title }}
+      </div>
+
     <br>
-      {{ form.category }}
+
+      <div class="form-group">
+          <label for="{{ form.description.id_for_label }}">Введите описание:</label>
+          {{ form.description }}
+      </div>
+
     <br>
-      <label for="{{ form.title.id_for_label }}">Введите название:</label>
-      {{ form.title }}
-    <br>
-      <label for="{{ form.description.id_for_label }}">Введите описание</label>
-      {{ form.description }}
-    <br>
-      <label for="{{ form.address.id_for_label }}">Введите адресс:</label>
-      {{ form.address }}
+      <div class="form-group">
+          <label for="{{ form.address.id_for_label }}">Введите адресс:</label>
+          {{ form.address }}
+      </div>
+
 <br>
-      <label for="{{ form.price.id_for_label }}">Введите цену:</label>
+      <div class="form-group">
+          <label for="{{ form.price.id_for_label }}">Введите цену:</label>
+          <p style="padding-left: 5.5%;"></p>{{ form.price }}
+          <label for="{{ form.contact.id_for_label }}" style="padding-left: 3%;">Ваши контакты:</label>
+          <p style="padding-left: 2%;"></p>{{ form.contact }}
+      </div>
+
     <br>
-      {{ form.price }}
+
+      <div class="form-group">
+          <label for="{{ form.main_image.id_for_label }}">Главное фото:</label>
+          <p style="padding-left: 2%;"></p>{{ form.main_image }}
+      </div>
     <br>
-      <label for="{{ form.contact.id_for_label }}">Ваши контакты:</label>
-      {{ form.contact }}
-    <br>
-      <label for="{{ form.main_image.id_for_label }}">Главное фото:</label>
-    <br>
-      {{ form.main_image }}
-    <br>
-    <br>
-    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <center>
+    <button type="submit" class="button-submit-form-add">Сохранить</button>
+    </center>
   </form>
 </div>
 {% endblock %}
