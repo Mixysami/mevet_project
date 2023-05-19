@@ -243,6 +243,103 @@ width: 100%;
 }
 
 
+/*Rental_manage*/
+
+.button-change {
+    margin-left: 3%;
+    margin-right: 3%;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: flex-start;
+
+}
+
+.ride2 p {
+    padding: 10px;
+    color: gray;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.ride2 p:hover {
+    color: black;
+}
+
+.ride2 p.active {
+    color: black;
+}
+.add-rental-button{
+    text-decoration: none;
+
+
+    padding: 8px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    background-color: #3a3a3a;
+    cursor: pointer;
+    outline: none;
+    border: solid 1px white;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.add-rental-button:hover{
+    border-radius: 10px;
+	border: solid 1px black;
+    background-color: white;
+    color:  black;
+
+}
+
+.edit-rental-button{
+    text-decoration: none;
+
+
+    padding: 8px;
+    border: none;
+    border-radius: 25px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    border: solid 1px white;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.edit-rental-button:hover{
+    border-radius: 10px;
+	border: solid 1px black;
+    background-color: #3a3a3a;
+    color:  white;
+}
+
+.remove-rental-button{
+    text-decoration: none;
+
+
+    padding: 8px;
+    border: none;
+    border-radius: 25px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    border: solid 1px white;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.remove-rental-button:hover{
+    border-radius: 10px;
+	border: solid 1px black;
+    background-color: red;
+    color:  white;
+}
 
 
 
