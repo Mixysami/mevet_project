@@ -51,79 +51,95 @@
     padding: 0 20px;
 }
 
-/* new on*/
+/* Вывод карточек с объявленями*/
 .rentals-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
 
-
-
-    }
 .rental-item {
-    width: 28%;
-    height: 500px;
-  margin: 0.5%;
-  margin-bottom: 20px;
-  padding: 13px;
-  border-radius: 15px;
-
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-
-
-    }
+    width: 30%;
+    height: 440px;
+    margin: 1%;
+    margin-bottom: 6px;
+    transition: 0.3s;
+}
 
 .rental-item:hover {
     box-shadow: 0px 40px 40px 0px rgba(0,0,0,0.2);
-    border-radius: 20px;
-    border: solid 1px gray;
-    background-color: #E8E8E8;
+    border-radius: 0px 0px 15px 15px;
     opacity: 95%;
+    transform: translateY(-10px);
 }
 
 .rental-item img {
-
- width: 90%;
-  height: 280px;
-  object-fit: cover;
-  margin-bottom: 10px;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 3px;
 }
 
 .rental-item h3 {
-
-  color: black;
-    font-size: 23px;
-  margin-bottom: 10px;
+    padding-left: 1%;
+    padding-right: 1%;
+    color: black;
+    font-size: 17px;
+    margin-bottom: 5px;
 }
 
 .rental-item p {
-  color: gray;
-  font-size: 15px;
-  margin-bottom: 5px;
+    padding-left: 1%;
+    padding-right: 1%;
+    color: gray;
+    font-size: 15px;
+    margin-bottom: 5px;
 }
 
 .rental-item h4 {
- align: bottom;
-  color: black;
-    font-size: 20px;
-  margin-bottom: 10px;
+    padding-left: 1%;
+    padding-right: 1%;
+    align: bottom;
+    color: black;
+    font-size: 17px;
+    margin-bottom: 4px;
 }
 
-hr {
-    border: none; /* Убираем границу */
-    background-color: black; /* Цвет линии */
+.add-to-favorites {
+    background-color: white;
+    color: white; /* Изменяем цвет текста на белый */
+    border-radius: 0.7em;
+    padding: 3px;
+    margin-left:1%;
+    border: none;
+    cursor: pointer;
+    font-family: 'Century Gothic', sans-serif;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease; /* Добавляем transition для цвета */
+    transform: translateY(100%);
+}
 
-    height: 2px; /* Толщина линии */
- }
+.rental-item:hover .add-to-favorites {
+
+    color: black; /* Изменяем цвет текста на черный при наведении */
+}
+
+
+.added-to-favorites {
+    border-radius: 25px;
+	border: solid 1px black;
+    color: black;
+}
+
 
 /* new off*/
+
+
 
 .osnov{
   width: 100%;
   height: auto;
-  
+
 /*  margin-bottom: 5%;*/
 background-color: #FFFAFA;
 }
@@ -187,15 +203,15 @@ background-color: #FFFAFA;
   padding: 5px;
   margin-left: 25%;
   text-decoration: none;
-  font-size: 13px; 
+  font-size: 13px;
   border-radius: 20px;
 
 
-  
+
 color: black;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  
+
 }
 .nav3 a:hover {
 /*  background: red;*/
@@ -265,25 +281,11 @@ color: black;
     transition: background-color 0.3s ease;
 }
 
-.add-to-favorites-rental:hover, .add-to-favorites:focus {
+.add-to-favorites-rental:hover, .add-to-favorites-rental:focus {
     color: white;
     background-color: #e74c3c;
-}
-/*кнопка-добавить в избранное*/
-.add-to-favorites {
-    background-color: transparent;
-    color: #e74c3c;
-    border-radius: 0.7em;
-    border: 1.5px solid #e74c3c;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.add-to-favorites:hover, .add-to-favorites:focus {
-    color: white;
-    background-color: #e74c3c;
-}
 
 
 
