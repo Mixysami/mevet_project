@@ -10,7 +10,7 @@
 <br>
 <h1 align="left" style="margin-left: 3%; font-size: 23px;">Ваши объявления</h1>
 <br>
-<p style="margin-left: 3%; font-size: 15px;">В данном разделе находятся объявления которые вы выложили на платформе.<br> На каждой карточке показаны данные которые вы внесли, вы можете заметить, кол-во просмотров на объявлениях.<br> Вы можете отредактировать, удалить, внести нужные правки, а также добавить новые объявления!</p>
+<p style="margin-left: 3%; font-size: 16px;">Здравствуйте  {{ username }}<br>В данном разделе находятся объявления которые вы выложили на платформе.<br> На каждой карточке показаны данные которые вы внесли, вы можете заметить, кол-во просмотров на объявлениях.<br> Вы можете отредактировать, удалить, внести нужные правки, а также добавить новые объявления!</p>
 <br>
 <div class="button-change">
 <a href="/add_rental" class="add-rental-button far fa-folder-open " style="font-size: 18px;"> <font style="font-family: 'Century Gothic', sans-serif;">Добавить Объявление</font></a>
@@ -31,8 +31,8 @@
             <br>
             </a>
 
-        <a href="{% url 'edit_rental' rental_id=rental.id %}" class="edit-rental-button fa-regular far fa-edit " style="font-size: 18px;  padding-left: 1%; padding-right: 1%;"> Редактировать</a>
-        <a href="{% url 'delete_rental' rental_id=rental.id %}" class="remove-rental-button fa-regular far fa-trash-alt" style="font-size: 18px; padding-left: 1%; padding-right: 1%;"> Удалить</a>
+        <a href="{% url 'edit_rental' rental_id=rental.id %}" class="edit-rental-button fa-regular far fa-edit " style="font-size: 18px;  padding-left: 1%; padding-right: 1%;"> <font style="font-family: 'Century Gothic', sans-serif;">Редактировать</font></a>
+        <a href="{% url 'delete_rental' rental_id=rental.id %}" class="remove-rental-button fa-regular far fa-trash-alt" style="font-size: 18px; padding-left: 1%; padding-right: 1%;"> <font style="font-family: 'Century Gothic', sans-serif;">Удалить</font></a>
 
     </div>
 
