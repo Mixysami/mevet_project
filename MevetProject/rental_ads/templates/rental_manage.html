@@ -8,26 +8,82 @@
 {% block content %}
 
 <br>
-<h1 align="center">Ваши объявления</h1>
+<h1 align="left" style="margin-left: 3%; font-size: 23px;">Ваши объявления</h1>
 <br>
-<a href="/add_rental" class="add-to-favorites far fa-folder-open " style="font-size: 18px;">Добавить Объявление</a>
-<div class="rentals-container" align="center">
+<p style="margin-left: 3%; font-size: 15px;">В данном разделе находятся объявления которые вы выложили на платформе.<br> На каждой карточке показаны данные которые вы внесли, вы можете заметить, кол-во просмотров на объявлениях.<br> Вы можете отредактировать, удалить, внести нужные правки, а также добавить новые объявления!</p>
+<br>
+<div class="button-change">
+<a href="/add_rental" class="add-rental-button far fa-folder-open " style="font-size: 18px;"> <font style="font-family: 'Century Gothic', sans-serif;">Добавить Объявление</font></a>
+<div class="ride2">
+        <p id="display-four" class="display-button fas fa-th active" onclick="toggleColor(1)"></p>
+        <p id="display-two" class="display-button fas fa-th-large" onclick="toggleColor(2)"></p>
+    </div>
+</div>
+<div class="rentals-container">
     {% for rental in rental_list %}
     <div class="rental-item" href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
         <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}" style=" text-decoration: none;">
-            <img src="{{ rental.main_image.url }}">
+            <img src="{{ rental.main_image.url }}" style="height: 60%;">
             <h3 style=" font-weight: bolder; ">{{ rental.title }}</h3>
-            <p>{{ rental.address|slice:":50" }}{% if rental.address|length > 50 %}...{% endif %}</p>
+            <p>{{ rental.address|slice:":40" }}{% if rental.address|length > 40 %}...{% endif %}</p>
             <h4>{{ rental.price }} ₽</h4>
-
+            <p style="padding-left: 1%; padding-right: 1%; font-size: 13px;" class="fas fa-hat-cowboy"> {{ rental.views_count }}</p>
+            <br>
             </a>
 
-        <a href="{% url 'edit_rental' rental_id=rental.id %}" class="add-to-favorites fa-regular far fa-edit " style="font-size: 18px;"> Редактировать</a>
-    <a href="{% url 'delete_rental' rental_id=rental.id %}" class="add-to-favorites fa-regular far fa-trash-alt" style="font-size: 18px;"> Удалить</a>
+        <a href="{% url 'edit_rental' rental_id=rental.id %}" class="edit-rental-button fa-regular far fa-edit " style="font-size: 18px;  padding-left: 1%; padding-right: 1%;"> Редактировать</a>
+        <a href="{% url 'delete_rental' rental_id=rental.id %}" class="remove-rental-button fa-regular far fa-trash-alt" style="font-size: 18px; padding-left: 1%; padding-right: 1%;"> Удалить</a>
 
     </div>
 
     {% endfor %}
 </div>
+
+<script>
+var displayOne = document.getElementById("display-four");
+var displayTwo = document.getElementById("display-two");
+
+// Назначаем обработчики событий для элементов
+displayOne.addEventListener("click", function () {
+    displayOne.classList.add("active");
+    displayTwo.classList.remove("active");
+});
+
+displayTwo.addEventListener("click", function () {
+    displayTwo.classList.add("active");
+    displayOne.classList.remove("active");
+});
+
+   const rentalItems = document.querySelectorAll(".rental-item");
+    const displayFourButton = document.getElementById("display-four");
+    const displayTwoButton = document.getElementById("display-two");
+
+    // Функция для отображения 3 объявлений в ряд
+    const displayFourItems = () => {
+        rentalItems.forEach(item => {
+            item.style.width = "30%";
+            item.style.height = "510px";
+
+        });
+
+    };
+
+    // Функция для отображения 2 объявлений в ряд
+    const displayTwoItems = () => {
+        rentalItems.forEach(item => {
+            item.style.width = "46%";
+            item.style.height = "550px";
+        });
+    };
+
+    // Обработчики событий для кнопок
+    displayFourButton.addEventListener("click", () => {
+        displayFourItems();
+    });
+
+    displayTwoButton.addEventListener("click", () => {
+        displayTwoItems();
+    });
+</script>
 
 {% endblock %}
