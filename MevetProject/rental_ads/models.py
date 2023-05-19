@@ -58,6 +58,7 @@ class Rental(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     main_image = models.ImageField(upload_to=rental_main_image_upload_path, blank=True, null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
+    views_count = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = "Rental"
