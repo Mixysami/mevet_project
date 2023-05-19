@@ -4,20 +4,23 @@
 {% block content %}
 <br>
 <div class="title-filter-top">
-    <h1 style="font-size: 24px; margin-right: auto;">Кинозалы</h1>
+    <h1 style="font-size: 22px; margin-right: auto;">Кинозалы</h1>
     <div class="ride" style="margin: 0 auto;">
         <p id="display-four" class="display-button fas fa-th active" onclick="toggleColor(1)"></p>
         <p id="display-two" class="display-button fas fa-th-large" onclick="toggleColor(2)"></p>
     </div>
 
     <p style="margin-left: auto;">
-        <select name="filter" class="filter">
-            <option value="r1">По новизне</option>
-            <option value="r2">По популярности</option>
-            <option value="r3">Цена А-Я</option>
-            <option value="r4">Цена Я-А</option>
-        </select>
-    </p>
+    <form method="GET" action="{% url 'kino' %}">
+  <select name="filter" class="filter" onchange="this.form.submit()">
+    <option value="r1" {% if selected_filter == 'r1' %}selected{% endif %}>По новизне</option>
+    <option value="r2" {% if selected_filter == 'r2' %}selected{% endif %}>По популярности</option>
+    <option value="r3" {% if selected_filter == 'r3' %}selected{% endif %}>Цена А-Я</option>
+    <option value="r4" {% if selected_filter == 'r4' %}selected{% endif %}>Цена Я-А</option>
+  </select>
+</form>
+</p>
+
 </div>
 <br>
 <div class="rentals-container">

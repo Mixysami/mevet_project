@@ -47,35 +47,150 @@ def register_view(request):
 def kino(request):
     kino_category = Category.objects.get(name='kino')
     rental_list = Rental.objects.filter(category=kino_category)
-    context = {"rental_list": rental_list}
+
+    # Получение значения выбранного фильтра
+    filter_value = request.GET.get('filter')
+
+    # Фильтрация списка объявлений в соответствии с выбранным фильтром
+    if filter_value == 'r1':
+        rental_list = rental_list.order_by('-created_at')  # По новизне
+    elif filter_value == 'r2':
+        rental_list = rental_list.order_by('-views_count')  # По популярности
+    elif filter_value == 'r3':
+        rental_list = rental_list.order_by('price')  # По цене по возрастанию
+    elif filter_value == 'r4':
+        rental_list = rental_list.order_by('-price')  # По цене по убыванию
+
+    # Обновление количества просмотров объявлений
+    for rental in rental_list:
+        rental.views_count += 1
+        rental.save()
+
+    # Добавление выбранного значения фильтра в контекст
+    context = {
+        "rental_list": rental_list,
+        "selected_filter": filter_value  # Передача выбранного значения фильтра в шаблон
+    }
     return render(request, 'kino.html', context)
 
 
 def kon(request):
     kon_category = Category.objects.get(name='kon')
     rental_list = Rental.objects.filter(category=kon_category)
-    context = {"rental_list": rental_list}
+
+    # Получение значения выбранного фильтра
+    filter_value = request.GET.get('filter')
+
+    # Фильтрация списка объявлений в соответствии с выбранным фильтром
+    if filter_value == 'r1':
+        rental_list = rental_list.order_by('-created_at')  # По новизне
+    elif filter_value == 'r2':
+        rental_list = rental_list.order_by('-views_count')  # По популярности
+    elif filter_value == 'r3':
+        rental_list = rental_list.order_by('price')  # По цене по возрастанию
+    elif filter_value == 'r4':
+        rental_list = rental_list.order_by('-price')  # По цене по убыванию
+
+    # Обновление количества просмотров объявлений
+    for rental in rental_list:
+        rental.views_count += 1
+        rental.save()
+
+    # Добавление выбранного значения фильтра в контекст
+    context = {
+        "rental_list": rental_list,
+        "selected_filter": filter_value  # Передача выбранного значения фильтра в шаблон
+    }
     return render(request, 'kon.html', context)
 
 
 def pagefoto(request):
     pagefoto_category = Category.objects.get(name='pagefoto')
     rental_list = Rental.objects.filter(category=pagefoto_category)
-    context = {"rental_list": rental_list}
+
+    # Получение значения выбранного фильтра
+    filter_value = request.GET.get('filter')
+
+    # Фильтрация списка объявлений в соответствии с выбранным фильтром
+    if filter_value == 'r1':
+        rental_list = rental_list.order_by('-created_at')  # По новизне
+    elif filter_value == 'r2':
+        rental_list = rental_list.order_by('-views_count')  # По популярности
+    elif filter_value == 'r3':
+        rental_list = rental_list.order_by('price')  # По цене по возрастанию
+    elif filter_value == 'r4':
+        rental_list = rental_list.order_by('-price')  # По цене по убыванию
+
+    # Обновление количества просмотров объявлений
+    for rental in rental_list:
+        rental.views_count += 1
+        rental.save()
+
+    # Добавление выбранного значения фильтра в контекст
+    context = {
+        "rental_list": rental_list,
+        "selected_filter": filter_value  # Передача выбранного значения фильтра в шаблон
+    }
     return render(request, 'pagefoto.html', context)
 
 
 def svadba(request):
     svadba_category = Category.objects.get(name='svadba')
     rental_list = Rental.objects.filter(category=svadba_category)
-    context = {"rental_list": rental_list}
+
+    # Получение значения выбранного фильтра
+    filter_value = request.GET.get('filter')
+
+    # Фильтрация списка объявлений в соответствии с выбранным фильтром
+    if filter_value == 'r1':
+        rental_list = rental_list.order_by('-created_at')  # По новизне
+    elif filter_value == 'r2':
+        rental_list = rental_list.order_by('-views_count')  # По популярности
+    elif filter_value == 'r3':
+        rental_list = rental_list.order_by('price')  # По цене по возрастанию
+    elif filter_value == 'r4':
+        rental_list = rental_list.order_by('-price')  # По цене по убыванию
+
+    # Обновление количества просмотров объявлений
+    for rental in rental_list:
+        rental.views_count += 1
+        rental.save()
+
+    # Добавление выбранного значения фильтра в контекст
+    context = {
+        "rental_list": rental_list,
+        "selected_filter": filter_value  # Передача выбранного значения фильтра в шаблон
+    }
     return render(request, 'svadba.html', context)
 
 
 def banket(request):
     banket_category = Category.objects.get(name='banket')
     rental_list = Rental.objects.filter(category=banket_category)
-    context = {"rental_list": rental_list}
+
+    # Получение значения выбранного фильтра
+    filter_value = request.GET.get('filter')
+
+    # Фильтрация списка объявлений в соответствии с выбранным фильтром
+    if filter_value == 'r1':
+        rental_list = rental_list.order_by('-created_at')  # По новизне
+    elif filter_value == 'r2':
+        rental_list = rental_list.order_by('-views_count')  # По популярности
+    elif filter_value == 'r3':
+        rental_list = rental_list.order_by('price')  # По цене по возрастанию
+    elif filter_value == 'r4':
+        rental_list = rental_list.order_by('-price')  # По цене по убыванию
+
+    # Обновление количества просмотров объявлений
+    for rental in rental_list:
+        rental.views_count += 1
+        rental.save()
+
+    # Добавление выбранного значения фильтра в контекст
+    context = {
+        "rental_list": rental_list,
+        "selected_filter": filter_value  # Передача выбранного значения фильтра в шаблон
+    }
     return render(request, 'banket.html', context)
 
 
