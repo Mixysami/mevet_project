@@ -18,6 +18,10 @@ urlpatterns = [
     path('rental_manage/', views.rental_manage, name='rental_manage'),
     path('rental/<int:rental_id>/delete/', views.delete_rental, name='delete_rental'),
     path('rental/<int:rental_id>/edit/', views.edit_rental, name='edit_rental'),
+    path('rental/<int:rental_id>/delete_image/<int:image_id>/', views.delete_rental_image, name='delete_rental_image'),
+
+
+
 
 
 

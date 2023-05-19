@@ -9,6 +9,8 @@ from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 from .forms import RentalForm
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.forms import inlineformset_factory
 
 def index(request):
     return render(request, 'index.html')
@@ -229,6 +231,12 @@ def add_rental(request):
             rental = form.save(commit=False)
             rental.user = request.user  # Связываем объявление с пользователем
             form.save()
+
+            # Обработка загрузки дополнительных фотографий
+            images = request.FILES.getlist('images')
+            for image in images:
+                RentalImage.objects.create(rental=rental, image=image)
+
             return redirect('rental_manage')
     else:
         form = RentalForm()
@@ -237,8 +245,9 @@ def add_rental(request):
 @login_required
 def rental_manage(request):
     user = request.user
-    rental_list = Rental.objects.filter(user=request.user)
-    return render(request, 'rental_manage.html', {'rental_list': rental_list})
+    rental_list = Rental.objects.filter(user=user)
+    username = user.username  # Получение имени пользователя
+    return render(request, 'rental_manage.html', {'rental_list': rental_list, 'username': username})
 
 @login_required
 def delete_rental(request, rental_id):
@@ -249,16 +258,40 @@ def delete_rental(request, rental_id):
 @login_required
 def edit_rental(request, rental_id):
     rental = get_object_or_404(Rental, pk=rental_id, user=request.user)
+
     if request.method == 'POST':
         form = RentalForm(request.POST, request.FILES, instance=rental)
         if form.is_valid():
             rental = form.save(commit=False)
             rental.user = request.user
             rental.save()
+
+            # Обработка загрузки дополнительных фотографий
+            images = request.FILES.getlist('images')
+            for image in images:
+                RentalImage.objects.create(rental=rental, image=image)
+
             return redirect('rental_detail', category_name=rental.category.name, rental_id=rental.id)
     else:
         form = RentalForm(instance=rental)
+
     return render(request, 'edit_rental.html', {'form': form})
+
+@login_required
+def delete_rental_image(request, rental_id, image_id):
+    rental = get_object_or_404(Rental, pk=rental_id, user=request.user)
+    image = get_object_or_404(RentalImage, pk=image_id, rental=rental)
+
+    # Удаление файла из системы
+    if image.image:
+        image.image.delete(save=False)
+
+    # Удаление объекта RentalImage из базы данных
+    image.delete()
+
+    return redirect('edit_rental', rental_id=rental.id)
+
+
 
 
 

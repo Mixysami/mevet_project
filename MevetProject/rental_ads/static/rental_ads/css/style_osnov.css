@@ -90,7 +90,7 @@ width: 100%;
     outline: none;
     transition: all 0.2s ease-in-out;
     font-family: 'Century Gothic', sans-serif;
-    border: solid 0.5px black;
+    border: solid 0.7px black;
 }
 
 .rentals-container {
@@ -256,6 +256,10 @@ width: 100%;
 
 }
 
+.ride2 {
+    margin-left: 2%;
+}
+
 .ride2 p {
     padding: 10px;
     color: gray;
@@ -336,7 +340,7 @@ width: 100%;
 
 .remove-rental-button:hover{
     border-radius: 10px;
-	border: solid 1px black;
+	border: solid 1px white;
     background-color: red;
     color:  white;
 }
@@ -347,7 +351,7 @@ width: 100%;
 /* Add some spacing between form elements */
 .form-container {
 display: flex;
-justify-content: center;
+margin-left: 3%;
 }
 
 .form-style-add-rental {
@@ -436,7 +440,8 @@ color: white;
 
 /* Style submit button */
 .button-submit-form-add {
-  width: 30%;
+  width: 50%;
+  height: 47px;
     padding: 8px;
     border: none;
     border-radius: 25px;
@@ -457,10 +462,6 @@ color: white;
     background-color: #3a3a3a;
     color:  white;
 }
-
-
-
-
 
 
 
