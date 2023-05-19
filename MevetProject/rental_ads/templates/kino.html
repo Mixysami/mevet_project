@@ -3,7 +3,22 @@
 {% block title %}Кинозалы{% endblock %}
 {% block content %}
 <br>
-<h1 align="center">Кинозалы</h1>
+<div class="title-filter-top">
+    <h1 style="font-size: 24px; margin-right: auto;">Кинозалы</h1>
+    <div class="ride" style="margin: 0 auto;">
+        <p id="display-four" class="display-button fas fa-th active" onclick="toggleColor(1)"></p>
+        <p id="display-two" class="display-button fas fa-th-large" onclick="toggleColor(2)"></p>
+    </div>
+
+    <p style="margin-left: auto;">
+        <select name="filter" class="filter">
+            <option value="r1">По новизне</option>
+            <option value="r2">По популярности</option>
+            <option value="r3">Цена А-Я</option>
+            <option value="r4">Цена Я-А</option>
+        </select>
+    </p>
+</div>
 <br>
 <div class="rentals-container">
     {% for rental in rental_list %}
@@ -14,31 +29,71 @@
             <p>{{ rental.address|slice:":50" }}{% if rental.address|length > 50 %}...{% endif %}</p>
             <h4>{{ rental.price }} ₽</h4>
             </a>
-           <button class="add-to-favorites fa-regular fa-heart" style="font-size: 14px;"> <font style="font-family: 'Century Gothic', sans-serif;">Избранное</font></button>
+           <button class="add-to-favorites fa-regular fa-heart" style="font-size: 16px;"> <font style="font-family: 'Century Gothic', sans-serif;">Избранное</font></button>
     </div>
     {% endfor %}
 </div>
 
 <script>
-    const rentalItems = document.querySelectorAll(".rental-item");
 
-rentalItems.forEach(item => {
-    const button = item.querySelector(".add-to-favorites");
+  var displayOne = document.getElementById("display-four");
+var displayTwo = document.getElementById("display-two");
 
-    button.style.transform = "translateY(30%)"; /* Изначально скрываем кнопку */
-
-    item.addEventListener("mouseenter", () => {
-        button.style.transform = "translateY(0)";
-    });
-
-    item.addEventListener("mouseleave", () => {
-        button.style.transform = "translateY(30%)";
-    });
-
-    button.addEventListener("click", () => {
-        button.classList.toggle("added-to-favorites");
-    });
+// Назначаем обработчики событий для элементов
+displayOne.addEventListener("click", function () {
+    displayOne.classList.add("active");
+    displayTwo.classList.remove("active");
 });
+
+displayTwo.addEventListener("click", function () {
+    displayTwo.classList.add("active");
+    displayOne.classList.remove("active");
+});
+
+   const rentalItems = document.querySelectorAll(".rental-item");
+    const displayFourButton = document.getElementById("display-four");
+    const displayTwoButton = document.getElementById("display-two");
+
+    // Функция для отображения 3 объявлений в ряд
+    const displayFourItems = () => {
+        rentalItems.forEach(item => {
+            item.style.width = "30%";
+            item.style.height = "440px";
+
+        });
+
+    };
+
+    // Функция для отображения 2 объявлений в ряд
+    const displayTwoItems = () => {
+        rentalItems.forEach(item => {
+            item.style.width = "46%";
+            item.style.height = "550px";
+        });
+    };
+
+    // Обработчики событий для кнопок
+    displayFourButton.addEventListener("click", () => {
+        displayFourItems();
+    });
+
+    displayTwoButton.addEventListener("click", () => {
+        displayTwoItems();
+    });
+
+    rentalItems.forEach(item => {
+        const button = item.querySelector(".add-to-favorites");
+        button.style.transform = "translateY(30%)"; /* Изначально скрываем кнопку */
+        item.addEventListener("mouseenter", () => {
+            button.style.transform = "translateY(0)";
+        });
+        item.addEventListener("mouseleave", () => {
+            button.style.transform = "translateY(30%)";
+        });
+        button.addEventListener("click", () => {
+            button.classList.toggle("added-to-favorites");
+        });
+    });
 
 </script>
 {% endblock %}

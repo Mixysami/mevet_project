@@ -8,7 +8,7 @@
 
 
 
-
+/*Главная страница*/
 
 .video-bg {
     height: 100vh;
@@ -52,6 +52,47 @@
 }
 
 /* Вывод карточек с объявленями*/
+.title-filter-top {
+    margin-left: 3%;
+    margin-right: 3%;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: flex-start;
+
+}
+
+ .ride p {
+    padding: 10px;
+    color: gray;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.ride p:hover {
+    color: black;
+}
+
+.ride p.active {
+    color: black;
+}
+
+.filter {
+width: 100%;
+    padding: 6px;
+    border: none;
+    border-radius: 20px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Century Gothic', sans-serif;
+    border: solid 0.5px black;
+}
+
 .rentals-container {
     display: flex;
     flex-wrap: wrap;
@@ -69,14 +110,14 @@
 
 .rental-item:hover {
     box-shadow: 0px 40px 40px 0px rgba(0,0,0,0.2);
-    border-radius: 0px 0px 15px 15px;
+    /*border-radius: 0px 0px 15px 15px;*/
     opacity: 95%;
     transform: translateY(-10px);
 }
 
 .rental-item img {
     width: 100%;
-    height: 300px;
+    height: 70%;
     object-fit: cover;
     margin-bottom: 3px;
 }
@@ -126,100 +167,15 @@
 
 
 .added-to-favorites {
-    border-radius: 25px;
+    border-radius: 8px;
 	border: solid 1px black;
     color: black;
 }
 
 
-/* new off*/
 
 
-
-.osnov{
-  width: 100%;
-  height: auto;
-
-/*  margin-bottom: 5%;*/
-background-color: #FFFAFA;
-}
-.vtor{
-/*  margin: 0 auto;*/
-  margin-left: 6%;
-
-  margin-right: 5%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-/*  width: 100%;*/
-  display: flex;
-}
-
-.col1-3{
-  display: inline-block;
-  width: 33,3%;
-  padding:15px;
-  margin: 5px;
-  border-radius: 20px;
-  border: solid 0.2px gray;
-   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
-
-.col1-3:hover {
-    box-shadow: 0px 40px 40px 0px rgba(0,0,0,0.2);
-    border-radius: 35px 35px 90px 90px;
-    border: solid 2px gray;
-
-
-}
-
-.txtbold{
-  padding-left: 5px;
-  padding-top: 5px;
-  font-weight: bold;
-}
-.txtff{
-  padding-left: 5px;
-  padding-top: 5px;
-  color: gray;
-  font-size: 20px;
-}
-.txts{
-  font-family: 'Century Gothic', sans-serif;
-  font-size: 18px;
-}
-
-.icon{
-  font-size: 18px;
-}
-
-.nav3{
-  display: flex;
-  align-items: center;
-  height: 50px;
-}
-.nav3 a {
-/*  color: black;*/
-  padding: 5px;
-  margin-left: 25%;
-  text-decoration: none;
-  font-size: 13px;
-  border-radius: 20px;
-
-
-
-color: black;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-
-}
-.nav3 a:hover {
-/*  background: red;*/
-  color: red;
-/*  border: 2px solid red;*/
-}
-
-/*  */
+/* Rental detail */
 .Osn {
     margin: 2%;
 	display: flex;
