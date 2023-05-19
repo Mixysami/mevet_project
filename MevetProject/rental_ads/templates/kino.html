@@ -1,30 +1,44 @@
 {% extends "base.html" %}
-
 {% load static %}
-
-
 {% block title %}Кинозалы{% endblock %}
-
 {% block content %}
-
 <br>
 <h1 align="center">Кинозалы</h1>
 <br>
-<div class="rentals-container" align="center">
+<div class="rentals-container">
     {% for rental in rental_list %}
     <div class="rental-item" href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
-        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}" style=" text-decoration: none;">
+        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}" style="text-decoration: none;">
             <img src="{{ rental.main_image.url }}">
-            <h3 style=" font-weight: bolder; ">{{ rental.title }}</h3>
+            <h3 style="font-weight: bolder;">{{ rental.title }}</h3>
             <p>{{ rental.address|slice:":50" }}{% if rental.address|length > 50 %}...{% endif %}</p>
             <h4>{{ rental.price }} ₽</h4>
             </a>
-           <button class="add-to-favorites fa-regular fa-heart add-to-favorites-btn" style="font-size: 18px;" > Добавить в избранное</button>
-
+           <button class="add-to-favorites fa-regular fa-heart" style="font-size: 14px;"> <font style="font-family: 'Century Gothic', sans-serif;">Избранное</font></button>
     </div>
-
     {% endfor %}
 </div>
 
+<script>
+    const rentalItems = document.querySelectorAll(".rental-item");
 
+rentalItems.forEach(item => {
+    const button = item.querySelector(".add-to-favorites");
+
+    button.style.transform = "translateY(30%)"; /* Изначально скрываем кнопку */
+
+    item.addEventListener("mouseenter", () => {
+        button.style.transform = "translateY(0)";
+    });
+
+    item.addEventListener("mouseleave", () => {
+        button.style.transform = "translateY(30%)";
+    });
+
+    button.addEventListener("click", () => {
+        button.classList.toggle("added-to-favorites");
+    });
+});
+
+</script>
 {% endblock %}

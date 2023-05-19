@@ -13,7 +13,7 @@ header {
     flex-direction: column; /* Добавляем свойство, чтобы меню располагались один под другим */
     align-items: center;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(13px);
     transition: transform 0.3s ease-in-out;
     z-index: 999;
