@@ -465,4 +465,27 @@ color: white;
 
 
 
+.form-group-edit-rental{
+}
 
+.form-group-edit-rental label {
+
+color: white;
+  font-weight: bold;
+  margin-right: -1%;
+
+}
+
+
+
+.form-group-edit-rental input[type="file"] {
+  width: 30%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+    border-radius: 20px;
+    resize: vertical;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+
+
+}

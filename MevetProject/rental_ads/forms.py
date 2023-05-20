@@ -6,6 +6,7 @@ from multiupload.fields import MultiFileField
 class RentalForm(forms.ModelForm):
     images = MultiFileField(min_num=1, max_num=10, max_file_size=1024*1024*5, required=False)
 
+
     class Meta:
         model = Rental
         fields = ['category', 'title', 'description', 'address', 'price', 'contact', 'main_image', 'images']
@@ -16,7 +17,7 @@ class RentalForm(forms.ModelForm):
             'address': forms.TextInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
             'contact': forms.TextInput(attrs={'class': 'form-control'}),
-            'main_image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+            'main_image': forms.FileInput(attrs={'class': 'form-control-file'}),
         }
 
         def clean_images(self):

@@ -299,3 +299,5 @@ def delete_rental_image(request, rental_id, image_id):
 
 
 
+
+

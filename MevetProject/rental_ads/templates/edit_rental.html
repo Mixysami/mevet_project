@@ -36,9 +36,15 @@
       <p style="padding-left: 2%;"></p>{{ form.contact }}
     </div>
     <br>
-    <div class="form-group">
-    <label>Главное фото:</label>
+      <br>
+
+
+    <div class="form-group-edit-rental">
+    <label>Изменить главное фото:</label>
+        <br>
+        <br>
     <p style="padding-left: 2%;"></p>{{ form.main_image }}
+        <br>
         <br>
     {% if form.instance.main_image %}
     <div>
@@ -47,13 +53,17 @@
 {% endif %}
 </div>
     <br>
-    <div class="form-group">
-    <label for="{{ form.images.id_for_label }}" style="margin-right: 1.5%;">Доп. фото:</label>
+      <br>
+
+    <div class="form-group-edit-rental">
+    <label for="{{ form.images.id_for_label }}" style="margin-right: 1.5%;">Изменить либо удалить доп. фото:</label>
+        <br>
+        <br>
     <p style="padding-left: 2%;"></p>{{ form.images }}
+        <br>
         <br>
     {% for image in form.instance.images.all %}
         <div>
-
             <img src="{{ image.image.url }}" alt="Rental Image" style="width: 200px; height: auto;">
             <a href="{% url 'delete_rental_image' rental_id=form.instance.id image_id=image.id %}">Удалить</a>
         </div>
