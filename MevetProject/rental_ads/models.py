@@ -4,7 +4,7 @@ from django.db import models
 import os
 import uuid
 import re
-
+from django.contrib.auth.models import User
 
 def rental_image_upload_path(instance, filename):
     # Get the file extension
@@ -60,6 +60,7 @@ class Rental(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     views_count = models.IntegerField(default=0)
 
+
     class Meta:
         verbose_name = "Rental"
         verbose_name_plural = "Rentals"
@@ -91,6 +92,16 @@ class Rental(models.Model):
         # Save the rental again with the updated main_image
         super(Rental, self).save(*args, **kwargs)
 
+    def add_to_favorites(self, user):
+        favorite, created = Favorite.objects.get_or_create(user=user, rental=self)
+        return favorite
+
+    def remove_from_favorites(self, user):
+        Favorite.objects.filter(user=user, rental=self).delete()
+
+    def is_favorite(self, user):
+        return Favorite.objects.filter(user=user, rental=self).exists()
+
     def __str__(self):
         return self.title
 
@@ -116,4 +127,16 @@ class Contact(models.Model):
     def __str__(self):
         return f"{self.rental.title} - Contact {self.pk}"
 
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rental = models.ForeignKey(Rental, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Favorite"
+        verbose_name_plural = "Favorites"
+
+    def __str__(self):
+        return f"{self.user.username} - {self.rental.title}"
 

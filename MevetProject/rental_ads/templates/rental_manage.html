@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-
 {% load static %}
-
-
 {% block title %}Ваши объявления{% endblock %}
-
 {% block content %}
 
 <br>
 <h1 align="left" style="margin-left: 3%; font-size: 23px;">Ваши объявления</h1>
 <br>
-<p style="margin-left: 3%; font-size: 16px;">Здравствуйте  {{ username }}<br>В данном разделе находятся объявления которые вы выложили на платформе.<br> На каждой карточке показаны данные которые вы внесли, вы можете заметить, кол-во просмотров на объявлениях.<br> Вы можете отредактировать, удалить, внести нужные правки, а также добавить новые объявления!</p>
+{% if rental_list %}
+<p style="margin-left: 3%; font-size: 16px;">Здравствуйте  {{ username }}<br>
+    В данном разделе находятся объявления которые вы выложили на платформе.<br>
+    На каждой карточке показаны данные которые вы внесли, вы можете заметить, кол-во просмотров на объявлениях.<br>
+    Вы можете отредактировать, удалить, внести нужные правки, а также добавить новые объявления!</p>
 <br>
 <div class="button-change">
 <a href="/add_rental" class="add-rental-button far fa-folder-open " style="font-size: 18px;"> <font style="font-family: 'Century Gothic', sans-serif;">Добавить Объявление</font></a>
@@ -19,6 +19,23 @@
         <p id="display-two" class="display-button fas fa-th-large" onclick="toggleColor(2)"></p>
     </div>
 </div>
+{% else %}
+<p style="margin-left: 3%; font-size: 16px;">Здравствуйте  {{ username }}<br>
+У вас нет выложенных объявлений. <br>
+    Если вы являетесь владельцем какого либо агенства/прелприятия связянного с тематикой платформы, вы можете выложить объявление <br>
+    Мы будем вам рады!</p>
+<br>
+
+<div class="button-change">
+    <a href="/add_rental" class="add-rental-button far fa-folder-open " style="font-size: 18px;"> <font style="font-family: 'Century Gothic', sans-serif;">Добавить Объявление</font></a>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endif %}
+
 <div class="rentals-container">
     {% for rental in rental_list %}
     <div class="rental-item" href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
