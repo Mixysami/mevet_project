@@ -2,17 +2,14 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpResponse
 from .models import Rental, Category, RentalImage
 from django.http import HttpResponse
 from django.http import JsonResponse
-from django.http import HttpResponseRedirect
 from .forms import RentalForm
-from django.contrib.auth.decorators import login_required
-from django.conf import settings
-from django.forms import inlineformset_factory
-from django.contrib import messages
 from .models import Favorite
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+
 
 def index(request):
     return render(request, 'index.html')
@@ -198,7 +195,6 @@ def banket(request):
     return render(request, 'banket.html', context)
 
 
-
 def rental_detail(request, category_name, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
     images = rental.images.all()
@@ -236,6 +232,7 @@ def add_rental(request):
         form = RentalForm()
     return render(request, 'add_rental.html', {'form': form})
 
+
 @login_required
 def rental_manage(request):
     user = request.user
@@ -243,11 +240,13 @@ def rental_manage(request):
     username = user.username  # Получение имени пользователя
     return render(request, 'rental_manage.html', {'rental_list': rental_list, 'username': username})
 
+
 @login_required
 def delete_rental(request, rental_id):
     rental = get_object_or_404(Rental, pk=rental_id, user=request.user)
     rental.delete()
     return redirect('rental_manage')
+
 
 @login_required
 def edit_rental(request, rental_id):
@@ -271,6 +270,7 @@ def edit_rental(request, rental_id):
 
     return render(request, 'edit_rental.html', {'form': form})
 
+
 @login_required
 def delete_rental_image(request, rental_id, image_id):
     rental = get_object_or_404(Rental, pk=rental_id, user=request.user)
@@ -286,37 +286,31 @@ def delete_rental_image(request, rental_id, image_id):
     return redirect('edit_rental', rental_id=rental.id)
 
 
-def add_to_favorites(request, rental_id):
-    rental = get_object_or_404(Rental, id=rental_id)
-
-    # Проверяем, добавлено ли объявление в избранное пользователем
-    favorite = Favorite.objects.filter(user=request.user, rental=rental).first()
-
-    if favorite:
-        # Если объявление уже в избранном, удаляем его из избранного
-        favorite.delete()
-    else:
-        # Если объявление не в избранном, добавляем его в избранное
-        Favorite.objects.create(user=request.user, rental=rental)
-
-    return redirect('kino')
-
 def favorite_rentals(request):
     favorites = Favorite.objects.filter(user=request.user)
     context = {'favorites': favorites}
     return render(request, 'favorite_rentals.html', context)
 
+
+@login_required
+@require_POST
+def add_favorite(request, rental_id):
+    rental = get_object_or_404(Rental, id=rental_id)
+    Favorite.objects.get_or_create(user=request.user, rental=rental)
+    return JsonResponse({'status': 'success'})
+
+
+@login_required
+@require_POST
 def remove_favorite(request, favorite_id):
-    if request.method == 'POST':
-        favorite = get_object_or_404(Favorite, id=favorite_id, user=request.user)
+    try:
+        favorite = Favorite.objects.get(id=favorite_id, user=request.user)
+    except Favorite.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Favorite not found'}, status=404)
+
+    try:
         favorite.delete()
-        return JsonResponse({'status':'success'})
-    else:
-        return JsonResponse({'status':'failed', 'error':'Invalid HTTP method'})
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': 'Error deleting favorite: ' + str(e)}, status=500)
 
-
-
-
-
-
-
+    return JsonResponse({'status': 'success'})

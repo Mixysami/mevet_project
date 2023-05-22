@@ -12,46 +12,46 @@
 
     <p style="margin-left: auto;">
     <form method="GET" action="{% url 'kino' %}">
-  <select name="filter" class="filter" onchange="this.form.submit()">
-    <option value="r1" {% if selected_filter == 'r1' %}selected{% endif %}>По новизне</option>
-    <option value="r2" {% if selected_filter == 'r2' %}selected{% endif %}>По популярности</option>
-    <option value="r3" {% if selected_filter == 'r3' %}selected{% endif %}>Цена А-Я</option>
-    <option value="r4" {% if selected_filter == 'r4' %}selected{% endif %}>Цена Я-А</option>
-  </select>
-</form>
-</p>
+        <select name="filter" class="filter" onchange="this.form.submit()">
+            <option value="r1" {% if selected_filter == 'r1' %}selected{% endif %}>По новизне</option>
+            <option value="r2" {% if selected_filter == 'r2' %}selected{% endif %}>По популярности</option>
+            <option value="r3" {% if selected_filter == 'r3' %}selected{% endif %}>Цена А-Я</option>
+            <option value="r4" {% if selected_filter == 'r4' %}selected{% endif %}>Цена Я-А</option>
+        </select>
+
+    </form>
+    </p>
 
 </div>
 <br>
 <div class="rentals-container">
-     {% for rental in rental_list %}
+    {% for rental in rental_list %}
     <div class="rental-item">
-        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}" style="text-decoration: none;">
+        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}"
+           style="text-decoration: none;">
             <img src="{{ rental.main_image.url }}">
             <h3 style="font-weight: bolder;">{{ rental.title }}</h3>
             <p>{{ rental.address|slice:":40" }}{% if rental.address|length > 40 %}...{% endif %}</p>
             <h4>{{ rental.price }} ₽</h4>
-            </a>
-           {% if request.user.is_authenticated %}
-    <form action="{% url 'add_to_favorites' rental_id=rental.id %}" method="POST" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit" class="add-to-favorites fa-regular fa-heart {% if rental.is_favorite %} added-to-favorites{% endif %}" style="font-size: 16px;">
+        </a>
+        {% if request.user.is_authenticated %}
+        <button data-favorite-id="{{ rental.id }}"
+                class="favorite-button fa-regular fa-heart {% if favorite.is_favorite %} delete-from-favorites {% endif %}"
+                style="font-size: 16px;">
             <font style="font-family: 'Century Gothic', sans-serif;">
-                {% if rental.is_favorite %}
+                {% if favorite.is_favorite %}
                 Удалить из избранного
                 {% else %}
                 Добавить в избранное
                 {% endif %}
             </font>
         </button>
-    </form>
-{% endif %}
+        {% endif %}
     </div>
     {% endfor %}
 </div>
 
 <script>
-
   var displayOne = document.getElementById("display-four");
 var displayTwo = document.getElementById("display-two");
 
@@ -97,8 +97,50 @@ displayTwo.addEventListener("click", function () {
         displayTwoItems();
     });
 
-
-
-
 </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.favorite-button').click(function() {
+        var favoriteId = $(this).data('favorite-id');
+        var url;
+        var isFavorite = $(this).hasClass('delete-from-favorites');
+        if (isFavorite) {
+            url = '/favorites/remove/' + favoriteId + '/';
+        } else {
+            url = '/favorites/add/' + favoriteId + '/';
+        }
+        var favoriteButton = $(this);
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function() {
+                if (isFavorite) {
+                    favoriteButton.removeClass('delete-from-favorites').addClass('add-to-favorites');
+                    favoriteButton.find('font').text('Добавить в избранное');
+                    alert("Удалено из избранного");
+                } else {
+                    favoriteButton.removeClass('add-to-favorites').addClass('delete-from-favorites');
+                    favoriteButton.find('font').text('Удалить из избранного');
+                    alert("Добавлено в избранное");
+                }
+            },
+            error: function(){
+                if (isFavorite) {
+                    alert("Произошла ошибка при удалении объявления из избранного");
+                } else {
+                    alert("Произошла ошибка при добавлении объявления в избранное");
+                }
+            }
+        });
+        return false;
+    });
+});
+</script>
+
+
 {% endblock %}
