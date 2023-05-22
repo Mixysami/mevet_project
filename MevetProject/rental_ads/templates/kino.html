@@ -97,7 +97,20 @@ displayTwo.addEventListener("click", function () {
         displayTwoItems();
     });
 
+    rentalItems.forEach(item => {
+    const button = item.querySelector(".add-to-favorites");
+    button.style.transform = "translateY(30%)"; /* Изначально скрываем кнопку */
+    item.addEventListener("mouseenter", () => {
+        button.style.transform = "translateY(0)";
+    });
+    item.addEventListener("mouseleave", () => {
+        button.style.transform = "translateY(30%)";
+    });
 
+    button.addEventListener("click", () => {
+        button.classList.toggle("added-to-favorites"); /* Добавляем или удаляем класс "added-to-favorites" */
+    });
+});
 
 
 </script>
