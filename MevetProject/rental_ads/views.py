@@ -307,10 +307,12 @@ def favorite_rentals(request):
     return render(request, 'favorite_rentals.html', context)
 
 def remove_favorite(request, favorite_id):
-    favorite = get_object_or_404(Favorite, id=favorite_id, user=request.user)
-    favorite.delete()
-    return redirect('favorite_rentals')
-
+    if request.method == 'POST':
+        favorite = get_object_or_404(Favorite, id=favorite_id, user=request.user)
+        favorite.delete()
+        return JsonResponse({'status':'success'})
+    else:
+        return JsonResponse({'status':'failed', 'error':'Invalid HTTP method'})
 
 
 
