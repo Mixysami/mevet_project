@@ -12,7 +12,7 @@
                         <p>{{ favorite.rental.address|slice:":40" }}{% if favorite.rental.address|length > 40 %}...{% endif %}</p>
                         <h4>{{ favorite.rental.price }} ₽</h4>
                     </a>
-                    <a href="{% url 'remove_favorite' favorite_id=favorite.id %}" class="remove-favorite-link" onclick="removeFromFavorites('{{ favorite.rental.id }}'); return confirm('Вы уверены, что хотите удалить объявление из избранного?')">Удалить из избранного</a>
+                    <button data-favorite-id="{{ favorite.id }}" class="remove-favorite-btn">Удалить из избранного</button>
                 </div>
             {% endfor %}
         </div>
@@ -32,5 +32,32 @@ function getFavoriteState(rentalId) {
 }
 
 </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.remove-favorite-btn').click(function() {
+        var favoriteId = $(this).data('favorite-id');
+        var removeUrl = '/favorites/remove/' + favoriteId + '/';
+        var rentalItem = $(this).closest('.rental-item');
+        $.ajax({
+            url: removeUrl,
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function() {
+                rentalItem.remove();
+            },
+            error: function(){
+                alert("Произошла ошибка при удалении избранного объявления");
+            }
+        });
+        return false;
+    });
+});
+</script>
+
+
 
 {% endblock %}
