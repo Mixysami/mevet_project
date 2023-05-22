@@ -128,7 +128,6 @@ class Contact(models.Model):
         return f"{self.rental.title} - Contact {self.pk}"
 
 
-
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rental = models.ForeignKey(Rental, on_delete=models.CASCADE)
@@ -136,6 +135,7 @@ class Favorite(models.Model):
     class Meta:
         verbose_name = "Favorite"
         verbose_name_plural = "Favorites"
+        unique_together = ('user', 'rental')  # Prevents duplicates
 
     def __str__(self):
         return f"{self.user.username} - {self.rental.title}"
