@@ -286,6 +286,7 @@ def delete_rental_image(request, rental_id, image_id):
     return redirect('edit_rental', rental_id=rental.id)
 
 
+@login_required(login_url='/login/')
 def add_to_favorites(request, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
 
@@ -301,19 +302,23 @@ def add_to_favorites(request, rental_id):
 
     return redirect('kino')
 
-@login_required
 def favorite_rentals(request):
+    if not request.user.is_authenticated:
+        message = "Авторизуйтесь чтобы добавить объявление в избранное."
+        context = {'message': message}
+        return render(request, 'favorite_rentals.html', context)
+
     favorites = Favorite.objects.filter(user=request.user)
     context = {'favorites': favorites}
     return render(request, 'favorite_rentals.html', context)
 
 def remove_favorite(request, favorite_id):
-    favorite = get_object_or_404(Favorite, id=favorite_id, user=request.user)
-    favorite.delete()
-    favorites = Favorite.objects.filter(user=request.user)
-    context = {'favorites': favorites}
-    return render(request, 'favorite_rentals.html', context)
-
+    if request.method == 'POST':
+        favorite = get_object_or_404(Favorite, id=favorite_id, user=request.user)
+        favorite.delete()
+        return JsonResponse({'status':'success'})
+    else:
+        return JsonResponse({'status':'failed', 'error':'Invalid HTTP method'})
 
 
 
