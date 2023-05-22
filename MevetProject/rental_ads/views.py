@@ -301,6 +301,7 @@ def add_to_favorites(request, rental_id):
 
     return redirect('kino')
 
+
 def favorite_rentals(request):
     favorites = Favorite.objects.filter(user=request.user)
     context = {'favorites': favorites}
