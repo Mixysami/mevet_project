@@ -11,6 +11,8 @@ from .forms import RentalForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.forms import inlineformset_factory
+from django.contrib import messages
+from .models import Favorite
 
 def index(request):
     return render(request, 'index.html')
@@ -216,14 +218,6 @@ def rental_search(request):
     return render(request, 'rental_search_results.html', context)
 
 
-
-
-def favorites(request):
-    rental_list = Rental.objects.filter(id__in=request.session.get('favorites', []))
-    context = {'rental_list': rental_list}
-    return render(request, 'favorites.html', context)
-
-
 def add_rental(request):
     if request.method == 'POST':
         form = RentalForm(request.POST, request.FILES)
@@ -292,7 +286,30 @@ def delete_rental_image(request, rental_id, image_id):
     return redirect('edit_rental', rental_id=rental.id)
 
 
+def add_to_favorites(request, rental_id):
+    rental = get_object_or_404(Rental, id=rental_id)
 
+    # Проверяем, добавлено ли объявление в избранное пользователем
+    favorite = Favorite.objects.filter(user=request.user, rental=rental).first()
+
+    if favorite:
+        # Если объявление уже в избранном, удаляем его из избранного
+        favorite.delete()
+    else:
+        # Если объявление не в избранном, добавляем его в избранное
+        Favorite.objects.create(user=request.user, rental=rental)
+
+    return redirect('kino')
+
+def favorite_rentals(request):
+    favorites = Favorite.objects.filter(user=request.user)
+    context = {'favorites': favorites}
+    return render(request, 'favorite_rentals.html', context)
+
+def remove_favorite(request, favorite_id):
+    favorite = get_object_or_404(Favorite, id=favorite_id, user=request.user)
+    favorite.delete()
+    return redirect('favorite_rentals')
 
 
 

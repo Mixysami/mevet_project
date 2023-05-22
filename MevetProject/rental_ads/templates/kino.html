@@ -24,15 +24,28 @@
 </div>
 <br>
 <div class="rentals-container">
-    {% for rental in rental_list %}
-    <div class="rental-item" href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
+     {% for rental in rental_list %}
+    <div class="rental-item">
         <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}" style="text-decoration: none;">
             <img src="{{ rental.main_image.url }}">
             <h3 style="font-weight: bolder;">{{ rental.title }}</h3>
             <p>{{ rental.address|slice:":40" }}{% if rental.address|length > 40 %}...{% endif %}</p>
             <h4>{{ rental.price }} ₽</h4>
             </a>
-           <button class="add-to-favorites fa-regular fa-heart" style="font-size: 16px;"> <font style="font-family: 'Century Gothic', sans-serif;">Избранное</font></button>
+           {% if request.user.is_authenticated %}
+    <form action="{% url 'add_to_favorites' rental_id=rental.id %}" method="POST" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="add-to-favorites fa-regular fa-heart {% if rental.is_favorite %} added-to-favorites{% endif %}" style="font-size: 16px;">
+            <font style="font-family: 'Century Gothic', sans-serif;">
+                {% if rental.is_favorite %}
+                Удалить из избранного
+                {% else %}
+                Добавить в избранное
+                {% endif %}
+            </font>
+        </button>
+    </form>
+{% endif %}
     </div>
     {% endfor %}
 </div>
@@ -84,19 +97,7 @@ displayTwo.addEventListener("click", function () {
         displayTwoItems();
     });
 
-    rentalItems.forEach(item => {
-        const button = item.querySelector(".add-to-favorites");
-        button.style.transform = "translateY(30%)"; /* Изначально скрываем кнопку */
-        item.addEventListener("mouseenter", () => {
-            button.style.transform = "translateY(0)";
-        });
-        item.addEventListener("mouseleave", () => {
-            button.style.transform = "translateY(30%)";
-        });
-        button.addEventListener("click", () => {
-            button.classList.toggle("added-to-favorites");
-        });
-    });
+
 
 
 </script>
