@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Избранные объявления{% endblock %}
 {% block content %}
+{% if message %}
+        <h1>{{ message }}</h1>
+    {% else %}
+ {% if request.user.is_authenticated %}
     <h1>Избранные объявления</h1>
     {% if favorites %}
         <div class="rentals-container">
@@ -58,6 +62,8 @@ $(document).ready(function() {
 });
 </script>
 
-
-
+{% else %}
+    <h1>Авторизуйтесь, чтобы добавить объявление в избранное</h1>
+{% endif %}
+{% endif %}
 {% endblock %}
