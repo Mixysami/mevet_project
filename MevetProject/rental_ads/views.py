@@ -301,7 +301,7 @@ def add_to_favorites(request, rental_id):
 
     return redirect('kino')
 
-
+@login_required
 def favorite_rentals(request):
     favorites = Favorite.objects.filter(user=request.user)
     context = {'favorites': favorites}
@@ -310,7 +310,9 @@ def favorite_rentals(request):
 def remove_favorite(request, favorite_id):
     favorite = get_object_or_404(Favorite, id=favorite_id, user=request.user)
     favorite.delete()
-    return redirect('favorite_rentals')
+    favorites = Favorite.objects.filter(user=request.user)
+    context = {'favorites': favorites}
+    return render(request, 'favorite_rentals.html', context)
 
 
 
