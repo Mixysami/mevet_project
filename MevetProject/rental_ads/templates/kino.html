@@ -35,7 +35,7 @@
            {% if request.user.is_authenticated %}
     <form action="{% url 'add_to_favorites' rental_id=rental.id %}" method="POST" style="display: inline;">
         {% csrf_token %}
-        <button type="submit" class="add-to-favorites fa-regular fa-heart {% if rental.is_favorite %} added-to-favorites{% endif %}" style="font-size: 16px;">
+        <button type="submit" class=" fa-regular fa-heart {% if rental.is_favorite %} added-to-favorites{% endif %}" style="font-size: 16px;">
             <font style="font-family: 'Century Gothic', sans-serif;">
                 {% if rental.is_favorite %}
                 Удалить из избранного

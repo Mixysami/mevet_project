@@ -148,7 +148,7 @@ width: 100%;
 }
 
 .add-to-favorites {
-    background-color: white;
+    background-color: black;
     color: white; /* Изменяем цвет текста на белый */
     border-radius: 0.7em;
     padding: 3px;
@@ -160,10 +160,7 @@ width: 100%;
     transform: translateY(100%);
 }
 
-.rental-item:hover .add-to-favorites {
 
-    color: black; /* Изменяем цвет текста на черный при наведении */
-}
 
 
 .added-to-favorites {
