@@ -140,3 +140,14 @@ class Favorite(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.rental.title}"
 
+class Message(models.Model):
+    rental = models.ForeignKey(Rental, on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Message"
+        verbose_name_plural = "Messages"

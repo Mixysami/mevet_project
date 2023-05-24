@@ -11,6 +11,7 @@
 /*Главная страница*/
 
 .video-bg {
+    margin-top:-7%;
     height: 100vh;
     width: 100%;
     overflow: hidden;
@@ -148,27 +149,29 @@ width: 100%;
 }
 
 .add-to-favorites {
-    background-color: black;
-    color: white; /* Изменяем цвет текста на белый */
+    background-color: white;
+    color: black; /* Изменяем цвет текста на белый */
     border-radius: 0.7em;
     padding: 3px;
     margin-left:1%;
-    border: none;
+    border: 1px solid white;
     cursor: pointer;
     font-family: 'Century Gothic', sans-serif;
-    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease; /* Добавляем transition для цвета */
-    transform: translateY(100%);
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease, border 0.3s ease; /* Добавляем transition для цвета */
+    transform: translateY(30%);
 }
 
-
-
+.add-to-favorites:hover {
+    background-color: white;
+    color: black; /* Изменяем цвет текста на белый */
+    border: 1px solid black;
+}
 
 .added-to-favorites {
     border-radius: 8px;
 	border: solid 1px black;
     color: black;
 }
-
 
 
 
@@ -223,21 +226,25 @@ width: 100%;
 	font-weight: 1000;
 }
 
+
+
 /*кнопка-добавить в избранное в rental_details*/
 .add-to-favorites-rental {
     background-color: transparent;
-    color: #e74c3c;
+    color: black;
     border-radius: 0.6em;
-    border: 2px solid #e74c3c;
-    padding: 10px;
+    border: 1px solid black;
+    padding: 7px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .add-to-favorites-rental:hover, .add-to-favorites-rental:focus {
     color: white;
-    background-color: #e74c3c;
+    background-color: black;
 }
+
+
 
 
 /*Rental_manage*/
@@ -343,6 +350,29 @@ width: 100%;
 }
 
 
+.message-rental-button{
+    text-decoration: none;
+
+
+    padding: 8px;
+    border: none;
+    border-radius: 25px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    border: solid 1px white;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.message-rental-button:hover{
+    border-radius: 10px;
+	border: solid 1px black;
+    background-color: #3a3a3a;
+    color:  white;
+}
+
 
 /*Форма для добавления*/
 /* Add some spacing between form elements */
@@ -423,6 +453,8 @@ color: white;
 
 }
 
+
+
 .form-group select {
   width: 30%;
   padding: 12px;
@@ -485,4 +517,41 @@ color: white;
     box-shadow:4px 4px 10px rgba(0,0,0,0.06);
 
 
+}
+
+
+
+
+.new-messages-count {
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+.textarea-detail {
+width: 90%;
+    padding: 13px;
+    font-size: 16px;
+    height: 90px;
+    border: 1px solid black;
+    border-radius: 20px;
+    resize: vertical;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+}
+
+.button-textarea-detail {
+    background-color: transparent;
+    color: black;
+    border-radius: 0.6em;
+    border: 1px solid black;
+    padding: 7px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-textarea-detail:hover, .button-textarea-detail:focus {
+    color: white;
+    background-color: black;
 }

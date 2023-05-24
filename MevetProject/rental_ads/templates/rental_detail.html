@@ -1,9 +1,6 @@
 {% extends "base.html" %}
-
 {% load static %}
-
 {% block content %}
-
 <div class="Osn">
     <div class="oneP">
         {% if rental.main_image %}
@@ -28,13 +25,31 @@
         <p class="spc">Местоположение:</p>
         <p>{{ rental.address }}</p>
         <br>
-        <button class="add-to-favorites fa-regular fa-heart " style="font-size: 20px;"> Добавить в избранное</button>
+        <button class="add-to-favorites-rental fa-regular fa-heart " style="font-size: 20px;"> Добавить в избранное</button>
+        <br>
+        <br>
+
+
+        {% if user.is_authenticated %}
+        <p class="spc">Отправить сообщение продавцу:</p>
+        <form method="post" action="{% url 'send_message' rental_id=rental.id %}">
+            {% csrf_token %}
+        <textarea class="textarea-detail" name="message" placeholder="Введите ваши контактные данные если желаете, чтобы продавец связался с вами для уточнения вопросов. Продавец обязательно получит ваши сообщения и перезвонит" required></textarea>
+        <button type="submit" class="button-textarea-detail">Отправить</button>
+        </form>
+        {% endif %}
     </div>
+
 </div>
 <div class="threeP">
     <h2>Описание:</h2>
     <p>{{ rental.description }}</p>
+
+
 </div>
+
+
+
 
 
 <script>
