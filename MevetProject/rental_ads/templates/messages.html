@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% for message in messages %}
+<div>
+    <p>От: {{ message.sender.username }}</p>
+    <p>{{ message.message }}</p>
+    {% if user == message.recipient %}
+    <form action="{% url 'delete_message' message_id=message.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+    </form>
+    {% endif %}
+</div>
+{% empty %}
+<p>Нет сообщений</p>
+{% endfor %}
+{% endblock %}

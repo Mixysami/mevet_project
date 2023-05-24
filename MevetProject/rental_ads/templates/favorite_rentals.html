@@ -16,7 +16,7 @@
                         <p>{{ favorite.rental.address|slice:":40" }}{% if favorite.rental.address|length > 40 %}...{% endif %}</p>
                         <h4>{{ favorite.rental.price }} ₽</h4>
                     </a>
-                    <button data-favorite-id="{{ favorite.id }}" class="remove-favorite-btn">Удалить из избранного</button>
+                    <button data-favorite-id="{{ favorite.id }}" class="add-to-favorites remove-favorite-btn">Удалить из избранного</button>
                 </div>
             {% endfor %}
         </div>

@@ -2,7 +2,6 @@
 {% load static %}
 {% block title %}Ваши объявления{% endblock %}
 {% block content %}
-
 <br>
 <h1 align="left" style="margin-left: 3%; font-size: 23px;">Ваши объявления</h1>
 <br>
@@ -48,8 +47,11 @@
             <br>
             </a>
 
-        <a href="{% url 'edit_rental' rental_id=rental.id %}" class="edit-rental-button fa-regular far fa-edit " style="font-size: 18px;  padding-left: 1%; padding-right: 1%;"> <font style="font-family: 'Century Gothic', sans-serif;">Редактировать</font></a>
-        <a href="{% url 'delete_rental' rental_id=rental.id %}" class="remove-rental-button fa-regular far fa-trash-alt" style="font-size: 18px; padding-left: 1%; padding-right: 1%;"> <font style="font-family: 'Century Gothic', sans-serif;">Удалить</font></a>
+        <a href="{% url 'edit_rental' rental_id=rental.id %}" class="edit-rental-button fa-regular far fa-edit " style="font-size: 16px;  padding-left: 1%; padding-right: 1%;"> <font style="font-family: 'Century Gothic', sans-serif;">Редактировать</font></a>
+        <a href="{% url 'delete_rental' rental_id=rental.id %}" class="remove-rental-button fa-regular far fa-trash-alt" style="font-size: 16px; padding-left: 1%; padding-right: 1%;"> <font style="font-family: 'Century Gothic', sans-serif;">Удалить</font></a>
+        <a href="{% url 'messages' rental_id=rental.id %}" class="message-rental-button far fa-envelope" style="font-size: 16px; padding-left: 1%; padding-right: 1%;">
+            <font style="font-family: 'Century Gothic', sans-serif;">Сообщения {{ rental.message_count }}</font></a>
+
 
     </div>
 

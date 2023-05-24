@@ -18,14 +18,10 @@ urlpatterns = [
     path('rental/<int:rental_id>/delete/', views.delete_rental, name='delete_rental'),
     path('rental/<int:rental_id>/edit/', views.edit_rental, name='edit_rental'),
     path('rental/<int:rental_id>/delete_image/<int:image_id>/', views.delete_rental_image, name='delete_rental_image'),
-    path('rental/add-to-favorites/<int:rental_id>/', views.add_to_favorites, name='add_to_favorites'),
     path('favorites/', views.favorite_rentals, name='favorite_rentals'),
+    path('favorites/add/<int:rental_id>/', views.add_favorite, name='add_favorite'),
     path('favorites/remove/<int:favorite_id>/', views.remove_favorite, name='remove_favorite'),
-
-
-
-
-
-
-
+    path('<int:rental_id>/messages/', views.messages, name='messages'),
+    path('<int:rental_id>/send_message/', views.send_message, name='send_message'),
+    path('messages/<int:message_id>/delete/', views.delete_message, name='delete_message'),
 ]
