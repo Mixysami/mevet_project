@@ -3,7 +3,7 @@
 {% block title %}Ваши объявления{% endblock %}
 {% block content %}
 <br>
-<h1 align="left" style="margin-left: 3%; font-size: 23px;">Ваши объявления</h1>
+<h1 align="left" style="margin-left: 3%; font-size: 23px;">Личный кабинет</h1>
 <br>
 {% if rental_list %}
 <p style="margin-left: 3%; font-size: 16px;">Здравствуйте  {{ username }}<br>
@@ -17,6 +17,7 @@
         <p id="display-four" class="display-button fas fa-th active" onclick="toggleColor(1)"></p>
         <p id="display-two" class="display-button fas fa-th-large" onclick="toggleColor(2)"></p>
     </div>
+    <a href="{% url 'logout' %}" class="fa-regular fa-user"> Выйти из аккаунта</a>
 </div>
 {% else %}
 <p style="margin-left: 3%; font-size: 16px;">Здравствуйте  {{ username }}<br>
