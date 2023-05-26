@@ -21,7 +21,7 @@
     <div class="top">
         <form class="search-form" method="get" action="{% url 'rental_search' %}">
             <div class="left">
-                <input type="search" class="search-input" placeholder="Поиск">
+                <input type="search" class="search-input" placeholder="Поиск" name="query">
             </div>
              <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
         </form>
@@ -30,8 +30,8 @@
         </div>
         <div class="right">
             {% if user.is_authenticated %}
-                <a href="/rental_manage" class="fa-regular fa-file-alt"></a>
-                <a href="{% url 'logout' %}" class="fa-regular fa-user"></a>
+
+                <a href="/rental_manage" class="fa-regular fa-user"></a>
             {% else %}
                 <a href="#blackout-login" class="fa-regular fa-user"></a>
             {% endif %}
