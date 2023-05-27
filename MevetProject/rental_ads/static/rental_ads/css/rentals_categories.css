@@ -1,0 +1,144 @@
+
+/* Вывод карточек с объявленями*/
+.title-filter-top {
+    margin-left: 3%;
+    margin-right: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.ride {
+    display: flex;
+    align-items: flex-start;
+}
+
+.ride p {
+    padding: 10px;
+    color: gray;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 3%;
+}
+
+.ride p:hover {
+    color: black;
+}
+
+.ride p.active {
+    color: black;
+}
+
+.title-filter-top h1 {
+    font-size: 22px;
+    text-align: center;
+}
+
+.centered-h1 {
+    flex-grow: 1;
+    text-align: center;
+    margin-left:6%;
+}
+
+.form-wrapper {
+    text-align: right;
+    margin-left: auto;
+    margin-right: 3%;
+}
+
+.filter {
+    width: 100%;
+    padding: 4px;
+    border: none;
+    border-radius: 10px;
+    border: solid 1px black;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Century Gothic', sans-serif;
+
+}
+
+
+.rentals-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.rental-item {
+    width: 30%;
+    height: 440px;
+    margin: 1%;
+    margin-bottom: 6px;
+    transition: 0.3s;
+}
+
+.rental-item:hover {
+    box-shadow: 0px 40px 40px 0px rgba(0,0,0,0.2);
+    /*border-radius: 0px 0px 15px 15px;*/
+    opacity: 95%;
+    transform: translateY(-10px);
+}
+
+.rental-item img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    margin-bottom: 3px;
+}
+
+.rental-item h3 {
+    padding-left: 1%;
+    padding-right: 1%;
+    color: black;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.rental-item p {
+    padding-left: 1%;
+    padding-right: 1%;
+    color: gray;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.rental-item h4 {
+    padding-left: 1%;
+    padding-right: 1%;
+    align: bottom;
+    color: black;
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.add-to-favorites {
+    background-color: white;
+    color: black; /* Изменяем цвет текста на белый */
+    border-radius: 0.7em;
+    padding: 3px;
+    margin-left:1%;
+    border: 1px solid white;
+    cursor: pointer;
+    font-family: 'Century Gothic', sans-serif;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease, border 0.3s ease; /* Добавляем transition для цвета */
+    transform: translateY(30%);
+}
+
+.add-to-favorites:hover {
+    background-color: white;
+    color: black; /* Изменяем цвет текста на белый */
+    border: 1px solid black;
+}
+
+.added-to-favorites {
+    border-radius: 8px;
+	border: solid 1px black;
+    color: black;
+}
+

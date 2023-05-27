@@ -4,24 +4,24 @@
 {% block content %}
 <br>
 <div class="title-filter-top">
-    <h1 style="font-size: 22px; margin-right: auto;">Кинозалы</h1>
-    <div class="ride" style="margin: 0 auto;">
+    <div class="ride">
         <p id="display-four" class="display-button fas fa-th active" onclick="toggleColor(1)"></p>
         <p id="display-two" class="display-button fas fa-th-large" onclick="toggleColor(2)"></p>
     </div>
 
-    <p style="margin-left: auto;">
-    <form method="GET" action="{% url 'kino' %}">
-        <select name="filter" class="filter" onchange="this.form.submit()">
-            <option value="r1" {% if selected_filter == 'r1' %}selected{% endif %}>По новизне</option>
-            <option value="r2" {% if selected_filter == 'r2' %}selected{% endif %}>По популярности</option>
-            <option value="r3" {% if selected_filter == 'r3' %}selected{% endif %}>Цена А-Я</option>
-            <option value="r4" {% if selected_filter == 'r4' %}selected{% endif %}>Цена Я-А</option>
-        </select>
 
-    </form>
+    <h1 class="centered-h1">Кинозалы</h1>
+
+    <p class="form-wrapper">
+        <form method="GET" action="{% url 'kino' %}">
+            <select name="filter" class="filter" onchange="this.form.submit()">
+                <option value="r1" {% if selected_filter == 'r1' %}selected{% endif %}>По новизне</option>
+                <option value="r2" {% if selected_filter == 'r2' %}selected{% endif %}>По популярности</option>
+                <option value="r3" {% if selected_filter == 'r3' %}selected{% endif %}>Цена А-Я</option>
+                <option value="r4" {% if selected_filter == 'r4' %}selected{% endif %}>Цена Я-А</option>
+            </select>
+        </form>
     </p>
-
 </div>
 <br>
 <div class="rentals-container">
@@ -50,7 +50,7 @@
     </div>
     {% endfor %}
 </div>
-
+<script src="https://kit.fontawesome.com/7dd3d9efdc.js" crossorigin="anonymous"></script>
 <script>
   var displayOne = document.getElementById("display-four");
 var displayTwo = document.getElementById("display-two");
