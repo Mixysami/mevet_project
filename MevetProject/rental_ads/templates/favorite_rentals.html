@@ -16,7 +16,8 @@
                                 <p>{{ favorite.rental.address|slice:":40" }}{% if favorite.rental.address|length > 40 %}...{% endif %}</p>
                                 <h4>{{ favorite.rental.price }} ₽</h4>
                             </a>
-                            <button data-favorite-id="{{ favorite.rental.id }}" class="remove-from-favorites">Удалить из избранного</button>
+                            <button data-favorite-id="{{ favorite.rental.id }}" class="delete-from-favorites fa-regular fa-heart" style="font-size: 16px;">
+                                <font style="font-family: 'Century Gothic', sans-serif;"> Удалить из избранного</font></button>
                         </div>
                     {% endfor %}
                 </div>
@@ -28,7 +29,7 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script>
             $(document).ready(function() {
-                $('.remove-from-favorites').click(function() {
+                $('.delete-from-favorites').click(function() {
                     var favoriteId = $(this).data('favorite-id');
                     var url = '/favorites/remove/' + favoriteId + '/';
                     var favoriteButton = $(this);

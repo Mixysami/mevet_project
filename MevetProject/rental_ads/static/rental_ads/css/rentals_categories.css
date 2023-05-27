@@ -136,9 +136,27 @@
     border: 1px solid black;
 }
 
-.added-to-favorites {
-    border-radius: 8px;
-	border: solid 1px black;
-    color: black;
+.delete-from-favorites {
+    background-color: white;
+    color: red; /* Изменяем цвет текста на белый */
+    border-radius: 0.7em;
+    padding: 3px;
+    margin-left:1%;
+    border: 1px solid white;
+    cursor: pointer;
+    font-family: 'Century Gothic', sans-serif;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease, border 0.3s ease; /* Добавляем transition для цвета */
+    transform: translateY(30%);
 }
+
+.delete-from-favorites:hover {
+    background-color: white;
+    color: red; /* Изменяем цвет текста на белый */
+    border: 1px solid red;
+}
+
+.testtt{
+ color: red;
+}
+
 
