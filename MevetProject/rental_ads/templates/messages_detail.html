@@ -1,21 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block content %}
-  <h2>Переписка на объявлении "{{ rental.title }}"</h2>
-  {% for message in messages %}
-    <div>
-      <p>От: {{ message.sender.username }}</p>
-      <p>{{ message.message }}</p>
-    </div>
-  {% empty %}
-    <p>Нет сообщений</p>
-  {% endfor %}
+<h1 class="centered-h11">Переписка на объявлении "{{ rental.title }}"</h1>
+<br>
+  <div class="message-container">
 
+    {% for message in messages %}
+      <div class="message">
+        <p>От: {{ message.sender.username }}</p>
+        <p>{{ message.message }}</p>
+      </div>
+    {% empty %}
+      <p>Нет сообщений</p>
+    {% endfor %}
+  </div>
+
+  <div class="message-form">
   <form method="post" action="{% url 'send_message' rental_id=rental.id %}">
     {% csrf_token %}
-    <textarea name="message" rows="4" cols="50"></textarea>
-    <br>
-    <input type="submit" value="Отправить">
+    <div class="form-content">
+      <textarea name="message" rows="2" cols="50"></textarea>
+      <button type="submit" class="submit-button"><i class="fa fa-paper-plane"></i></button>
+    </div>
   </form>
+</div>
 {% endblock %}

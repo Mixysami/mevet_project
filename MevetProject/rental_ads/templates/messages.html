@@ -2,16 +2,20 @@
 {% load static %}
 
 {% block content %}
-<h2>Объявления с перепиской</h2>
+<h1 class="centered-h11">Объявления с перепиской</h1>
 {% if rental_list %}
-<ul>
+<div class="rentals-container">
     {% for rental in rental_list %}
-    <li>
-        <a href="{% url 'messages_detail' rental_id=rental.id %}">{{ rental.title }}</a>
-
-    </li>
+    <div class="rental-item">
+        <a href="{% url 'messages_detail' rental_id=rental.id %}" style="text-decoration: none;">
+        <img src="{{ rental.main_image.url }}">
+            <h3 style="font-weight: bolder;">{{ rental.title }}</h3>
+            <p>{{ rental.address|slice:":40" }}{% if rental.address|length > 40 %}...{% endif %}</p>
+            <h4>{{ rental.price }} ₽</h4>
+        </a>
+    </div>
     {% endfor %}
-</ul>
+</div>
 {% else %}
 <p>Нет объявлений с перепиской.</p>
 {% endif %}
