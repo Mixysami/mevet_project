@@ -34,8 +34,10 @@
         <p class="spc">Отправить сообщение продавцу:</p>
         <form method="post" action="{% url 'send_message' rental_id=rental.id %}">
             {% csrf_token %}
-        <textarea class="textarea-detail" name="message" placeholder="Введите ваши контактные данные если желаете, чтобы продавец связался с вами для уточнения вопросов. Продавец обязательно получит ваши сообщения и перезвонит" required></textarea>
-        <button type="submit" class="button-textarea-detail">Отправить</button>
+        <textarea class="textarea-detail" name="message" placeholder=""></textarea>
+
+
+            <button type="submit" class="button-textarea-detail">Отправить</button>
         </form>
         {% endif %}
     </div>

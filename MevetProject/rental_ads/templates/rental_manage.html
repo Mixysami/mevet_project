@@ -18,8 +18,6 @@
         <p id="display-two" class="display-button fas fa-th-large" onclick="toggleColor(2)"></p>
     </div>
     <a href="{% url 'logout' %}" class="fa-regular fa-user"> Выйти из аккаунта</a>
-    <a href="{% url 'messages' %}" class="message-rental-button far fa-envelope" style="font-size: 16px; padding-left: 1%; padding-right: 1%;">
-    <font style="font-family: 'Century Gothic', sans-serif;">Сообщения</font></a>
 </div>
 {% else %}
 <p style="margin-left: 3%; font-size: 16px;">Здравствуйте  {{ username }}<br>

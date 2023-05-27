@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{% static 'rental_ads/css/style_menu.css' %}">
     <link rel="stylesheet" href="{% static 'rental_ads/css/style_footer.css' %}">
     <link rel="stylesheet" href="{% static 'rental_ads/css/style_osnov.css' %}">
+    <link rel="stylesheet" href="{% static 'rental_ads/css/rentals_categories.css' %}">
+    <link rel="stylesheet" href="{% static 'rental_ads/css/index_rental.css' %}">
     <link href="https://fonts.cdnfonts.com/css/century-gothic?styles=24895" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -29,8 +31,8 @@
             <img src="{% static 'rental_ads/img/logo.png' %}" alt="Логотип">
         </div>
         <div class="right">
+                <a href="{% url 'messages' %}" class="far fa-envelope"></a>
             {% if user.is_authenticated %}
-
                 <a href="/rental_manage" class="fa-regular fa-user"></a>
             {% else %}
                 <a href="#blackout-login" class="fa-regular fa-user"></a>
