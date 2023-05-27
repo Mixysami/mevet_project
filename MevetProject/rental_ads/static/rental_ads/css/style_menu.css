@@ -114,6 +114,7 @@ header {
 .bottom-text{
     font-size: 13px;
     font-family: 'Century Gothic', sans-serif;
+    font-weight: normal;
 }
 
 /*Форма Логина и регистрации*/

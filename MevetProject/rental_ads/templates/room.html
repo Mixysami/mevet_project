@@ -8,10 +8,7 @@
         <p id="display-four" class="display-button fas fa-th active" onclick="toggleColor(1)"></p>
         <p id="display-two" class="display-button fas fa-th-large" onclick="toggleColor(2)"></p>
     </div>
-
-
     <h1 class="centered-h1">Помещения</h1>
-
     <p class="form-wrapper">
         <form method="GET" action="{% url 'room' %}">
             <select name="filter" class="filter" onchange="this.form.submit()">
@@ -34,19 +31,20 @@
             <p>{{ rental.address|slice:":40" }}{% if rental.address|length > 40 %}...{% endif %}</p>
             <h4>{{ rental.price }} ₽</h4>
         </a>
-      {% if request.user.is_authenticated %}
-    {% with is_favorite=rental.is_favorite %}
-        {% if is_favorite %}
-            <button data-favorite-id="{{ rental.id }}" class="fa-regular fa-heart favorite-button delete-from-favorites" style="font-size: 16px;">
-               <font style="font-family: 'Century Gothic', sans-serif;"> Удалить из избранного</font>
-            </button>
-        {% else %}
-            <button data-favorite-id="{{ rental.id }}" class="add-to-favorites favorite-button fa-regular fa-heart" style="font-size: 16px;">
-                <font style="font-family: 'Century Gothic', sans-serif;">Добавить в избранное</font>
-            </button>
+        {% if request.user.is_authenticated %}
+            {% with is_favorite=rental.is_favorite %}
+                {% if is_favorite %}
+                    <button data-favorite-id="{{ rental.id }}" class="fa-regular fa-heart favorite-button delete-from-favorites" style="font-size: 16px;">
+                         <font style="font-family: 'Century Gothic', sans-serif;"> Удалить из избранного</font>
+                    </button>
+                {% else %}
+                    <button data-favorite-id="{{ rental.id }}" class="add-to-favorites favorite-button fa-regular fa-heart" style="font-size: 16px;">
+                        <font style="font-family: 'Century Gothic', sans-serif;">Добавить в избранное</font>
+                    </button>
+                {% endif %}
+            {% endwith %}
+
         {% endif %}
-    {% endwith %}
-{% endif %}
     </div>
     {% endfor %}
 </div>
@@ -54,32 +52,25 @@
 <script>
   var displayOne = document.getElementById("display-four");
 var displayTwo = document.getElementById("display-two");
-
 // Назначаем обработчики событий для элементов
 displayOne.addEventListener("click", function () {
     displayOne.classList.add("active");
     displayTwo.classList.remove("active");
 });
-
 displayTwo.addEventListener("click", function () {
     displayTwo.classList.add("active");
     displayOne.classList.remove("active");
 });
-
    const rentalItems = document.querySelectorAll(".rental-item");
     const displayFourButton = document.getElementById("display-four");
     const displayTwoButton = document.getElementById("display-two");
-
     // Функция для отображения 3 объявлений в ряд
     const displayFourItems = () => {
         rentalItems.forEach(item => {
             item.style.width = "30%";
             item.style.height = "440px";
-
         });
-
     };
-
     // Функция для отображения 2 объявлений в ряд
     const displayTwoItems = () => {
         rentalItems.forEach(item => {
@@ -87,18 +78,14 @@ displayTwo.addEventListener("click", function () {
             item.style.height = "550px";
         });
     };
-
     // Обработчики событий для кнопок
     displayFourButton.addEventListener("click", () => {
         displayFourItems();
     });
-
     displayTwoButton.addEventListener("click", () => {
         displayTwoItems();
     });
-
 </script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
  $(document).ready(function() {
@@ -139,7 +126,6 @@ displayTwo.addEventListener("click", function () {
             });
             return false;
         });
-
         $(document).on('click', '.delete-from-favorites', function() {
     var favoriteId = $(this).data('favorite-id');
     var url = '/favorites/remove/' + favoriteId + '/';
@@ -162,6 +148,4 @@ displayTwo.addEventListener("click", function () {
 });
     });
 </script>
-
-
 {% endblock %}

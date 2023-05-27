@@ -4,23 +4,26 @@
 {% block content %}
 <br>
 <h1 align="left" style="margin-left: 3%; font-size: 23px;">Личный кабинет</h1>
+
 <br>
 {% if rental_list %}
-<p style="margin-left: 3%; font-size: 16px;">Здравствуйте  {{ username }}<br>
+    <p style="margin-left: 3%; font-size: 16px;">Здравствуйте  {{ username }}<br>
     В данном разделе находятся объявления которые вы выложили на платформе.<br>
     На каждой карточке показаны данные которые вы внесли, вы можете заметить, кол-во просмотров на объявлениях.<br>
     Вы можете отредактировать, удалить, внести нужные правки, а также добавить новые объявления!</p>
-<br>
-<div class="button-change">
-<a href="/add_rental" class="add-rental-button far fa-folder-open " style="font-size: 18px;"> <font style="font-family: 'Century Gothic', sans-serif;">Добавить Объявление</font></a>
-<div class="ride2">
-        <p id="display-four" class="display-button fas fa-th active" onclick="toggleColor(1)"></p>
-        <p id="display-two" class="display-button fas fa-th-large" onclick="toggleColor(2)"></p>
+    <br>
+    <div class="button-change">
+        <a href="/add_rental" class="add-rental-button far fa-folder-open " style="font-size: 18px;"> <font style="font-family: 'Century Gothic', sans-serif;">Добавить Объявление</font></a>
+        <p> </p>
+        <a href="{% url 'logout' %}" class="exit-rental-button fas fa-sign-in-alt" style="font-size: 18px; margin-left:1%;"><font style="font-family: 'Century Gothic', sans-serif; font-weight: normal;"> Выйти из аккаунта</font></a>
+
+        <div class="ride2">
+            <p id="display-four" class="display-button fas fa-th active" onclick="toggleColor(1)"></p>
+            <p id="display-two" class="display-button fas fa-th-large" onclick="toggleColor(2)"></p>
+        </div>
     </div>
-    <a href="{% url 'logout' %}" class="fa-regular fa-user"> Выйти из аккаунта</a>
-</div>
 {% else %}
-<p style="margin-left: 3%; font-size: 16px;">Здравствуйте  {{ username }}<br>
+    <p style="margin-left: 3%; font-size: 16px;">Здравствуйте  {{ username }}<br>
 У вас нет выложенных объявлений. <br>
     Если вы являетесь владельцем какого либо агенства/прелприятия связянного с тематикой платформы, вы можете выложить объявление <br>
     Мы будем вам рады!</p>
@@ -28,7 +31,6 @@
 
 <div class="button-change">
     <a href="/add_rental" class="add-rental-button far fa-folder-open " style="font-size: 18px;"> <font style="font-family: 'Century Gothic', sans-serif;">Добавить Объявление</font></a>
-
 </div>
 
 <br>
@@ -47,7 +49,7 @@
             <h3 style=" font-weight: bolder; ">{{ rental.title }}</h3>
             <p>{{ rental.address|slice:":40" }}{% if rental.address|length > 40 %}...{% endif %}</p>
             <h4>{{ rental.price }} ₽</h4>
-            <p style="padding-left: 1%; padding-right: 1%; font-size: 13px;" class="fas fa-hat-cowboy"> {{ rental.views_count }}</p>
+            <p style="padding-left: 1%; padding-right: 1%; font-size: 13px;" class="far fa-eye"> {{ rental.views_count }}</p>
             <br>
             </a>
 
