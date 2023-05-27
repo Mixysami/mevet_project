@@ -20,8 +20,10 @@ urlpatterns = [
     path('rental/<int:rental_id>/delete_image/<int:image_id>/', views.delete_rental_image, name='delete_rental_image'),
     path('favorites/', views.favorite_rentals, name='favorite_rentals'),
     path('favorites/add/<int:rental_id>/', views.add_favorite, name='add_favorite'),
-    path('favorites/remove/<int:favorite_id>/', views.remove_favorite, name='remove_favorite'),
-    path('<int:rental_id>/messages/', views.messages, name='messages'),
-    path('<int:rental_id>/send_message/', views.send_message, name='send_message'),
+    path('favorites/remove/<int:rental_id>/', views.remove_favorite, name='remove_favorite'),
+    path('messages/', views.messages, name='messages'),
+    path('messages/<int:rental_id>/messages_detail', views.messages_detail, name='messages_detail'),
     path('messages/<int:message_id>/delete/', views.delete_message, name='delete_message'),
+    path('<int:rental_id>/send_message/', views.send_message, name='send_message'),
+
 ]

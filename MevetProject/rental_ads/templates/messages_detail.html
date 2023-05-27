@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <h2>Переписка на объявлении "{{ rental.title }}"</h2>
+  {% for message in messages %}
+    <div>
+      <p>От: {{ message.sender.username }}</p>
+      <p>{{ message.message }}</p>
+    </div>
+  {% empty %}
+    <p>Нет сообщений</p>
+  {% endfor %}
+
+  <form method="post" action="{% url 'send_message' rental_id=rental.id %}">
+    {% csrf_token %}
+    <textarea name="message" rows="4" cols="50"></textarea>
+    <br>
+    <input type="submit" value="Отправить">
+  </form>
+{% endblock %}

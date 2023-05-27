@@ -34,19 +34,19 @@
             <p>{{ rental.address|slice:":40" }}{% if rental.address|length > 40 %}...{% endif %}</p>
             <h4>{{ rental.price }} ₽</h4>
         </a>
-        {% if request.user.is_authenticated %}
-        <button data-favorite-id="{{ rental.id }}"
-                class="add-to-favorites favorite-button fa-regular fa-heart {% if favorite.is_favorite %} delete-from-favorites {% endif %}"
-                style="font-size: 16px;">
-            <font style="font-family: 'Century Gothic', sans-serif;">
-                {% if favorite.is_favorite %}
-                Удалить из избранного
-                {% else %}
-                Добавить в избранное
-                {% endif %}
-            </font>
-        </button>
+      {% if request.user.is_authenticated %}
+    {% with is_favorite=rental.is_favorite %}
+        {% if is_favorite %}
+            <button data-favorite-id="{{ rental.id }}" class="add-to-favorites favorite-button fa-regular fa-heart delete-from-favorites" style="font-size: 16px;">
+                <font style="font-family: 'Century Gothic', sans-serif;">Удалить из избранного</font>
+            </button>
+        {% else %}
+            <button data-favorite-id="{{ rental.id }}" class="add-to-favorites favorite-button fa-regular fa-heart" style="font-size: 16px;">
+                <font style="font-family: 'Century Gothic', sans-serif;">Добавить в избранное</font>
+            </button>
         {% endif %}
+    {% endwith %}
+{% endif %}
     </div>
     {% endfor %}
 </div>
@@ -101,45 +101,66 @@ displayTwo.addEventListener("click", function () {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('.favorite-button').click(function() {
-        var favoriteId = $(this).data('favorite-id');
-        var url;
-        var isFavorite = $(this).hasClass('delete-from-favorites');
-        if (isFavorite) {
-            url = '/favorites/remove/' + favoriteId + '/';
-        } else {
-            url = '/favorites/add/' + favoriteId + '/';
-        }
-        var favoriteButton = $(this);
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken': '{{ csrf_token }}'
-            },
-            success: function() {
-                if (isFavorite) {
-                    favoriteButton.removeClass('delete-from-favorites').addClass('add-to-favorites');
-                    favoriteButton.find('font').text('Добавить в избранное');
-                    alert("Удалено из избранного");
-                } else {
-                    favoriteButton.removeClass('add-to-favorites').addClass('delete-from-favorites');
-                    favoriteButton.find('font').text('Удалить из избранного');
-                    alert("Добавлено в избранное");
-                }
-            },
-            error: function(){
-                if (isFavorite) {
-                    alert("Произошла ошибка при удалении объявления из избранного");
-                } else {
-                    alert("Произошла ошибка при добавлении объявления в избранное");
-                }
+ $(document).ready(function() {
+        $('.favorite-button').click(function() {
+            var favoriteId = $(this).data('favorite-id');
+            var url;
+            var isFavorite = $(this).hasClass('delete-from-favorites');
+            if (isFavorite) {
+                url = '/favorites/remove/' + favoriteId + '/';
+            } else {
+                url = '/favorites/add/' + favoriteId + '/';
             }
+            var favoriteButton = $(this);
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function() {
+                    if (isFavorite) {
+                        favoriteButton.removeClass('delete-from-favorites').addClass('add-to-favorites');
+                        favoriteButton.find('font').text('Добавить в избранное');
+                        alert("Удалено из избранного");
+                    } else {
+                        favoriteButton.removeClass('add-to-favorites').addClass('delete-from-favorites');
+                        favoriteButton.find('font').text('Удалить из избранного');
+                        alert("Добавлено в избранное");
+                    }
+                },
+                error: function(){
+                    if (isFavorite) {
+                        alert("Произошла ошибка при удалении объявления из избранного");
+                    } else {
+                        alert("Произошла ошибка при добавлении объявления в избранное");
+                    }
+                }
+            });
+            return false;
         });
-        return false;
+
+        $(document).on('click', '.delete-from-favorites', function() {
+    var favoriteId = $(this).data('favorite-id');
+    var url = '/favorites/remove/' + favoriteId + '/';
+    var favoriteButton = $(this);
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success: function() {
+            favoriteButton.closest('.rental-item').remove();
+            alert("Удалено из избранного");
+        },
+        error: function(){
+            alert("Произошла ошибка при удалении объявления из избранного");
+        }
     });
+    return false;
 });
+    });
 </script>
 
 
