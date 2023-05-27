@@ -50,7 +50,12 @@ def room(request):
     room_category = Category.objects.get(name='room')
     rental_list = Rental.objects.filter(category=room_category)
     # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
-    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    if request.user.is_authenticated:  # Проверка, аутентифицирован ли пользователь
+        favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    else:
+        favorite_rentals = []  # Если пользователь не аутентифицирован, присвоить пустой список
+
+
     # Добавление флага is_favorite в контекст для каждого объявления
     for rental in rental_list:
         rental.is_favorite = rental.id in favorite_rentals
@@ -73,8 +78,9 @@ def room(request):
     context = {
         "rental_list": rental_list,
         "selected_filter": filter_value,
-        "user": request.user,  # Добавление пользователя в контекст
-        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
+        "user": request.user,
+        "favorite": Favorite.objects.filter(user=request.user) if request.user.is_authenticated else []
+        # Добавление избранных объявлений в контекст, если пользователь аутентифицирован
     }
     return render(request, 'room.html', context)
 
@@ -83,7 +89,11 @@ def corporate(request):
     corporate_category = Category.objects.get(name='corporate')
     rental_list = Rental.objects.filter(category=corporate_category)
     # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
-    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    if request.user.is_authenticated:  # Проверка, аутентифицирован ли пользователь
+        favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    else:
+        favorite_rentals = []  # Если пользователь не аутентифицирован, присвоить пустой список
+
     # Добавление флага is_favorite в контекст для каждого объявления
     for rental in rental_list:
         rental.is_favorite = rental.id in favorite_rentals
@@ -106,8 +116,9 @@ def corporate(request):
     context = {
         "rental_list": rental_list,
         "selected_filter": filter_value,
-        "user": request.user,  # Добавление пользователя в контекст
-        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
+        "user": request.user,
+        "favorite": Favorite.objects.filter(user=request.user) if request.user.is_authenticated else []
+        # Добавление избранных объявлений в контекст, если пользователь аутентифицирован
     }
     return render(request, 'corporate.html', context)
 
@@ -115,7 +126,11 @@ def conferences(request):
     conferences_category = Category.objects.get(name='conferences')
     rental_list = Rental.objects.filter(category=conferences_category)
     # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
-    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    if request.user.is_authenticated:  # Проверка, аутентифицирован ли пользователь
+        favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    else:
+        favorite_rentals = []  # Если пользователь не аутентифицирован, присвоить пустой список
+
     # Добавление флага is_favorite в контекст для каждого объявления
     for rental in rental_list:
         rental.is_favorite = rental.id in favorite_rentals
@@ -138,8 +153,9 @@ def conferences(request):
     context = {
         "rental_list": rental_list,
         "selected_filter": filter_value,
-        "user": request.user,  # Добавление пользователя в контекст
-        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
+        "user": request.user,
+        "favorite": Favorite.objects.filter(user=request.user) if request.user.is_authenticated else []
+        # Добавление избранных объявлений в контекст, если пользователь аутентифицирован
     }
     return render(request, 'conferences.html', context)
 
@@ -147,7 +163,11 @@ def wedding(request):
     wedding_category = Category.objects.get(name='wedding')
     rental_list = Rental.objects.filter(category=wedding_category)
     # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
-    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    if request.user.is_authenticated:  # Проверка, аутентифицирован ли пользователь
+        favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    else:
+        favorite_rentals = []  # Если пользователь не аутентифицирован, присвоить пустой список
+
     # Добавление флага is_favorite в контекст для каждого объявления
     for rental in rental_list:
         rental.is_favorite = rental.id in favorite_rentals
@@ -170,8 +190,9 @@ def wedding(request):
     context = {
         "rental_list": rental_list,
         "selected_filter": filter_value,
-        "user": request.user,  # Добавление пользователя в контекст
-        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
+        "user": request.user,
+        "favorite": Favorite.objects.filter(user=request.user) if request.user.is_authenticated else []
+        # Добавление избранных объявлений в контекст, если пользователь аутентифицирован
     }
     return render(request, 'wedding.html', context)
 
@@ -179,7 +200,11 @@ def birthday(request):
     birthday_category = Category.objects.get(name='birthday')
     rental_list = Rental.objects.filter(category=birthday_category)
     # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
-    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    if request.user.is_authenticated:  # Проверка, аутентифицирован ли пользователь
+        favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    else:
+        favorite_rentals = []  # Если пользователь не аутентифицирован, присвоить пустой список
+
     # Добавление флага is_favorite в контекст для каждого объявления
     for rental in rental_list:
         rental.is_favorite = rental.id in favorite_rentals
@@ -202,8 +227,9 @@ def birthday(request):
     context = {
         "rental_list": rental_list,
         "selected_filter": filter_value,
-        "user": request.user,  # Добавление пользователя в контекст
-        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
+        "user": request.user,
+        "favorite": Favorite.objects.filter(user=request.user) if request.user.is_authenticated else []
+        # Добавление избранных объявлений в контекст, если пользователь аутентифицирован
     }
     return render(request, 'birthday.html', context)
 
@@ -211,7 +237,11 @@ def concerts(request):
     concerts_category = Category.objects.get(name='concerts')
     rental_list = Rental.objects.filter(category=concerts_category)
     # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
-    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    if request.user.is_authenticated:  # Проверка, аутентифицирован ли пользователь
+        favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    else:
+        favorite_rentals = []  # Если пользователь не аутентифицирован, присвоить пустой список
+
     # Добавление флага is_favorite в контекст для каждого объявления
     for rental in rental_list:
         rental.is_favorite = rental.id in favorite_rentals
@@ -234,8 +264,9 @@ def concerts(request):
     context = {
         "rental_list": rental_list,
         "selected_filter": filter_value,
-        "user": request.user,  # Добавление пользователя в контекст
-        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
+        "user": request.user,
+        "favorite": Favorite.objects.filter(user=request.user) if request.user.is_authenticated else []
+        # Добавление избранных объявлений в контекст, если пользователь аутентифицирован
     }
     return render(request, 'concerts.html', context)
 
@@ -243,7 +274,11 @@ def other(request):
     other_category = Category.objects.get(name='other')
     rental_list = Rental.objects.filter(category=other_category)
     # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
-    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    if request.user.is_authenticated:  # Проверка, аутентифицирован ли пользователь
+        favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    else:
+        favorite_rentals = []  # Если пользователь не аутентифицирован, присвоить пустой список
+
     # Добавление флага is_favorite в контекст для каждого объявления
     for rental in rental_list:
         rental.is_favorite = rental.id in favorite_rentals
@@ -266,8 +301,9 @@ def other(request):
     context = {
         "rental_list": rental_list,
         "selected_filter": filter_value,
-        "user": request.user,  # Добавление пользователя в контекст
-        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
+        "user": request.user,
+        "favorite": Favorite.objects.filter(user=request.user) if request.user.is_authenticated else []
+        # Добавление избранных объявлений в контекст, если пользователь аутентифицирован
     }
     return render(request, 'other.html', context)
 
@@ -285,6 +321,14 @@ def rental_search(request):
         Q(title__icontains=query) |
         Q(description__icontains=query)
     )
+
+    if request.user.is_authenticated:
+        favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    else:
+        favorite_rentals = []
+
+    for rental in rental_list:
+        rental.is_favorite = rental.id in favorite_rentals
 
     context = {'rental_list': rental_list}
     return render(request, 'rental_search_results.html', context)

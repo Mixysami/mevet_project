@@ -1,21 +1,103 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<h1>Search Results</h1>
-
+<h1 class="centered-h11">Результаты поиска</h1>
 <div class="rentals-container">
     {% for rental in rental_list %}
     <div class="rental-item">
-        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}">
+        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}"
+           style="text-decoration: none;">
             <img src="{{ rental.main_image.url }}">
-            <h3>{{ rental.title }}</h3>
-            <p>{{ rental.description|slice:":20" }}{% if rental.description|length > 20 %}...{% endif %}</p>
-            <p>{{ rental.address|slice:":20" }}{% if rental.address|length > 20 %}...{% endif %}</p>
-            <button class="add-to-favorites fa-regular fa-heart " style="font-size: 20px;"> Добавить в избранное</button>
+            <h3 style="font-weight: bolder;">{{ rental.title }}</h3>
+            <p>{{ rental.address|slice:":40" }}{% if rental.address|length > 40 %}...{% endif %}</p>
+            <h4>{{ rental.price }} ₽</h4>
         </a>
+        {% if request.user.is_authenticated %}
+            {% with is_favorite=rental.is_favorite %}
+                {% if is_favorite %}
+                    <button data-favorite-id="{{ rental.id }}" class="fa-regular fa-heart favorite-button delete-from-favorites" style="font-size: 16px;">
+                         <font style="font-family: 'Century Gothic', sans-serif;"> Удалить из избранного</font>
+                    </button>
+                {% else %}
+                    <button data-favorite-id="{{ rental.id }}" class="add-to-favorites favorite-button fa-regular fa-heart" style="font-size: 16px;">
+                        <font style="font-family: 'Century Gothic', sans-serif;">Добавить в избранное</font>
+                    </button>
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+
     </div>
     {% empty %}
-    <p>No results found.</p>
+    <center>
+
+    <p style="margin-top: 22%; margin-bottom: 26%;">Не найдено объявлений!<br> Вы можете найти интересующие вас объявления в категориях на платформе</p>
+    </center>
+
+
+
     {% endfor %}
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+ $(document).ready(function() {
+        $('.favorite-button').click(function() {
+            var favoriteId = $(this).data('favorite-id');
+            var url;
+            var isFavorite = $(this).hasClass('delete-from-favorites');
+            if (isFavorite) {
+                url = '/favorites/remove/' + favoriteId + '/';
+            } else {
+                url = '/favorites/add/' + favoriteId + '/';
+            }
+            var favoriteButton = $(this);
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function() {
+                    if (isFavorite) {
+                        favoriteButton.removeClass('delete-from-favorites').addClass('add-to-favorites');
+                        favoriteButton.find('font').text('Добавить в избранное');
+                        alert("Удалено из избранного");
+                    } else {
+                        favoriteButton.removeClass('add-to-favorites').addClass('delete-from-favorites');
+                        favoriteButton.find('font').text('Удалить из избранного');
+                        alert("Добавлено в избранное");
+                    }
+                },
+                error: function(){
+                    if (isFavorite) {
+                        alert("Произошла ошибка при удалении объявления из избранного");
+                    } else {
+                        alert("Произошла ошибка при добавлении объявления в избранное");
+                    }
+                }
+            });
+            return false;
+        });
+        $(document).on('click', '.delete-from-favorites', function() {
+    var favoriteId = $(this).data('favorite-id');
+    var url = '/favorites/remove/' + favoriteId + '/';
+    var favoriteButton = $(this);
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success: function() {
+            favoriteButton.closest('.rental-item').remove();
+            alert("Удалено из избранного");
+        },
+        error: function(){
+            alert("Произошла ошибка при удалении объявления из избранного");
+        }
+    });
+    return false;
+});
+    });
+</script>
 {% endblock %}

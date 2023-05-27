@@ -1,33 +1,37 @@
 {% extends "base.html" %}
 {% block title %}Избранные объявления{% endblock %}
 {% block content %}
-    {% if message %}
-        <h1>{{ message }}</h1>
-    {% else %}
-        {% if request.user.is_authenticated %}
-            <h1>Избранные объявления</h1>
-            {% if favorites %}
-                <div class="rentals-container">
-                    {% for favorite in favorites %}
-                        <div class="rental-item">
-                            <a href="{% url 'rental_detail' category_name=favorite.rental.category.name rental_id=favorite.rental.id %}" style="text-decoration: none;">
-                                <img src="{{ favorite.rental.main_image.url }}">
-                                <h3 style="font-weight: bolder;">{{ favorite.rental.title }}</h3>
-                                <p>{{ favorite.rental.address|slice:":40" }}{% if favorite.rental.address|length > 40 %}...{% endif %}</p>
-                                <h4>{{ favorite.rental.price }} ₽</h4>
-                            </a>
-                            <button data-favorite-id="{{ favorite.rental.id }}" class="delete-from-favorites fa-regular fa-heart" style="font-size: 16px;">
-                                <font style="font-family: 'Century Gothic', sans-serif;"> Удалить из избранного</font></button>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <p>У вас пока нет избранных объявлений.</p>
-            {% endif %}
 
-            <!-- При удалении объявления из избранного -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script>
+
+<br>
+<h1 class="centered-h11">Избранные объявления</h1>
+
+<br>
+{% if favorites %}
+    <div class="rentals-container">
+        {% for favorite in favorites %}
+        <div class="rental-item">
+            <a href="{% url 'rental_detail' category_name=favorite.rental.category.name rental_id=favorite.rental.id %}" style="text-decoration: none;">
+            <img src="{{ favorite.rental.main_image.url }}">
+            <h3 style="font-weight: bolder;">{{ favorite.rental.title }}</h3>
+            <p>{{ favorite.rental.address|slice:":40" }}{% if favorite.rental.address|length > 40 %}...{% endif %}</p>
+            <h4>{{ favorite.rental.price }} ₽</h4>
+            </a>
+            <button data-favorite-id="{{ favorite.rental.id }}" class="delete-from-favorites fa-regular fa-heart" style="font-size: 16px;">
+            <font style="font-family: 'Century Gothic', sans-serif;"> Удалить из избранного</font></button>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+<center>
+
+    <p style="margin-top: 8%; margin-bottom: 13%;">У вас пока нет избранных объявлений! <br> Вы можете найти интересующие вас объявления в категориях на платформе</p>
+    </center>
+{% endif %}
+
+<!-- При удалении объявления из избранного -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
             $(document).ready(function() {
                 $('.delete-from-favorites').click(function() {
                     var favoriteId = $(this).data('favorite-id');
@@ -51,8 +55,5 @@
                 });
             });
             </script>
-        {% else %}
-            <h1>Авторизуйтесь, чтобы добавить объявление в избранное</h1>
-        {% endif %}
-    {% endif %}
+
 {% endblock %}
