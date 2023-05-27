@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Помещения{% endblock %}
+{% block content %}
+<br>
+<div class="title-filter-top">
+    <div class="ride">
+        <p id="display-four" class="display-button fas fa-th active" onclick="toggleColor(1)"></p>
+        <p id="display-two" class="display-button fas fa-th-large" onclick="toggleColor(2)"></p>
+    </div>
+
+
+    <h1 class="centered-h1">Помещения</h1>
+
+    <p class="form-wrapper">
+        <form method="GET" action="{% url 'room' %}">
+            <select name="filter" class="filter" onchange="this.form.submit()">
+                <option value="r1" {% if selected_filter == 'r1' %}selected{% endif %}>По новизне</option>
+                <option value="r2" {% if selected_filter == 'r2' %}selected{% endif %}>По популярности</option>
+                <option value="r3" {% if selected_filter == 'r3' %}selected{% endif %}>Цена А-Я</option>
+                <option value="r4" {% if selected_filter == 'r4' %}selected{% endif %}>Цена Я-А</option>
+            </select>
+        </form>
+    </p>
+</div>
+<br>
+<div class="rentals-container">
+    {% for rental in rental_list %}
+    <div class="rental-item">
+        <a href="{% url 'rental_detail' category_name=rental.category.name rental_id=rental.id %}"
+           style="text-decoration: none;">
+            <img src="{{ rental.main_image.url }}">
+            <h3 style="font-weight: bolder;">{{ rental.title }}</h3>
+            <p>{{ rental.address|slice:":40" }}{% if rental.address|length > 40 %}...{% endif %}</p>
+            <h4>{{ rental.price }} ₽</h4>
+        </a>
+      {% if request.user.is_authenticated %}
+    {% with is_favorite=rental.is_favorite %}
+        {% if is_favorite %}
+            <button data-favorite-id="{{ rental.id }}" class="fa-regular fa-heart favorite-button delete-from-favorites" style="font-size: 16px;">
+               <font style="font-family: 'Century Gothic', sans-serif;"> Удалить из избранного</font>
+            </button>
+        {% else %}
+            <button data-favorite-id="{{ rental.id }}" class="add-to-favorites favorite-button fa-regular fa-heart" style="font-size: 16px;">
+                <font style="font-family: 'Century Gothic', sans-serif;">Добавить в избранное</font>
+            </button>
+        {% endif %}
+    {% endwith %}
+{% endif %}
+    </div>
+    {% endfor %}
+</div>
+<script src="https://kit.fontawesome.com/7dd3d9efdc.js" crossorigin="anonymous"></script>
+<script>
+  var displayOne = document.getElementById("display-four");
+var displayTwo = document.getElementById("display-two");
+
+// Назначаем обработчики событий для элементов
+displayOne.addEventListener("click", function () {
+    displayOne.classList.add("active");
+    displayTwo.classList.remove("active");
+});
+
+displayTwo.addEventListener("click", function () {
+    displayTwo.classList.add("active");
+    displayOne.classList.remove("active");
+});
+
+   const rentalItems = document.querySelectorAll(".rental-item");
+    const displayFourButton = document.getElementById("display-four");
+    const displayTwoButton = document.getElementById("display-two");
+
+    // Функция для отображения 3 объявлений в ряд
+    const displayFourItems = () => {
+        rentalItems.forEach(item => {
+            item.style.width = "30%";
+            item.style.height = "440px";
+
+        });
+
+    };
+
+    // Функция для отображения 2 объявлений в ряд
+    const displayTwoItems = () => {
+        rentalItems.forEach(item => {
+            item.style.width = "46%";
+            item.style.height = "550px";
+        });
+    };
+
+    // Обработчики событий для кнопок
+    displayFourButton.addEventListener("click", () => {
+        displayFourItems();
+    });
+
+    displayTwoButton.addEventListener("click", () => {
+        displayTwoItems();
+    });
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+ $(document).ready(function() {
+        $('.favorite-button').click(function() {
+            var favoriteId = $(this).data('favorite-id');
+            var url;
+            var isFavorite = $(this).hasClass('delete-from-favorites');
+            if (isFavorite) {
+                url = '/favorites/remove/' + favoriteId + '/';
+            } else {
+                url = '/favorites/add/' + favoriteId + '/';
+            }
+            var favoriteButton = $(this);
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function() {
+                    if (isFavorite) {
+                        favoriteButton.removeClass('delete-from-favorites').addClass('add-to-favorites');
+                        favoriteButton.find('font').text('Добавить в избранное');
+                        alert("Удалено из избранного");
+                    } else {
+                        favoriteButton.removeClass('add-to-favorites').addClass('delete-from-favorites');
+                        favoriteButton.find('font').text('Удалить из избранного');
+                        alert("Добавлено в избранное");
+                    }
+                },
+                error: function(){
+                    if (isFavorite) {
+                        alert("Произошла ошибка при удалении объявления из избранного");
+                    } else {
+                        alert("Произошла ошибка при добавлении объявления в избранное");
+                    }
+                }
+            });
+            return false;
+        });
+
+        $(document).on('click', '.delete-from-favorites', function() {
+    var favoriteId = $(this).data('favorite-id');
+    var url = '/favorites/remove/' + favoriteId + '/';
+    var favoriteButton = $(this);
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success: function() {
+            favoriteButton.closest('.rental-item').remove();
+            alert("Удалено из избранного");
+        },
+        error: function(){
+            alert("Произошла ошибка при удалении объявления из избранного");
+        }
+    });
+    return false;
+});
+    });
+</script>
+
+
+{% endblock %}

@@ -44,11 +44,13 @@
         {% with request.path|lower|slice:":-1" as current_path %}
             <a href="/" class="fa-regular fas far far fa-compass" style="background: {% if '' == current_path %}  white;
       color: black;{% endif %}"><font class="bottom-text"> Главная страница</font></a>
-            <a href="/pagefoto" class="fa-regular fas fa-photo" style="background: {% if '/pagefoto' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Фотостудии</font></a>
-            <a href="/svadba" class="fa-regular fas fa-gift" style="background: {% if '/svadba' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Свадебные агенства</font></a>
-            <a href="/banket" class="fa-regular fas fa-glass-cheers" style="background: {% if '/banket' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Банкетные залы</font></a>
-            <a href="/kino" class="fa-regular fas fa-video" style="background: {% if '/kino' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Кинозалы</font></a>
-            <a href="/kon" class="fa-regular fas fa-guitar" style="background: {% if '/kon' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Концертные залы</font></a>
+            <a href="/conferences" class="fa-regular fas fa-photo" style="background: {% if '/conferences' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Конференции</font></a>
+            <a href="/wedding" class="fa-regular fas fa-gift" style="background: {% if '/wedding' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Свадьбы</font></a>
+            <a href="/birthday" class="fa-regular fas fa-glass-cheers" style="background: {% if '/birthday' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Дни рождения</font></a>
+            <a href="/room" class="fa-regular fas fa-video" style="background: {% if '/room' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Помещения</font></a>
+            <a href="/corporate" class="fa-regular fas fa-guitar" style="background: {% if '/corporate' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Корпоративы</font></a>
+            <a href="/concerts" class="fa-regular fas fa-guitar" style="background: {% if '/concerts' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Концерты</font></a>
+            <a href="/other" class="fa-regular fas fa-guitar" style="background: {% if '/other' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Другие</font></a>
         {% endwith %}
     </div>
 </header>

@@ -46,9 +46,9 @@ def register_view(request):
     return render(request, 'register.html', {'form': form})
 
 
-def kino(request):
-    kino_category = Category.objects.get(name='kino')
-    rental_list = Rental.objects.filter(category=kino_category)
+def room(request):
+    room_category = Category.objects.get(name='room')
+    rental_list = Rental.objects.filter(category=room_category)
     # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
     favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
     # Добавление флага is_favorite в контекст для каждого объявления
@@ -56,7 +56,6 @@ def kino(request):
         rental.is_favorite = rental.id in favorite_rentals
     # Получение значения выбранного фильтра
     filter_value = request.GET.get('filter')
-
     # Фильтрация списка объявлений в соответствии с выбранным фильтром
     if filter_value == 'r1':
         rental_list = rental_list.order_by('-created_at')  # По новизне
@@ -66,12 +65,10 @@ def kino(request):
         rental_list = rental_list.order_by('price')  # По цене по возрастанию
     elif filter_value == 'r4':
         rental_list = rental_list.order_by('-price')  # По цене по убыванию
-
     # Обновление количества просмотров объявлений
     for rental in rental_list:
         rental.views_count += 1
         rental.save()
-
     # Добавление выбранного значения фильтра в контекст
     context = {
         "rental_list": rental_list,
@@ -79,16 +76,19 @@ def kino(request):
         "user": request.user,  # Добавление пользователя в контекст
         "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
     }
-    return render(request, 'kino.html', context)
+    return render(request, 'room.html', context)
 
 
-def kon(request):
-    kon_category = Category.objects.get(name='kon')
-    rental_list = Rental.objects.filter(category=kon_category)
-
+def corporate(request):
+    corporate_category = Category.objects.get(name='corporate')
+    rental_list = Rental.objects.filter(category=corporate_category)
+    # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
+    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    # Добавление флага is_favorite в контекст для каждого объявления
+    for rental in rental_list:
+        rental.is_favorite = rental.id in favorite_rentals
     # Получение значения выбранного фильтра
     filter_value = request.GET.get('filter')
-
     # Фильтрация списка объявлений в соответствии с выбранным фильтром
     if filter_value == 'r1':
         rental_list = rental_list.order_by('-created_at')  # По новизне
@@ -98,27 +98,29 @@ def kon(request):
         rental_list = rental_list.order_by('price')  # По цене по возрастанию
     elif filter_value == 'r4':
         rental_list = rental_list.order_by('-price')  # По цене по убыванию
-
     # Обновление количества просмотров объявлений
     for rental in rental_list:
         rental.views_count += 1
         rental.save()
-
     # Добавление выбранного значения фильтра в контекст
     context = {
         "rental_list": rental_list,
-        "selected_filter": filter_value  # Передача выбранного значения фильтра в шаблон
+        "selected_filter": filter_value,
+        "user": request.user,  # Добавление пользователя в контекст
+        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
     }
-    return render(request, 'kon.html', context)
+    return render(request, 'corporate.html', context)
 
-
-def pagefoto(request):
-    pagefoto_category = Category.objects.get(name='pagefoto')
-    rental_list = Rental.objects.filter(category=pagefoto_category)
-
+def conferences(request):
+    conferences_category = Category.objects.get(name='conferences')
+    rental_list = Rental.objects.filter(category=conferences_category)
+    # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
+    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    # Добавление флага is_favorite в контекст для каждого объявления
+    for rental in rental_list:
+        rental.is_favorite = rental.id in favorite_rentals
     # Получение значения выбранного фильтра
     filter_value = request.GET.get('filter')
-
     # Фильтрация списка объявлений в соответствии с выбранным фильтром
     if filter_value == 'r1':
         rental_list = rental_list.order_by('-created_at')  # По новизне
@@ -128,27 +130,29 @@ def pagefoto(request):
         rental_list = rental_list.order_by('price')  # По цене по возрастанию
     elif filter_value == 'r4':
         rental_list = rental_list.order_by('-price')  # По цене по убыванию
-
     # Обновление количества просмотров объявлений
     for rental in rental_list:
         rental.views_count += 1
         rental.save()
-
     # Добавление выбранного значения фильтра в контекст
     context = {
         "rental_list": rental_list,
-        "selected_filter": filter_value  # Передача выбранного значения фильтра в шаблон
+        "selected_filter": filter_value,
+        "user": request.user,  # Добавление пользователя в контекст
+        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
     }
-    return render(request, 'pagefoto.html', context)
+    return render(request, 'conferences.html', context)
 
-
-def svadba(request):
-    svadba_category = Category.objects.get(name='svadba')
-    rental_list = Rental.objects.filter(category=svadba_category)
-
+def wedding(request):
+    wedding_category = Category.objects.get(name='wedding')
+    rental_list = Rental.objects.filter(category=wedding_category)
+    # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
+    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    # Добавление флага is_favorite в контекст для каждого объявления
+    for rental in rental_list:
+        rental.is_favorite = rental.id in favorite_rentals
     # Получение значения выбранного фильтра
     filter_value = request.GET.get('filter')
-
     # Фильтрация списка объявлений в соответствии с выбранным фильтром
     if filter_value == 'r1':
         rental_list = rental_list.order_by('-created_at')  # По новизне
@@ -158,27 +162,29 @@ def svadba(request):
         rental_list = rental_list.order_by('price')  # По цене по возрастанию
     elif filter_value == 'r4':
         rental_list = rental_list.order_by('-price')  # По цене по убыванию
-
     # Обновление количества просмотров объявлений
     for rental in rental_list:
         rental.views_count += 1
         rental.save()
-
     # Добавление выбранного значения фильтра в контекст
     context = {
         "rental_list": rental_list,
-        "selected_filter": filter_value  # Передача выбранного значения фильтра в шаблон
+        "selected_filter": filter_value,
+        "user": request.user,  # Добавление пользователя в контекст
+        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
     }
-    return render(request, 'svadba.html', context)
+    return render(request, 'wedding.html', context)
 
-
-def banket(request):
-    banket_category = Category.objects.get(name='banket')
-    rental_list = Rental.objects.filter(category=banket_category)
-
+def birthday(request):
+    birthday_category = Category.objects.get(name='birthday')
+    rental_list = Rental.objects.filter(category=birthday_category)
+    # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
+    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    # Добавление флага is_favorite в контекст для каждого объявления
+    for rental in rental_list:
+        rental.is_favorite = rental.id in favorite_rentals
     # Получение значения выбранного фильтра
     filter_value = request.GET.get('filter')
-
     # Фильтрация списка объявлений в соответствии с выбранным фильтром
     if filter_value == 'r1':
         rental_list = rental_list.order_by('-created_at')  # По новизне
@@ -188,19 +194,82 @@ def banket(request):
         rental_list = rental_list.order_by('price')  # По цене по возрастанию
     elif filter_value == 'r4':
         rental_list = rental_list.order_by('-price')  # По цене по убыванию
-
     # Обновление количества просмотров объявлений
     for rental in rental_list:
         rental.views_count += 1
         rental.save()
-
     # Добавление выбранного значения фильтра в контекст
     context = {
         "rental_list": rental_list,
-        "selected_filter": filter_value  # Передача выбранного значения фильтра в шаблон
+        "selected_filter": filter_value,
+        "user": request.user,  # Добавление пользователя в контекст
+        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
     }
-    return render(request, 'banket.html', context)
+    return render(request, 'birthday.html', context)
 
+def concerts(request):
+    concerts_category = Category.objects.get(name='concerts')
+    rental_list = Rental.objects.filter(category=concerts_category)
+    # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
+    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    # Добавление флага is_favorite в контекст для каждого объявления
+    for rental in rental_list:
+        rental.is_favorite = rental.id in favorite_rentals
+    # Получение значения выбранного фильтра
+    filter_value = request.GET.get('filter')
+    # Фильтрация списка объявлений в соответствии с выбранным фильтром
+    if filter_value == 'r1':
+        rental_list = rental_list.order_by('-created_at')  # По новизне
+    elif filter_value == 'r2':
+        rental_list = rental_list.order_by('-views_count')  # По популярности
+    elif filter_value == 'r3':
+        rental_list = rental_list.order_by('price')  # По цене по возрастанию
+    elif filter_value == 'r4':
+        rental_list = rental_list.order_by('-price')  # По цене по убыванию
+    # Обновление количества просмотров объявлений
+    for rental in rental_list:
+        rental.views_count += 1
+        rental.save()
+    # Добавление выбранного значения фильтра в контекст
+    context = {
+        "rental_list": rental_list,
+        "selected_filter": filter_value,
+        "user": request.user,  # Добавление пользователя в контекст
+        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
+    }
+    return render(request, 'concerts.html', context)
+
+def other(request):
+    other_category = Category.objects.get(name='other')
+    rental_list = Rental.objects.filter(category=other_category)
+    # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
+    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    # Добавление флага is_favorite в контекст для каждого объявления
+    for rental in rental_list:
+        rental.is_favorite = rental.id in favorite_rentals
+    # Получение значения выбранного фильтра
+    filter_value = request.GET.get('filter')
+    # Фильтрация списка объявлений в соответствии с выбранным фильтром
+    if filter_value == 'r1':
+        rental_list = rental_list.order_by('-created_at')  # По новизне
+    elif filter_value == 'r2':
+        rental_list = rental_list.order_by('-views_count')  # По популярности
+    elif filter_value == 'r3':
+        rental_list = rental_list.order_by('price')  # По цене по возрастанию
+    elif filter_value == 'r4':
+        rental_list = rental_list.order_by('-price')  # По цене по убыванию
+    # Обновление количества просмотров объявлений
+    for rental in rental_list:
+        rental.views_count += 1
+        rental.save()
+    # Добавление выбранного значения фильтра в контекст
+    context = {
+        "rental_list": rental_list,
+        "selected_filter": filter_value,
+        "user": request.user,  # Добавление пользователя в контекст
+        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
+    }
+    return render(request, 'other.html', context)
 
 def rental_detail(request, category_name, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
