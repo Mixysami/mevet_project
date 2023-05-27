@@ -49,7 +49,11 @@ def register_view(request):
 def kino(request):
     kino_category = Category.objects.get(name='kino')
     rental_list = Rental.objects.filter(category=kino_category)
-
+    # Получение списка идентификаторов объявлений, добавленных в избранное текущим пользователем
+    favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    # Добавление флага is_favorite в контекст для каждого объявления
+    for rental in rental_list:
+        rental.is_favorite = rental.id in favorite_rentals
     # Получение значения выбранного фильтра
     filter_value = request.GET.get('filter')
 
@@ -71,7 +75,9 @@ def kino(request):
     # Добавление выбранного значения фильтра в контекст
     context = {
         "rental_list": rental_list,
-        "selected_filter": filter_value  # Передача выбранного значения фильтра в шаблон
+        "selected_filter": filter_value,
+        "user": request.user,  # Добавление пользователя в контекст
+        "favorite": Favorite.objects.filter(user=request.user)  # Добавление избранных объявлений в контекст
     }
     return render(request, 'kino.html', context)
 
@@ -290,7 +296,7 @@ def delete_rental_image(request, rental_id, image_id):
 
     return redirect('edit_rental', rental_id=rental.id)
 
-
+@login_required
 def favorite_rentals(request):
     favorites = Favorite.objects.filter(user=request.user)
     context = {'favorites': favorites}
@@ -307,19 +313,13 @@ def add_favorite(request, rental_id):
 
 @login_required
 @require_POST
-def remove_favorite(request, favorite_id):
-    try:
-        favorite = Favorite.objects.get(id=favorite_id, user=request.user)
-    except Favorite.DoesNotExist:
-        return JsonResponse({'status': 'error', 'message': 'Favorite not found'}, status=404)
+def remove_favorite(request, rental_id):
+    favorite = get_object_or_404(Favorite, rental_id=rental_id, user=request.user)
+    favorite.delete()
+    return JsonResponse({'message': 'Успешно удалено из избранного'})
 
-    try:
-        favorite.delete()
-    except Exception as e:
-        return JsonResponse({'status': 'error', 'message': 'Error deleting favorite: ' + str(e)}, status=500)
 
-    return JsonResponse({'status': 'success'})
-
+from django.shortcuts import redirect
 
 @login_required
 def send_message(request, rental_id):
@@ -334,19 +334,41 @@ def send_message(request, rental_id):
             rental=rental,
             message=message_text
         )
-        return redirect('rental_detail', category_name=rental.category.name, rental_id=rental.id)
+        return redirect('messages_detail', rental_id=rental.id)  # Изменено на 'messages_detail'
     else:
-        return HttpResponseNotAllowed(['POST'])
+        rental = get_object_or_404(Rental, id=rental_id)
+        return render(request, 'send_message.html', {'rental': rental})
 
 @login_required
-def messages(request, rental_id):
-    rental = get_object_or_404(Rental, id=rental_id)
-    messages = Message.objects.filter(rental=rental)
-    return render(request, 'messages.html', {'rental': rental, 'messages': messages})
-
+def messages(request):
+    user = request.user
+    rental_list_received = Rental.objects.filter(message__recipient=user).distinct()
+    rental_list_sent = Rental.objects.filter(message__sender=user).distinct()
+    rental_list = rental_list_received | rental_list_sent
+    return render(request, 'messages.html', {'rental_list': rental_list})
 @login_required
 def delete_message(request, message_id):
     message = get_object_or_404(Message, id=message_id)
     if request.user == message.recipient:
         message.delete()
     return redirect('messages', rental_id=message.rental.id)
+
+
+@login_required
+def messages_detail(request, rental_id):
+    rental = get_object_or_404(Rental, id=rental_id)
+    messages = Message.objects.filter(rental=rental)
+
+    if request.method == 'POST':
+        message_text = request.POST['message']
+        sender = request.user
+        recipient = rental.user
+        message = Message.objects.create(
+            sender=sender,
+            recipient=recipient,
+            rental=rental,
+            message=message_text
+        )
+        return redirect('messages_detail', rental_id=rental_id)
+
+    return render(request, 'messages_detail.html', {'rental': rental, 'messages': messages})

@@ -1,69 +1,57 @@
 {% extends "base.html" %}
 {% block title %}Избранные объявления{% endblock %}
 {% block content %}
-{% if message %}
+    {% if message %}
         <h1>{{ message }}</h1>
     {% else %}
- {% if request.user.is_authenticated %}
-    <h1>Избранные объявления</h1>
-    {% if favorites %}
-        <div class="rentals-container">
-            {% for favorite in favorites %}
-                <div class="rental-item">
-                    <a href="{% url 'rental_detail' category_name=favorite.rental.category.name rental_id=favorite.rental.id %}" style="text-decoration: none;">
-                        <img src="{{ favorite.rental.main_image.url }}">
-                        <h3 style="font-weight: bolder;">{{ favorite.rental.title }}</h3>
-                        <p>{{ favorite.rental.address|slice:":40" }}{% if favorite.rental.address|length > 40 %}...{% endif %}</p>
-                        <h4>{{ favorite.rental.price }} ₽</h4>
-                    </a>
-                    <button data-favorite-id="{{ favorite.id }}" class="add-to-favorites remove-favorite-btn">Удалить из избранного</button>
+        {% if request.user.is_authenticated %}
+            <h1>Избранные объявления</h1>
+            {% if favorites %}
+                <div class="rentals-container">
+                    {% for favorite in favorites %}
+                        <div class="rental-item">
+                            <a href="{% url 'rental_detail' category_name=favorite.rental.category.name rental_id=favorite.rental.id %}" style="text-decoration: none;">
+                                <img src="{{ favorite.rental.main_image.url }}">
+                                <h3 style="font-weight: bolder;">{{ favorite.rental.title }}</h3>
+                                <p>{{ favorite.rental.address|slice:":40" }}{% if favorite.rental.address|length > 40 %}...{% endif %}</p>
+                                <h4>{{ favorite.rental.price }} ₽</h4>
+                            </a>
+                            <button data-favorite-id="{{ favorite.rental.id }}" class="remove-from-favorites">Удалить из избранного</button>
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p>У вас пока нет избранных объявлений.</p>
+            {% else %}
+                <p>У вас пока нет избранных объявлений.</p>
+            {% endif %}
+
+            <!-- При удалении объявления из избранного -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+            $(document).ready(function() {
+                $('.remove-from-favorites').click(function() {
+                    var favoriteId = $(this).data('favorite-id');
+                    var url = '/favorites/remove/' + favoriteId + '/';
+                    var favoriteButton = $(this);
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function() {
+                            favoriteButton.closest('.rental-item').remove();
+                            alert("Удалено из избранного");
+                        },
+                        error: function() {
+                            alert("Произошла ошибка при удалении объявления из избранного");
+                        }
+                    });
+                    return false;
+                });
+            });
+            </script>
+        {% else %}
+            <h1>Авторизуйтесь, чтобы добавить объявление в избранное</h1>
+        {% endif %}
     {% endif %}
-
-<!-- При удалении объявления из избранного -->
-<script>
-function removeFromFavorites(rentalId) {
-  toggleFavorite(rentalId, false);
-  localStorage.setItem("rentalFavorites", JSON.stringify(JSON.parse(localStorage.getItem("favorites"))));
-}
-function getFavoriteState(rentalId) {
-  const favorites = JSON.parse(localStorage.getItem("rentalFavorites")) || {};
-  return favorites[rentalId] || false;
-}
-
-</script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('.remove-favorite-btn').click(function() {
-        var favoriteId = $(this).data('favorite-id');
-        var removeUrl = '/favorites/remove/' + favoriteId + '/';
-        var rentalItem = $(this).closest('.rental-item');
-        $.ajax({
-            url: removeUrl,
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken': '{{ csrf_token }}'
-            },
-            success: function() {
-                rentalItem.remove();
-            },
-            error: function(){
-                alert("Произошла ошибка при удалении избранного объявления");
-            }
-        });
-        return false;
-    });
-});
-</script>
-
-{% else %}
-    <h1>Авторизуйтесь, чтобы добавить объявление в избранное</h1>
-{% endif %}
-{% endif %}
 {% endblock %}
