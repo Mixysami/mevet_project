@@ -87,19 +87,19 @@
       zoomedImage.style.display = 'flex';
       zoomedImage.style.justifyContent = 'center';
       zoomedImage.style.alignItems = 'center';
-      
+
       // создаем элемент изображения для увеличенного изображения
       const zoomedImg = document.createElement('img');
       zoomedImg.src = image.src;
       zoomedImg.style.maxWidth = '90%';
       zoomedImg.style.maxHeight = '90%';
-      
+
       // добавляем изображение в элемент для увеличенного изображения
       zoomedImage.appendChild(zoomedImg);
-      
+
       // добавляем элемент для увеличенного изображения в DOM
       document.body.appendChild(zoomedImage);
-      
+
       // удаляем элемент для увеличенного изображения при клике на него
       zoomedImage.addEventListener('click', (event) => {
         zoomedImage.remove();
