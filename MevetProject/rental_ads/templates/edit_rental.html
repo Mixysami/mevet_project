@@ -14,8 +14,13 @@
     <div class="form-group">
       <label for="{{ form.category.id_for_label }}">Выберите категорию:</label>
       {{ form.category }}
+
+    </div>
+
+      <br>
+      <div class="form-group">
       <label for="{{ form.title.id_for_label }}" style="padding-left: 3%;">Заголовок объявления:</label>
-      &nbsp;&nbsp;
+
       {{ form.title }}
     </div>
     <br>
@@ -29,12 +34,19 @@
       {{ form.address }}
     </div>
     <br>
+
     <div class="form-group">
       <label for="{{ form.price.id_for_label }}">Введите цену:</label>
       <p style="padding-left: 5.5%;"></p>{{ form.price }}
+
+    </div>
+      <br>
+      <div class="form-group">
+
       <label for="{{ form.contact.id_for_label }}" style="padding-left: 3%;">Ваши контакты:</label>
       <p style="padding-left: 2%;"></p>{{ form.contact }}
     </div>
+
     <br>
       <br>
 
