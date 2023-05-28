@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+/* Rental detail */
+
+ .backpho {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden; /* Ensures the image doesn't overflow */
+    }
+
+    .backpho .photoback {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: auto;
+        filter: blur(30px); /* Apply blur effect */
+        background-color: rgba(0, 0, 0, 0.8); /* Apply dark overlay */
+    }
+
+    .backpho::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8); /* Apply dark overlay */
+    }
+.Osn {
+    margin: 2%;
+    display: flex;
+    width: 90%;
+
+
+}
+
+.oneP {
+	padding-top: 1.5%;
+    width: 63%;
+}
+.twoP {
+    position: sticky;
+    top: 16%;
+    width: 37%;
+    max-height: calc(100vh - 300px); /* Добавляем высоту элемента */
+    overflow: auto; /* Добавляем прокрутку, если содержимое выходит за пределы элемента */
+    display: flex;
+    flex-direction: column; /* Устанавливаем вертикальное направление для элементов внутри */
+    align-items: flex-start; /* Выравниваем элементы внутри по левому краю */
+    padding: 20px; /* Добавляем отступы вокруг содержимого */
+    box-sizing: border-box; /* Учитываем отступы внутри размеров элемента */
+
+
+}
+
+.twoPob {
+
+    /*background-color:#F5F5F5;*/
+    background-color:white;
+    border-radius: 15px;
+    padding:3%;
+    width: 100%;
+
+    box-shadow: 0px 10px 15px gray;
+}
+
+.twoP h1{
+	font-size: 40px;
+}
+
+.cpf{
+	font-size: 16px;
+}
+
+
+
+/*main картинка*/
+.main_img_rental_detail {
+    cursor: pointer;
+    border: solid 2px gray;
+	width: 91.1%;
+	transition:width 0.5s ease;
+}
+
+.dinamic {
+	display: flex;
+}
+/*rental картинки*/
+.rental_img_rental_detail {
+    cursor: pointer;
+    border: solid 2px gray;
+    width: 30%;
+	transition:width 0.5s ease;
+}
+
+
+.spc{
+font-size: 20px;
+	font-weight: bolder;
+}
+
+
+
+/*кнопка-добавить в избранное в rental_details*/
+.add-to-favorites-rental {
+    background-color: transparent;
+    color: black;
+    border-radius: 0.6em;
+    border: 1px solid black;
+    padding: 7px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-favorites-rental:hover, .add-to-favorites-rental:focus {
+    color: white;
+    background-color: black;
+}
+
+
+.textarea-detail {
+width: 95%;
+    padding: 13px;
+    font-size: 16px;
+    height: 45px;
+    border: 1px solid black;
+    border-radius: 20px;
+    resize: vertical;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+}
+
+.button-textarea-detail {
+    margin-top: 1%;
+    background-color: transparent;
+    color: black;
+    border-radius: 20px;
+    border: 1px solid black;
+    padding: 7px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-textarea-detail:hover, .button-textarea-detail:focus {
+    color: white;
+    background-color: black;
+}

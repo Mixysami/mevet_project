@@ -7,8 +7,8 @@
 
     {% for message in messages %}
       <div class="message">
-        <p>От: {{ message.sender.username }}</p>
-        <p>{{ message.message }}</p>
+        <p style="color: #5181B8;">{{ message.sender.username }}</p>
+        <p style="font-size:13px;">{{ message.message }}</p>
       </div>
     {% empty %}
       <p>Нет сообщений</p>

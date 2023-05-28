@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
 <br>
   <h2 align="left" style="margin-left: 3%; font-size: 23px;">Добавить объявление</h2>
@@ -15,8 +14,10 @@
       <div class="form-group">
           <label for="{{ form.category.id_for_label }}">Выберете категорию:</label>
           {{ form.category }}
-          <label for="{{ form.title.id_for_label }}" style="padding-left: 3%;">Загаловок объявления:</label>
-          &nbsp;&nbsp;
+      </div>
+      <br>
+      <div class="form-group">
+          <label for="{{ form.title.id_for_label }}" >Загаловок объявления:</label>
           {{ form.title }}
       </div>
 
@@ -36,13 +37,15 @@
 <br>
       <div class="form-group">
           <label for="{{ form.price.id_for_label }}">Введите цену:</label>
-          <p style="padding-left: 5.5%;"></p>{{ form.price }}
-          <label for="{{ form.contact.id_for_label }}" style="padding-left: 3%;">Ваши контакты:</label>
-          <p style="padding-left: 2%;"></p>{{ form.contact }}
+          <p style="padding-left: 2%;"></p>{{ form.price }}
       </div>
 
     <br>
-
+      <div class="form-group">
+          <label for="{{ form.contact.id_for_label }}" >Ваши контакты:</label>
+          <p style="padding-left: 2%;"></p>{{ form.contact }}
+      </div>
+<br>
       <div class="form-group">
           <label for="{{ form.main_image.id_for_label }}">Главное фото:</label>
           <p style="padding-left: 2%;"></p>{{ form.main_image }}

@@ -310,8 +310,21 @@ def other(request):
 def rental_detail(request, category_name, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
     images = rental.images.all()
-    context = {'rental': rental, 'images': images}
+    if request.user.is_authenticated:
+        favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
+    else:
+        favorite_rentals = []
+
+    rental.is_favorite = rental.id in favorite_rentals
+
+    context = {
+        'rental': rental,
+        'images': images,
+        'favorite': Favorite.objects.filter(user=request.user) if request.user.is_authenticated else []
+    }
+
     return render(request, 'rental_detail.html', context)
+
 
 
 def rental_search(request):
