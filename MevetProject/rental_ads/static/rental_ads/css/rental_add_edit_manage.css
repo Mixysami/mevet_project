@@ -1,11 +1,14 @@
 /*Форма для добавления*/
 /* Add some spacing between form elements */
 .form-container {
-margin-left: 1%;
+margin: 0 auto; /* Центрирование по горизонтали */
+  display: flex;
+  justify-content: center; /* Центрирование по горизонтали */
+
 }
 
 .form-style-add-rental {
-width: 60%;
+width: 90%;
 padding: 2%;
 border-radius: 25px;
 height: auto;

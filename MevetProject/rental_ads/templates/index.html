@@ -1,26 +1,106 @@
 {% extends "base.html" %}
-
 {% load static %}
-
 {% block title %}main page{% endblock %}
-
 {% block content %}
 <div class="video-bg">
     <video src="{% static 'rental_ads/mp4/vidbg.mp4' %}" type="video/mp4" autoplay muted loop></video>
     <div class="effects"></div>
     <div class="video-bg__content">
         <h1>MEVET</h1>
-        <p>Открой новые возможности!</p>
+        <p style="font-size: 30px;">Открой новые возможности!</p>
     </div>
 </div>
 
-<br>
 
-<center>
-    <h1 style="font-size: 40px;">MEVET</h1>
-    <p style="font-size: 20px;">Наша компания упрщает жизнь как клиентам, так и арендодателям, продавцам.<br></p>
-    <p style="font-size: 20px;">Клиент может найти подходящее помещение для мероприятий.<br> Либо фотостудию или
-        организацию по оформлению события и многое другое...<br><br>Самое главное, что все собрано в одном месте. </p>
-    <p style="font-size: 20px;"><br>Попробуй MEVET!<br> Это удобно!</p>
-</center>
+<div class="index-body">
+    <br>
+    <br>
+    <br>
+
+    <div class="index-osnov">
+        <div class="index-left">
+            <div class="index-cards-text" style="text-align:left;">
+                <h2 style="font-size: 35px;">Добро пожаловать на Mevet</h2>
+                <p style="font-size: 20px;">Маркетплейс мероприятий, где вы можете найти и создать самые захватывающие и интересные мероприятия.
+        У нас вы найдете мероприятия различных категорий, включая концерты, фестивали, спортивные соревнования, выставки и многое другое.
+            Присоединяйтесь к нашей платформе, чтобы быть в курсе последних событий и обнаруживать новые возможности для развлечений и общения.</p>
+            </div>
+            <br>
+             <br>
+             <br>
+            <div class="index-cards-photo">
+                <img src="{% static 'rental_ads/img/index_2.png' %}" alt="Фотография">
+                {% if user.is_authenticated %}
+                    <a href="/room"><div class="photo-text">Начать искать мероприятия</div></a>
+                {% else %}
+                    <a href="#blackout-login"><div class="photo-text">Начать искать мероприятия</div></a>
+                {% endif %}
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="index-cards-text" style="text-align:left;">
+                <h2 style="font-size: 33px;">Общение с участниками</h2>
+                <p style="font-size: 17px;">На платформе Mevet, маркетплейсе мероприятий, доступен чат, который позволяет вам общаться с теми, кто разместил объявления о мероприятиях. Чат является удобным инструментом для взаимодействия с организаторами или другими участниками, которые заинтересовали вас и вызвали вопросы или потребность в дополнительной информации. Вы можете использовать чат для обсуждения деталей мероприятий, запроса дополнительных билетов, получения информации о расписании или любых других вопросов, связанных с мероприятием.</p>
+            </div>
+        </div>
+        <div class="index-right">
+            <div class="index-cards-photo">
+                <img src="{% static 'rental_ads/img/index_1.jpg' %}" alt="Фотография">
+                {% if user.is_authenticated %}
+                    <a href="/rental_manage"><div class="photo-text">Начать работать</div></a>
+                {% else %}
+                    <a href="#blackout-login"><div class="photo-text">Начать работать</div></a>
+                {% endif %}
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <div class="index-cards-text" style="text-align:left;">
+                <h2 style="font-size: 33px;">Помощь в организации мероприятий</h2>
+                <p style="font-size: 17px;">Mevet предоставляет инструменты для организации и продвижения мероприятий.
+                Вы можете создавать свои собственные события, определять даты, места, продавать билеты и взаимодействовать с участниками.
+                Наша платформа обеспечивает простоту использования и позволяет вам эффективно управлять всеми аспектами вашего мероприятия.
+                Независимо от того, организуете вы большой концерт или небольшую встречу, Mevet поможет вам сделать ваше мероприятие запоминающимся.</p>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="index-cards-photo">
+                <img src="{% static 'rental_ads/img/index_3.jpg' %}" alt="Фотография">
+                {% if user.is_authenticated %}
+                    <a href="/rental_manage"><div class="photo-text">Пробую MEVET</div></a>
+                {% else %}
+                    <a href="#blackout-login"><div class="photo-text">Пробую MEVET</div></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
+
+<script>
+
+    window.addEventListener('DOMContentLoaded', function() {
+        var header = document.getElementById('site-header');
+        header.style.backgroundColor = 'transparent';
+        header.style.backdropFilter = 'blur(3px)';
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                header.style.transition = 'background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out';
+                header.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+                header.style.backdropFilter = 'blur(13px)';
+            } else {
+                header.style.transition = 'background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out';
+                header.style.backgroundColor = 'transparent';
+                header.style.backdropFilter = 'blur(3px)';
+            }
+        });
+    });
+
+</script>
 {% endblock %}

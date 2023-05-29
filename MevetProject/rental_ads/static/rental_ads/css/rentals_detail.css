@@ -48,7 +48,7 @@
     position: sticky;
     top: 16%;
     width: 37%;
-    max-height: calc(100vh - 300px); /* Добавляем высоту элемента */
+    max-height: calc(170vh - 700px); /* Добавляем высоту элемента */
     overflow: auto; /* Добавляем прокрутку, если содержимое выходит за пределы элемента */
     display: flex;
     flex-direction: column; /* Устанавливаем вертикальное направление для элементов внутри */
@@ -83,7 +83,7 @@
 /*main картинка*/
 .main_img_rental_detail {
     cursor: pointer;
-
+    border:solid 1px white;
 	width: 90%;
 	transition:width 0.5s ease;
 	border-radius: 15px;
@@ -95,6 +95,7 @@
 /*rental картинки*/
 .rental_img_rental_detail {
     cursor: pointer;
+    border:solid 1px white;
     margin-top: 0.5%;
     width: 29.6%;
     height: 150px;

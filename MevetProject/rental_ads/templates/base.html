@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<header>
+<header id="site-header">
     <div class="top">
         <form class="search-form" method="get" action="{% url 'rental_search' %}">
             <div class="left">
@@ -32,7 +32,9 @@
              <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
         </form>
         <div class="center">
-            <img src="{% static 'rental_ads/img/logo.png' %}" alt="Логотип">
+            <a href="/">
+            <img src="{% static 'rental_ads/img/logo.png' %}" alt="Логотип" >
+                </a>
         </div>
         <div class="right">
 
@@ -50,8 +52,8 @@
     </div>
     <div class="bottom">
         {% with request.path|lower|slice:":-1" as current_path %}
-            <a href="/" class="fa-regular fas far far fa-compass" style="background: {% if '' == current_path %}  white;
-      color: black;{% endif %}"><font class="bottom-text"> Главная страница</font></a>
+<!--            <a href="/" class="fa-regular fas far far fa-compass" style="background: {% if '' == current_path %}  white;-->
+<!--      color: black;{% endif %}"><font class="bottom-text"></font></a>-->
             <a href="/conferences" class="fas fa-mug-hot" style="background: {% if '/conferences' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Конференции</font></a>
             <a href="/wedding" class="fa-regular fas fa-gift" style="background: {% if '/wedding' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Свадьбы</font></a>
             <a href="/birthday" class="fa-regular fas fa-glass-cheers" style="background: {% if '/birthday' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Дни рождения</font></a>
@@ -62,6 +64,7 @@
         {% endwith %}
     </div>
 </header>
+<button onclick="scrollToTop()" id="scrollToTopBtn">↑</button>
 <br>
 <br>
 <br>
@@ -70,20 +73,24 @@
 
 {% block content %} {% endblock content %}
 
-</br>
+
 <div id="blackout-login">
     <div id="window-login">
         <h2>Авторизуйтесь</h2>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li style="font-size: 10px;">{% if message.tags %} {% endif %}{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
         <form id="login-form" method="post" action="/login/">
             {% csrf_token %}
-                <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Имя пользователя"
-                   required>
-                <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Пароль"
-                   required>
+                <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Имя пользователя" required>
+                <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Пароль" required>
                 <input type="submit" value="Войти" id="login-form-submit" class="close">
                 <a href="#blackout-register" class="register-button">Регистрация</a>
         </form>
-        {{ form.errors}}
     <a href="#" class="close fas fa-close"><font style="font-family: 'Century Gothic', sans-serif; font-weight: 400;"> Закрыть окно</font></a>
     </div>
 </div>
@@ -122,5 +129,23 @@
 </footer>
 </center>
 <script src="https://kit.fontawesome.com/7dd3d9efdc.js" crossorigin="anonymous"></script>
+<script>
+window.onscroll = function() {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    document.getElementById("scrollToTopBtn").style.display = "block";
+  } else {
+    document.getElementById("scrollToTopBtn").style.display = "none";
+  }
+}
+
+function scrollToTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
 </body>
 </html>
