@@ -33,7 +33,7 @@
     border-radius: 25px;
     color: white;
     font-weight: bold;
-    background-color: #3a3a3a;
+    background-color: black;
     cursor: pointer;
     outline: none;
     border: solid 1px white;
@@ -56,7 +56,7 @@
     border-radius: 25px;
     color: white;
 
-    background-color: #3a3a3a;
+    background-color: black;
     cursor: pointer;
     outline: none;
     border: solid 1px white;
@@ -89,7 +89,7 @@
 .edit-rental-button:hover{
     border-radius: 10px;
 	border: solid 1px black;
-    background-color: #3a3a3a;
+    background-color: black;
     color:  white;
 }
 

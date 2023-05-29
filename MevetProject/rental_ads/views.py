@@ -10,6 +10,7 @@ from .models import Favorite
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from .models import Message
+from django.contrib import messages as django_messages
 
 
 def index(request):
@@ -25,7 +26,8 @@ def login_view(request):
             login(request, user)
             return redirect('rental_manage')
         else:
-            return HttpResponse('Invalid credentials')
+            django_messages.error(request, 'Неправильно введены логин или пароль.')
+            return redirect('home')
     else:
         return render(request, 'login.html')
 
