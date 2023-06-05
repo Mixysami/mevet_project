@@ -1,66 +1,72 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<br>
-  <h2 align="left" style="margin-left: 8%; font-size: 23px;">Добавить объявление</h2>
-<br>
-    <p style="margin-left: 8%; font-size: 16px;">В данном разделе вы непосредственно заполняете форму и выкладываете объявление на платформу.<br>Пожалуйста заносите точные данные в том числе "Адресс, Контакты, Цена".<br> При занесении точных данных клиент без проблем сможет с вами связаться!</p>
-<br>
-<br>
-<div class="form-container">
-  <form method="POST" enctype="multipart/form-data" class="form-style-add-rental">
-    {% csrf_token %}
 
-      <div class="form-group">
-          <label for="{{ form.category.id_for_label }}">Выберете категорию:</label>
-          {{ form.category }}
-      </div>
-      <br>
-      <div class="form-group">
-          <label for="{{ form.title.id_for_label }}" >Загаловок объявления:</label>
-          {{ form.title }}
-      </div>
 
-    <br>
+<form method="POST" enctype="multipart/form-data" class="form-style-add-rental">
 
-      <div class="form-group">
-          <label for="{{ form.description.id_for_label }}">Введите описание:</label>
-          {{ form.description }}
-      </div>
+    <div class="add_manage_left">
 
-    <br>
-      <div class="form-group">
-          <label for="{{ form.address.id_for_label }}">Введите адресс:</label>
-          {{ form.address }}
-      </div>
 
-<br>
-      <div class="form-group">
-          <label for="{{ form.price.id_for_label }}">Введите цену:</label>
-          <p style="padding-left: 2%;"></p>{{ form.price }}
-      </div>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.category.id_for_label }}">Выберете категорию:</label>
+                    {{ form.category }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.title.id_for_label }}" >Загаловок объявления:</label>
+                    {{ form.title }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.description.id_for_label }}">Введите описание:</label>
+                    {{ form.description }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.address.id_for_label }}">Введите адресс:</label>
+                    {{ form.address }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.price.id_for_label }}">Введите цену:</label>
+                    <p style="padding-left: 2%;"></p>{{ form.price }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.contact.id_for_label }}" >Ваши контакты:</label>
+                    <p style="padding-left: 2%;"></p>{{ form.contact }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.main_image.id_for_label }}">Главное фото:</label>
+                    <p style="padding-left: 2%;"></p>{{ form.main_image }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.images.id_for_label }}" style="margin-right: 1.5%;">Доп. фото:</label>
+                    <p style="padding-left: 2%;"></p>{{ form.images }}
+                </div>
+                <br>
 
-    <br>
-      <div class="form-group">
-          <label for="{{ form.contact.id_for_label }}" >Ваши контакты:</label>
-          <p style="padding-left: 2%;"></p>{{ form.contact }}
-      </div>
-<br>
-      <div class="form-group">
-          <label for="{{ form.main_image.id_for_label }}">Главное фото:</label>
-          <p style="padding-left: 2%;"></p>{{ form.main_image }}
-      </div>
-    <br>
-      <div class="form-group">
-    <label for="{{ form.images.id_for_label }}" style="margin-right: 1.5%;">Доп. фото:</label>
-    <p style="padding-left: 2%;"></p>{{ form.images }}
-</div>
-      <br>
-    <center>
-    <button type="submit" class="button-submit-form-add">Сохранить</button>
-    </center>
 
-  </form>
-</div>
+
+    </div>
+
+    <div class="add_manage_right">
+        <div class="add_manage_right_pob">
+            <h2 align="left" style="margin-left: 8%; font-size: 23px;">Добавить объявление</h2>
+            <br>
+            <p style="margin-left: 8%; font-size: 16px;">В данном разделе вы непосредственно заполняете форму и выкладываете объявление на платформу.<br>Пожалуйста заносите точные данные в том числе "Адресс, Контакты, Цена".<br> При занесении точных данных клиент без проблем сможет с вами связаться!</p>
+        </div>
+        <br>
+
+
+                <button type="submit" class="button-submit-form-add">Сохранить</button>
+
+
+    </div>
+</form>
 <br>
 {% endblock %}

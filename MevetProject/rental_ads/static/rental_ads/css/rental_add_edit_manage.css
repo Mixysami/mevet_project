@@ -1,27 +1,66 @@
 /*Форма для добавления*/
 /* Add some spacing between form elements */
-.form-container {
-margin: 0 auto; /* Центрирование по горизонтали */
-  display: flex;
-  justify-content: center; /* Центрирование по горизонтали */
+
+.add_manage_container{
+    width:100%;
+    margin: 0 auto; /* Центрирование по горизонтали */
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+}
+
+.add_manage_left {
+width: 70%;
 
 }
 
+.add_manage_right {
+width: 30%;
+position: sticky;
+    top: 16%;
+    padding-left: 2%;
+
+    max-height: calc(170vh - 900px); /* Добавляем высоту элемента */
+    overflow: auto; /* Добавляем прокрутку, если содержимое выходит за пределы элемента */
+    display: flex;
+    flex-direction: column; /* Устанавливаем вертикальное направление для элементов внутри */
+    align-items: flex-start; /* Выравниваем элементы внутри по левому краю */
+
+    box-sizing: border-box; /* Учитываем отступы внутри размеров элемента */
+
+}
+
+.add_manage_right_pob{
+
+    border-radius: 15px;
+    padding:3%;
+    width: 95%;
+    box-shadow:40px 40px 30px rgba(0,0,0,0.06);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(13px);
+    color:white;
+}
+
+
+
 .form-style-add-rental {
-width: 90%;
-padding: 2%;
-border-radius: 25px;
-height: auto;
+
+padding-left: 1%;
+
 /*box-shadow:40px 40px 30px rgba(0,0,0,0.06);
 background-color: rgba(0, 0, 0, 0.6);
 backdrop-filter: blur(13px);*/
+
+width:100%;
+    margin: 0 auto; /* Центрирование по горизонтали */
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
 }
 
 .form-group{
 display: flex;
 width: 100%;
 padding: 2%;
-border-radius: 25px;
+border-radius: 15px;
 box-shadow:40px 40px 30px rgba(0,0,0,0.06);
 background-color: rgba(0, 0, 0, 0.6);
 backdrop-filter: blur(13px);
@@ -99,11 +138,11 @@ color: white;
 
 /* Style submit button */
 .button-submit-form-add {
-  width: 50%;
+  width: 95%;
   height: 47px;
     padding: 8px;
     border: none;
-    border-radius: 25px;
+    border-radius: 15px;
     color: white;
     font-weight: bold;
     font-size: 16px;

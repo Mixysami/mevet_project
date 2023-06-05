@@ -2,90 +2,89 @@
 {% load static %}
 
 {% block content %}
-<br>
-<h2 align="left" style="margin-left: 8%; font-size: 23px;">Редактировать объявление</h2>
-<br>
-<p style="margin-left: 8%; font-size: 16px;">В данном разделе вы непосредственно заполняете форму и выкладываете объявление на платформу.<br>Пожалуйста заносите точные данные в том числе "Адрес, Контакты, Цена".<br> При занесении точных данных клиент без проблем сможет с вами связаться!</p>
-<br>
-<br>
-<div class="form-container">
-  <form method="POST" enctype="multipart/form-data" class="form-style-add-rental">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="{{ form.category.id_for_label }}">Выберите категорию:</label>
-      {{ form.category }}
+<form method="POST" enctype="multipart/form-data" class="form-style-add-rental">
+    <div class="add_manage_left">
+
+
+
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.category.id_for_label }}">Выберите категорию:</label>
+                    {{ form.category }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.title.id_for_label }}" style="padding-left: 3%;">Заголовок объявления:</label>
+                    {{ form.title }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.description.id_for_label }}">Введите описание:</label>
+                    {{ form.description }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.address.id_for_label }}">Введите адрес:</label>
+                    {{ form.address }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.price.id_for_label }}">Введите цену:</label>
+                    <p style="padding-left: 5.5%;"></p>{{ form.price }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="{{ form.contact.id_for_label }}" style="padding-left: 3%;">Ваши контакты:</label>
+                    <p style="padding-left: 2%;"></p>{{ form.contact }}
+                </div>
+                <br>
+                <br>
+                <div class="form-group-edit-rental">
+                    <label>Изменить главное фото:</label>
+                    <br>
+                    <br>
+                    <p style="padding-left: 2%;"></p>{{ form.main_image }}
+                    <br>
+                    <br>
+                    {% if form.instance.main_image %}
+                    <div>
+                        <img src="{{ form.instance.main_image.url }}" alt="" style="width: 200px; height: auto;">
+                    </div>
+                    {% endif %}
+                </div>
+                <br>
+                <br>
+                <div class="form-group-edit-rental">
+                    <label for="{{ form.images.id_for_label }}" style="margin-right: 1.5%;">Изменить либо удалить доп. фото:</label>
+                    <br>
+                    <br>
+                    <p style="padding-left: 2%;"></p>{{ form.images }}
+                    <br>
+                    <br>
+                    {% for image in form.instance.images.all %}
+                    <div>
+                        <img src="{{ image.image.url }}" alt="Rental Image" style="width: 200px; height: auto;">
+                        <a href="{% url 'delete_rental_image' rental_id=form.instance.id image_id=image.id %}">Удалить</a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <br>
+
+
 
     </div>
 
-      <br>
-      <div class="form-group">
-      <label for="{{ form.title.id_for_label }}" style="padding-left: 3%;">Заголовок объявления:</label>
-
-      {{ form.title }}
-    </div>
-    <br>
-    <div class="form-group">
-      <label for="{{ form.description.id_for_label }}">Введите описание:</label>
-      {{ form.description }}
-    </div>
-    <br>
-    <div class="form-group">
-      <label for="{{ form.address.id_for_label }}">Введите адрес:</label>
-      {{ form.address }}
-    </div>
-    <br>
-
-    <div class="form-group">
-      <label for="{{ form.price.id_for_label }}">Введите цену:</label>
-      <p style="padding-left: 5.5%;"></p>{{ form.price }}
-
-    </div>
-      <br>
-      <div class="form-group">
-
-      <label for="{{ form.contact.id_for_label }}" style="padding-left: 3%;">Ваши контакты:</label>
-      <p style="padding-left: 2%;"></p>{{ form.contact }}
-    </div>
-
-    <br>
-      <br>
-
-
-    <div class="form-group-edit-rental">
-    <label>Изменить главное фото:</label>
-        <br>
-        <br>
-    <p style="padding-left: 2%;"></p>{{ form.main_image }}
-        <br>
-        <br>
-    {% if form.instance.main_image %}
-    <div>
-        <img src="{{ form.instance.main_image.url }}" alt="" style="width: 200px; height: auto;">
-    </div>
-{% endif %}
-</div>
-    <br>
-      <br>
-
-    <div class="form-group-edit-rental">
-    <label for="{{ form.images.id_for_label }}" style="margin-right: 1.5%;">Изменить либо удалить доп. фото:</label>
-        <br>
-        <br>
-    <p style="padding-left: 2%;"></p>{{ form.images }}
-        <br>
-        <br>
-    {% for image in form.instance.images.all %}
-        <div>
-            <img src="{{ image.image.url }}" alt="Rental Image" style="width: 200px; height: auto;">
-            <a href="{% url 'delete_rental_image' rental_id=form.instance.id image_id=image.id %}">Удалить</a>
+    <div class="add_manage_right">
+        <div class="add_manage_right_pob">
+            <h2 align="left" style="margin-left: 8%; font-size: 23px;">Редактировать объявление</h2>
+            <br>
+            <p style="margin-left: 8%; font-size: 16px;">В данном разделе вы непосредственно заполняете форму и выкладываете объявление на платформу.<br>Пожалуйста заносите точные данные в том числе "Адрес, Контакты, Цена".<br> При занесении точных данных клиент без проблем сможет с вами связаться!</p>
         </div>
-    {% endfor %}
-</div>
-    <br>
-    <center>
-      <button type="submit" class="button-submit-form-add">Сохранить</button>
-    </center>
-  </form>
-</div>
+        <br>
+
+            <button type="submit" class="button-submit-form-add">Сохранить</button>
+
+    </div>
+</form>
 <br>
 {% endblock %}
