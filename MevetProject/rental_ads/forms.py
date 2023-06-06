@@ -1,5 +1,5 @@
 from django import forms
-from .models import Rental, Category, RentalImage
+from .models import Rental, Category, RentalImage, Review
 
 from multiupload.fields import MultiFileField
 
@@ -29,3 +29,8 @@ class RentalForm(forms.ModelForm):
                     if image.image not in images:
                         image.delete()
             return images
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['content']

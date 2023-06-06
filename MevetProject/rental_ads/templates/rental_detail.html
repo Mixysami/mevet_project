@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+
+
+
 {% block content %}
 <div class="backpho">
     <img src="{{ rental.main_image.url }}" class="photoback">
@@ -15,28 +18,51 @@
             {% endfor %}
         </div>
         <br>
-        <div class="twoPob" style="width: 90%;">
-            {% if user.is_authenticated %}
-                <p class="spc" style="margin-bottom: 2%;">Отправить сообщение продавцу:</p>
-                <form method="post" action="{% url 'send_message' rental_id=rental.id %}">
-                    {% csrf_token %}
-                    <textarea class="textarea-detail" name="message" placeholder=""></textarea>
-                    <button type="submit" class="button-textarea-detail">Отправить</button>
-                </form>
-            {% else %}
-                <p class="spc">Войдите в аккаунт, чтобы отправлять сообщения</p>
-            {% endif %}
-        </div>
+
+
         <br>
-        <div class="twoPob" style="width: 90%;">
+        <div class="twoPob stpob">
             <p class="spc">Описание:</p>
             <p>{{ rental.description }}</p>
         </div>
+        <br>
+        <!-- Добавьте следующий код для отображения списка отзывов -->
+        <div class="twoPob stpob">
+             {% if user.is_authenticated %}
+            <p class="spc">Оставить отзыв:</p>
+            <form method="post" action="{% url 'add_review' rental_id=rental.id %}">
+                {% csrf_token %}
+
+                <textarea class="textarea-detail" name="content" placeholder=""></textarea>
+                <button type="submit" class="button-textarea-detail">Отправить отзыв</button>
+            </form>
+            {% else %}
+                <p class="spc">Войдите в аккаунт, чтобы оставлять отзывы</p>
+            {% endif %}
+
+            <br>
+            <p class="spc">Отзывы:</p>
+            <br>
+            {% for review in reviews reversed %}
+            <div class="rewiews-container">
+                <p class="rewiews-date">{{ review.created_at }}</p>
+                <p class="rewiews-person">{{ review.user.username }}:</p>
+
+                <p class="rewiews-message">{{ review.content }}</p>
+            </div>
+
+
+            <br>
+            {% empty %}
+                <p>Нет отзывов</p>
+            {% endfor %}
+        </div>
+
     </div>
 
     <div class="twoP">
         <div class="twoPob">
-            <h1>{{ rental.title }}</h1>
+            <h1 style="font-size: 23px;">{{ rental.title }}</h1>
             <p class="spc">Цена:</p>
             <p class="cpf">{{ rental.price }} ₽</p>
             {% if request.user.is_authenticated %}
@@ -66,9 +92,32 @@
             <p class="spc">Местоположение:</p>
             <p class="cpf" style="padding-bottom: 2%;">{{ rental.address }}</p>
         </div>
+
+        <br>
+
+        <div class="twoPob" style="width: 100%;">
+            {% if user.is_authenticated %}
+                <p class="spc" style="margin-bottom: 2%;">Отправить сообщение продавцу:</p>
+                <form method="post" action="{% url 'send_message' rental_id=rental.id %}">
+                    {% csrf_token %}
+                    <textarea class="textarea-detail" name="message" placeholder=""></textarea>
+                    <button type="submit" class="button-textarea-detail">Отправить</button>
+                </form>
+            {% else %}
+                <p class="spc">Войдите в аккаунт, чтобы отправлять сообщения</p>
+            {% endif %}
+        </div>
     </div>
 </div>
 </div>
+
+<script>
+$(document).ready(function() {
+  if ($(window).width() <= 767) {
+    $(".Osn").prepend($(".oneP"));
+  }
+});
+</script>
 <script>
   // выбираем все изображения на странице
   const images = document.querySelectorAll('img');

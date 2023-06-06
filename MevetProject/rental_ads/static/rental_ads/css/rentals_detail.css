@@ -41,7 +41,7 @@
 }
 
 .oneP {
-	padding-top: 1.5%;
+	margin-top: 110px;
     width: 63%;
 }
 .twoP {
@@ -68,6 +68,10 @@
     width: 100%;
 
 
+}
+
+.stpob{
+ width: 90%;
 }
 
 .twoP h1{
@@ -134,10 +138,10 @@ width: 95%;
     padding: 13px;
     font-size: 16px;
     height: 45px;
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 20px;
     resize: vertical;
-    box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+    box-shadow:4px 4px 10px rgba(0,0,0,0.3);
 }
 
 .button-textarea-detail {
@@ -145,7 +149,8 @@ width: 95%;
     background-color: transparent;
     color: black;
     border-radius: 20px;
-    border: 1px solid black;
+    border: 1px solid white;
+   box-shadow:4px 4px 10px rgba(0,0,0,0.3);
     padding: 7px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -154,4 +159,101 @@ width: 95%;
 .button-textarea-detail:hover, .button-textarea-detail:focus {
     color: white;
     background-color: black;
+}
+
+
+.rewiews-person{
+    color: black;
+    font-weight: bolder;
+    font-size:16px;
+}
+
+
+.rewiews-message{
+    font-size:14px;
+}
+
+.rewiews-date{
+    font-size:9px;
+}
+
+.rewiews-container{
+    width: 100%;
+    padding: 5px;
+    padding-left: 2%;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.3);
+    border-radius:17px;
+
+
+}
+
+
+/* Медиа-запрос для смартфонов */
+@media only screen and (max-width: 767px) {
+    .Osn {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    .oneP {
+        width: 100%;
+        margin-top: 2%;
+        padding: 5px;
+
+    }
+
+    .twoP {
+        margin-top: 70px;
+        width: 100%;
+        position: relative;
+        top: 0;
+        padding: 5px;
+
+    }
+
+    .twoPob {
+
+    /*background-color:#F5F5F5;*/
+    background-color:white;
+    border-radius: 15px;
+
+    width: 100%;
+
+
+
+}
+
+/*main картинка*/
+.main_img_rental_detail {
+    cursor: pointer;
+    border:solid 1px white;
+	width: 100%;
+
+	transition:width 0.5s ease;
+	border-radius: 15px;
+}
+
+.dinamic {
+	display: flex;
+	width: 100%;
+}
+/*rental картинки*/
+.rental_img_rental_detail {
+    cursor: pointer;
+    border:solid 1px white;
+    margin-top: 0.5%;
+    width: 32%;
+    height: 150px;
+    object-fit: cover;
+	transition:width 0.5s ease;
+	border-radius: 15px;
+}
+
+.cpf{
+	font-size: 13px;
+}
+.spc{
+    font-size: 16px;
+}
+
 }

@@ -4,6 +4,7 @@
 <head>
     <title>{% block title %}Default Title{% endblock %}</title>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'rental_ads/css/style_menu.css' %}">
     <link rel="stylesheet" href="{% static 'rental_ads/css/style_footer.css' %}">
     <link rel="stylesheet" href="{% static 'rental_ads/css/style_osnov.css' %}">
@@ -26,18 +27,23 @@
 <body>
 <header id="site-header">
     <div class="top">
+        <button class="menu-button"><i class="fas fa-bars"></i></button>
         <form class="search-form" method="get" action="{% url 'rental_search' %}">
             <div class="left">
                 <input type="search" class="search-input" placeholder="Поиск" name="query">
+                <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
             </div>
-             <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
+
+
         </form>
+
         <div class="center">
             <a href="/">
-            <img src="{% static 'rental_ads/img/logo.png' %}" alt="Логотип" >
+                <img src="{% static 'rental_ads/img/logo.png' %}" alt="Логотип" >
                 </a>
         </div>
         <div class="right">
+
 
             {% if user.is_authenticated %}
                 <a href="{% url 'messages' %}" class="far fa-envelope"></a>
@@ -50,8 +56,17 @@
             {% endif %}
 
         </div>
+
+
+
     </div>
     <div class="bottom">
+        <form class="search-form2" method="get" action="{% url 'rental_search' %}">
+                <input type="search" class="search-input2" placeholder="Поиск" name="query">
+                <button type="submit" class="search-button2"><i class="fa-solid fa-search"></i></button>
+
+            </form>
+        <br>
         {% with request.path|lower|slice:":-1" as current_path %}
 <!--            <a href="/" class="fa-regular fas far far fa-compass" style="background: {% if '' == current_path %}  white;-->
 <!--      color: black;{% endif %}"><font class="bottom-text"></font></a>-->
@@ -64,13 +79,10 @@
             <a href="/other" class="far fa-grin-beam-sweat" style="background: {% if '/other' == current_path %} white; color: black; {% endif %}"><font class="bottom-text"> Другие</font></a>
         {% endwith %}
     </div>
+
 </header>
 <button onclick="scrollToTop()" id="scrollToTopBtn">↑</button>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 
 {% block content %} {% endblock content %}
 
@@ -113,11 +125,10 @@
     </div>
 </div>
 
-<center>
-<footer class="footer">
+<footer class="footer" style="text-align: center;">
     <div class="container">
         <div class="footer-col">
-            <h4>Подпишитесь на нас</h4>
+            <h4 style="margin-bottom: 15px; font-size: 16px;">Подпишитесь на нас</h4>
             <div class="social-links">
                 <a href="https://vk.com/mixysami"><i class="fa-brands fa-vk"></i></a>
                 <a href="https://t.me/mixxxs"><i class="fa-brands fa-telegram"></i></a>
@@ -125,11 +136,18 @@
                 <a href="https://www.google.com/intl/ru/gmail/about/"><i class="fa-solid fa-envelope"></i></a>
             </div>
         </div>
-        <p style="color: white;">©2023 MEVET | All Rights Reserved</p>
+        <p style="color: white; margin-top: 15px;">©2023 MEVET | All Rights Reserved</p>
     </div>
 </footer>
-</center>
+
+
 <script src="https://kit.fontawesome.com/7dd3d9efdc.js" crossorigin="anonymous"></script>
+<script>
+   document.querySelector('.menu-button').addEventListener('click', function () {
+    document.querySelector('header').classList.toggle('menu-open');
+    document.querySelector('.bottom').classList.toggle('menu-open');
+});
+</script>
 <script>
 window.onscroll = function() {
   scrollFunction();

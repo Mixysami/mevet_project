@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<h1 class="centered-h11">Объявления с перепиской</h1>
+<h1 class="centered-h11 otss">Объявления с перепиской</h1>
 {% if rental_list %}
 <div class="rentals-container">
     {% for rental in rental_list %}
@@ -17,9 +17,9 @@
     {% endfor %}
 </div>
 {% else %}
-<p>Нет объявлений с перепиской.</p>
+<p style="margin-bottom: 90%;">Нет объявлений с перепиской.</p>
 <br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 
 
 {% endif %}
