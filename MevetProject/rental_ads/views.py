@@ -11,6 +11,7 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from .models import Message
 from django.contrib import messages as django_messages
+from .forms import ReviewForm
 
 
 def index(request):
@@ -312,20 +313,41 @@ def other(request):
 def rental_detail(request, category_name, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
     images = rental.images.all()
+    reviews = rental.review_set.all()  # Получаем все отзывы для данного объявления
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.rental = rental
+            review.save()
+            return redirect('rental_detail', category_name=category_name, rental_id=rental_id)
+    else:
+        form = ReviewForm()
     if request.user.is_authenticated:
         favorite_rentals = Favorite.objects.filter(user=request.user).values_list('rental_id', flat=True)
     else:
         favorite_rentals = []
-
     rental.is_favorite = rental.id in favorite_rentals
-
     context = {
         'rental': rental,
         'images': images,
-        'favorite': Favorite.objects.filter(user=request.user) if request.user.is_authenticated else []
+        'reviews': reviews,  # Передаем список отзывов в контекст представления
+        'favorite': Favorite.objects.filter(user=request.user) if request.user.is_authenticated else [],
+        'form': form,  # Передаем форму для отзывов в контекст представления
     }
-
     return render(request, 'rental_detail.html', context)
+
+def add_review(request, rental_id):
+    rental = get_object_or_404(Rental, id=rental_id)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.rental = rental
+            review.save()
+    return redirect('rental_detail', category_name=rental.category.slug, rental_id=rental_id)
 
 
 

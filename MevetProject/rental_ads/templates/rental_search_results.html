@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 class="centered-h11">Результаты поиска</h1>
+<h1 class="centered-h11 otss">Результаты поиска</h1>
 <div class="rentals-container">
     {% for rental in rental_list %}
     <div class="rental-item">
@@ -29,7 +29,7 @@
     {% empty %}
     <center>
 
-    <p style="margin-top: 22%; margin-bottom: 26%;">Не найдено объявлений!<br> Вы можете найти интересующие вас объявления в категориях на платформе</p>
+    <p style="margin-top: 22%; margin-bottom: 100%;">Не найдено объявлений!<br> Вы можете найти интересующие вас объявления в категориях на платформе</p>
     </center>
 
 

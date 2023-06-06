@@ -9,6 +9,7 @@
 }
 
 .add_manage_left {
+margin-top: 125px;
 width: 70%;
 
 }
@@ -197,4 +198,51 @@ color: white;
 
 }
 
+/* Медиа-запрос для смартфонов */
+@media only screen and (max-width: 767px) {
+  .form-style-add-rental {
+       flex-direction: column-reverse;
+        width: 100%;
+}
 
+.add_manage_left {
+ width: 100%;
+        margin-top: 2%;
+        padding: 5px;
+
+}
+
+.add_manage_right {
+margin-top: 70px;
+        width: 100%;
+        position: relative;
+        top: 0;
+        padding: 5px;
+}
+
+.add_manage_right_pob{
+
+    border-radius: 15px;
+    padding:3%;
+    width: 100%;
+    box-shadow:40px 40px 30px rgba(0,0,0,0.06);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(13px);
+    color:white;
+}
+.button-submit-form-add {
+  width: 100%;
+  height: 47px;
+    padding: 8px;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    border: solid 1px white;
+}
+}

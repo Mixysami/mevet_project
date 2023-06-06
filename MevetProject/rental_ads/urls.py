@@ -16,12 +16,15 @@ urlpatterns = [
     path('other/', views.other, name='other'),
 
     path('<str:category_name>/<int:rental_id>/', views.rental_detail, name='rental_detail'),
+    path('add_review/<int:rental_id>/', views.add_review, name='add_review'),
+
     path('search/', views.rental_search, name='rental_search'),
     path('add_rental/', views.add_rental, name='add_rental'),
     path('rental_manage/', views.rental_manage, name='rental_manage'),
     path('rental/<int:rental_id>/delete/', views.delete_rental, name='delete_rental'),
     path('rental/<int:rental_id>/edit/', views.edit_rental, name='edit_rental'),
     path('rental/<int:rental_id>/delete_image/<int:image_id>/', views.delete_rental_image, name='delete_rental_image'),
+
 
     path('favorites/', views.favorite_rentals, name='favorite_rentals'),
     path('favorites/add/<int:rental_id>/', views.add_favorite, name='add_favorite'),

@@ -1,5 +1,9 @@
 /*Rental_manage*/
 
+.otss {
+    margin-top: 120px;
+}
+
 .button-change {
     margin-left: 3%;
     margin-right: 3%;
@@ -10,6 +14,8 @@
 
 .ride2 {
     margin-left: 2%;
+    display: flex;
+    align-items: flex-start;
 }
 
 .ride2 p {
@@ -114,7 +120,32 @@
     color:  white;
 }
 
+.centered-h11 {
+ flex-grow: 1;
 
+   text-align: center;
+}
+
+
+
+
+@media only screen and (max-width: 767px) {
+
+    .ride2 {
+        display:none;
+    }
+
+    .otss {
+    margin-top: 80px;
+}
+
+.centered-h11 {
+ flex-grow: 1;
+    font-size: 20px;
+   text-align: center;
+}
+
+}
 
 
 
