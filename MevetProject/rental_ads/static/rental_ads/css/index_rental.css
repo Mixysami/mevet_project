@@ -182,7 +182,7 @@ background: black;
 }
 
 .index-osnov {
-    display: flex;
+    flex-direction: column;
     width: 100%;
     margin: 0 auto;
     justify-content: center; /* Добавлено для горизонтального центрирования */
@@ -190,11 +190,11 @@ background: black;
 }
 
 .index-left {
-    width: 50%;
+    width: 100%;
 }
 
 .index-right {
-    width: 50%;
+    width: 100%;
 }
 
 .index-cards-text {
@@ -203,17 +203,17 @@ margin: 0 auto;
     padding: 8px;
     color: white;
     line-height: 1.7;
-    width: 100%;
+    width: 90%;
 
 }
 
 .index-cards-text h2{
-    font-size: 20px;
+    font-size: 23px;
 
 }
 
 .index-cards-text p{
-font-size: 12px;
+font-size: 17px;
 
 
 }
@@ -221,8 +221,8 @@ font-size: 12px;
 .index-cards-photo {
 margin: 0 auto;
         position: relative;
-        width: 160px; /* Размеры фотографии можно настроить по вашему усмотрению */
-        height: 250px;
+        width: 90%; /* Размеры фотографии можно настроить по вашему усмотрению */
+        height: 350px;
         overflow: hidden;
         border-radius: 18px;
     }

@@ -48,7 +48,7 @@
     position: sticky;
     top: 16%;
     width: 37%;
-    max-height: calc(170vh - 700px); /* Добавляем высоту элемента */
+    max-height: calc(200vh - 700px); /* Добавляем высоту элемента */
     overflow: auto; /* Добавляем прокрутку, если содержимое выходит за пределы элемента */
     display: flex;
     flex-direction: column; /* Устанавливаем вертикальное направление для элементов внутри */
@@ -193,6 +193,8 @@ width: 95%;
     .Osn {
         flex-direction: column-reverse;
         width: 100%;
+        padding-left: 2%;
+        padding-right: 2.5%;
     }
 
     .oneP {
@@ -208,6 +210,7 @@ width: 95%;
         position: relative;
         top: 0;
         padding: 5px;
+        padding-right: 5px;
 
     }
 
