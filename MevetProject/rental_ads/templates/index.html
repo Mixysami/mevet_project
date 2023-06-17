@@ -3,12 +3,13 @@
 {% block title %}main page{% endblock %}
 {% block content %}
 <div class="video-bg">
-    <video src="{% static 'rental_ads/mp4/vidbg.mp4' %}" type="video/mp4" autoplay muted loop></video>
+    <video id="my-video" src="{% static 'rental_ads/mp4/vidbg.mp4' %}" type="video/mp4" autoplay muted loop></video>
     <div class="effects"></div>
     <div class="video-bg__content">
         <h1>MEVET</h1>
         <p style="font-size: 30px;">Открой новые возможности!</p>
     </div>
+
 </div>
 
 
@@ -103,4 +104,6 @@
     });
 
 </script>
+
+
 {% endblock %}

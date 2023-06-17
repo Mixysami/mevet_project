@@ -193,24 +193,29 @@ width: 95%;
     .Osn {
         flex-direction: column-reverse;
         width: 100%;
-        padding-left: 2%;
-        padding-right: 2.5%;
+
     }
 
     .oneP {
-        width: 100%;
+        width: 95%;
         margin-top: 2%;
-        padding: 5px;
+        padding-left: 2%;
+        padding-right:1%;
 
+    }
+    .textarea-detail {
+        border: 1px gray solid;
     }
 
     .twoP {
         margin-top: 70px;
-        width: 100%;
+        width: 95%;
         position: relative;
         top: 0;
-        padding: 5px;
-        padding-right: 5px;
+        padding-left: 2%;
+        padding-right:1%;
+
+
 
     }
 

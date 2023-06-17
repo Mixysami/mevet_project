@@ -99,9 +99,9 @@
         {% endif %}
         <form id="login-form" method="post" action="/login/">
             {% csrf_token %}
-                <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Имя пользователя" required>
-                <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Пароль" required>
-                <input type="submit" value="Войти" id="login-form-submit" class="close">
+                <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Имя пользователя" pattern="[A-Za-z0-9]{5,}" title="Минимум 6 символов на английском языке" required>
+                <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Пароль" pattern="[A-Za-z0-9]{5,}" title="Минимум 6 символов на английском языке" required>
+                <input type="submit" value="Войти" id="login-form-submit"  class="close">
                 <a href="#blackout-register" class="register-button">Регистрация</a>
         </form>
     <a href="#" class="close fas fa-close"><font style="font-family: 'Century Gothic', sans-serif; font-weight: 400;"> Закрыть окно</font></a>
@@ -114,9 +114,9 @@
 		<form id="login-form" method="post" action="/register/">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Введите имя" required>
-            <input type="password" name="password1" id="password-field" class="login-form-field" placeholder="Введите пароль" required>
-            <input type="password" name="password2" id="password-field" class="login-form-field" placeholder="Повторите пароль" required>
+            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Введите имя" pattern="[A-Za-z0-9]{5,}" title="Минимум 6 символов на английском языке" required>
+            <input type="password" name="password1" id="password-field" class="login-form-field" placeholder="Введите пароль" pattern="[A-Za-z0-9]{5,}" title="Минимум 5 символов на английском языке" required>
+            <input type="password" name="password2" id="password-field" class="login-form-field" placeholder="Повторите пароль" pattern="[A-Za-z0-9]{5,}" title="Минимум 5 символов на английском языке" required>
             <input type="submit" value="Регистрация" class="close" id="login-form-submit"></input>
             <a href="#blackout-login" class="register-button">Вход</a>
         </form>
