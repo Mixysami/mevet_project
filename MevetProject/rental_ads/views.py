@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Message
 from django.contrib import messages as django_messages
 from .forms import ReviewForm
+from django.contrib.messages import error
 
 
 def index(request):
@@ -38,16 +39,20 @@ def logout_view(request):
     return redirect('home')
 
 
+from django.contrib.messages import error
+
 def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')
+        else:
+            error(request, 'Неправильно заполнена форма регистрации.')
+            return redirect('home')
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
-
 
 def room(request):
     room_category = Category.objects.get(name='room')

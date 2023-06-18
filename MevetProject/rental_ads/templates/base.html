@@ -110,18 +110,24 @@
 
 <div id="blackout-register">
     <div id="window-register">
-        <h2>Зарегистрируйтесь</h2>
-		<form id="login-form" method="post" action="/register/">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Введите имя" pattern="[A-Za-z0-9]{5,}" title="Минимум 6 символов на английском языке" required>
-            <input type="password" name="password1" id="password-field" class="login-form-field" placeholder="Введите пароль" pattern="[A-Za-z0-9]{5,}" title="Минимум 5 символов на английском языке" required>
-            <input type="password" name="password2" id="password-field" class="login-form-field" placeholder="Повторите пароль" pattern="[A-Za-z0-9]{5,}" title="Минимум 5 символов на английском языке" required>
-            <input type="submit" value="Регистрация" class="close" id="login-form-submit"></input>
-            <a href="#blackout-login" class="register-button">Вход</a>
-        </form>
-        {{ form.errors}}
-        <a href="#" class="close"><font style="font-family: 'Century Gothic', sans-serif; font-weight: 400;">Закрыть окно</font></a>
+    <h2>Зарегистрируйтесь</h2>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li style="font-size: 10px;">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form id="login-form" method="post" action="/register/">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Введите имя" pattern="[A-Za-z0-9]{5,}" title="Минимум 6 символов на английском языке" required>
+        <input type="password" name="password1" id="password-field" class="login-form-field" placeholder="Введите пароль" pattern="[A-Za-z0-9]{8,}" title="Минимум 8 символов на английском языке" required>
+        <input type="password" name="password2" id="password-field" class="login-form-field" placeholder="Повторите пароль" pattern="[A-Za-z0-9]{8,}" title="Минимум 8 символов на английском языке" required>
+        <input type="submit" value="Регистрация" class="close" id="login-form-submit"></input>
+        <a href="#blackout-login" class="register-button">Вход</a>
+    </form>
+    <a href="#" class="close"><font style="font-family: 'Century Gothic', sans-serif; font-weight: 400;">Закрыть окно</font></a>
     </div>
 </div>
 
